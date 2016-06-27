@@ -16,7 +16,6 @@ namespace Connect
         Connectds.entrepriseRow entrepriseRow;
         int id = -1;
         
-
         public FormEntreprise()
         {
             InitializeComponent();
