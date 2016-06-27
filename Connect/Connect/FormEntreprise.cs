@@ -22,6 +22,7 @@ namespace Connect
             InitializeComponent();
             
             PopulateAndBind(id);    
+
         }
 
         public FormEntreprise(Connectds.entrepriseRow entrepriseRow)
