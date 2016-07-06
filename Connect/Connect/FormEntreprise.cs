@@ -16,13 +16,10 @@ namespace Connect
         Connectds.entrepriseRow entrepriseRow;
         int id = -1;
         
-
         public FormEntreprise()
         {
             InitializeComponent();
-            
             PopulateAndBind(id);    
-
         }
 
         public FormEntreprise(Connectds.entrepriseRow entrepriseRow)
@@ -30,9 +27,13 @@ namespace Connect
             InitializeComponent();
             this.id = entrepriseRow.entreprise_id;
             PopulateAndBind(id);
-
         }
 
+        /// <summary>
+        /// Au chargement du formulaire, on charge les données du data set dans la variable ds, par le biais de la méthode GetEntrepriseDS()
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FormEntreprise_Load(object sender, EventArgs e)
         {
             ds = EntrepriseManager.GetEntrepriseDS();
@@ -47,6 +48,8 @@ namespace Connect
             comboBoxTailleEnt.Items.Add("Très Petite Entreprise");
             comboBoxTailleEnt.Items.Add("Petite Entreprise");
             comboBoxTailleEnt.Items.Add("Grande Entreprise");
+
+
 
             if (id != -1)
             {

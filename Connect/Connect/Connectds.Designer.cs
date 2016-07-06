@@ -2149,11 +2149,11 @@ namespace Connect {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string adresse_entreprise {
                 get {
-                    try {
-                        return ((string)(this[this.tableentreprise.adresse_entrepriseColumn]));
+                    if (this.Isadresse_entrepriseNull()) {
+                        return null;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'adresse_entreprise\' in table \'entreprise\' is DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableentreprise.adresse_entrepriseColumn]));
                     }
                 }
                 set {
@@ -2165,11 +2165,11 @@ namespace Connect {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string contact_entreprise {
                 get {
-                    try {
-                        return ((string)(this[this.tableentreprise.contact_entrepriseColumn]));
+                    if (this.Iscontact_entrepriseNull()) {
+                        return null;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'contact_entreprise\' in table \'entreprise\' is DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableentreprise.contact_entrepriseColumn]));
                     }
                 }
                 set {
@@ -2181,11 +2181,11 @@ namespace Connect {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string telephone_entreprise {
                 get {
-                    try {
-                        return ((string)(this[this.tableentreprise.telephone_entrepriseColumn]));
+                    if (this.Istelephone_entrepriseNull()) {
+                        return null;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'telephone_entreprise\' in table \'entreprise\' is DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableentreprise.telephone_entrepriseColumn]));
                     }
                 }
                 set {
@@ -2213,11 +2213,11 @@ namespace Connect {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string type_entreprise {
                 get {
-                    try {
-                        return ((string)(this[this.tableentreprise.type_entrepriseColumn]));
+                    if (this.Istype_entrepriseNull()) {
+                        return null;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'type_entreprise\' in table \'entreprise\' is DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableentreprise.type_entrepriseColumn]));
                     }
                 }
                 set {
@@ -2229,11 +2229,11 @@ namespace Connect {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string taille_entreprise {
                 get {
-                    try {
-                        return ((string)(this[this.tableentreprise.taille_entrepriseColumn]));
+                    if (this.Istaille_entrepriseNull()) {
+                        return null;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'taille_entreprise\' in table \'entreprise\' is DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableentreprise.taille_entrepriseColumn]));
                     }
                 }
                 set {
@@ -2245,11 +2245,11 @@ namespace Connect {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string descriptif_entreprise {
                 get {
-                    try {
-                        return ((string)(this[this.tableentreprise.descriptif_entrepriseColumn]));
+                    if (this.Isdescriptif_entrepriseNull()) {
+                        return null;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'descriptif_entreprise\' in table \'entreprise\' is DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableentreprise.descriptif_entrepriseColumn]));
                     }
                 }
                 set {
