@@ -15,13 +15,23 @@ namespace Connect
         Connectds ds;
         Connectds.entrepriseRow entrepriseRow;
         int id = -1;
-        
+
+        /// <summary>
+        /// Constructeur pour un formulaire vierge, afin de créer une nouvelle entreprise.
+        /// la valeur de la variable id pour charger ce formulaire est alors à -1.
+        /// </summary>
         public FormEntreprise()
         {
             InitializeComponent();
             PopulateAndBind(id);    
         }
 
+        /// <summary>
+        /// Constructeur pour afficher dans le formulaire, les détails d'une entreprise existante.
+        /// Utilise l'id de l'entreprise comme attribut.
+        /// la valeur de la variable id pour charger ce formulaire sera alors l'id de l'entreprise.
+        /// </summary>
+        /// <param name="entrepriseRow"></param>
         public FormEntreprise(Connectds.entrepriseRow entrepriseRow)
         {
             InitializeComponent();
@@ -39,6 +49,7 @@ namespace Connect
             ds = EntrepriseManager.GetEntrepriseDS();
 
         }
+
         private void PopulateAndBind(int id)
         {
             comboBoxStatutEnt.Items.Add(Enums.Statut.Actif.ToString());
@@ -49,7 +60,8 @@ namespace Connect
             comboBoxTailleEnt.Items.Add("Petite Entreprise");
             comboBoxTailleEnt.Items.Add("Grande Entreprise");
 
-
+            datePickerCreationEnt.MinDate = DateTime.Now.AddYears(-10);
+            datePickerCreationEnt.MaxDate = DateTime.Now.AddDays(1);
 
             if (id != -1)
             {
@@ -83,31 +95,29 @@ namespace Connect
                     default:
                         break;
                 }
-
-            }
-            else
-            {
-                Connectds.entrepriseDataTable dt = new Connectds.entrepriseDataTable();
-                entrepriseRow = dt.NewentrepriseRow();
-                entrepriseRow.statut_entreprise = (int)Enums.Statut.Actif;
-                entrepriseRow.type_entreprise = "TPE";
-                entrepriseRow.descriptif_entreprise = string.Empty;
-                entrepriseRow.date_creation_entreprise = DateTime.Now;
-             }
-
-            textBoxNomEnt.DataBindings.Add("Text", entrepriseRow, "nom_entreprise");
+                textBoxNomEnt.DataBindings.Add("Text", entrepriseRow, "nom_entreprise");
                 textBoxAdresseEnt.DataBindings.Add("Text", entrepriseRow, "adresse_entreprise");
                 textBoxContactEnt.DataBindings.Add("Text", entrepriseRow, "contact_entreprise");
                 textBoxTelEnt.DataBindings.Add("Text", entrepriseRow, "telephone_entreprise");
                 textBoxSecteurEnt.DataBindings.Add("Text", entrepriseRow, "secteur_entreprise");
                 textBoxTypeEnt.DataBindings.Add("Text", entrepriseRow, "type_entreprise");
                 textBoxDescripEnt.DataBindings.Add("Text", entrepriseRow, "descriptif_entreprise");
-
-
-            //datePickerCreationEnt.MinDate = DateTime.Now.AddYears(-10);
-            datePickerCreationEnt.MaxDate = DateTime.Now.AddDays(1);
-            datePickerCreationEnt.DataBindings.Add("Value", entrepriseRow, "date_creation_entreprise");
-
+                datePickerCreationEnt.DataBindings.Add("Value", entrepriseRow, "date_creation_entreprise");
+            }
+            else
+            {
+                Connectds.entrepriseDataTable dt = new Connectds.entrepriseDataTable();
+                entrepriseRow = dt.NewentrepriseRow();
+                entrepriseRow.nom_entreprise = textBoxNomEnt.Text;
+                entrepriseRow.adresse_entreprise = textBoxAdresseEnt.Text;
+                entrepriseRow.contact_entreprise = textBoxContactEnt.Text;
+                entrepriseRow.telephone_entreprise = textBoxTelEnt.Text;
+                entrepriseRow.statut_entreprise = (int)Enums.Statut.Actif;
+                //comboBoxStatutEnt
+                //entrepriseRow.type_entreprise = "TPE";
+                //entrepriseRow.descriptif_entreprise = string.Empty;
+                entrepriseRow.date_creation_entreprise = DateTime.Now;
+             }
         }
 
         private void buttonAnnulerEnt_Click(object sender, EventArgs e)
