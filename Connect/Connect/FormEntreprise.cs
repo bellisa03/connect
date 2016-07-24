@@ -108,15 +108,7 @@ namespace Connect
             {
                 Connectds.entrepriseDataTable dt = new Connectds.entrepriseDataTable();
                 entrepriseRow = dt.NewentrepriseRow();
-                entrepriseRow.nom_entreprise = textBoxNomEnt.Text;
-                entrepriseRow.adresse_entreprise = textBoxAdresseEnt.Text;
-                entrepriseRow.contact_entreprise = textBoxContactEnt.Text;
-                entrepriseRow.telephone_entreprise = textBoxTelEnt.Text;
-                entrepriseRow.statut_entreprise = (int)Enums.Statut.Actif;
-                //comboBoxStatutEnt
-                //entrepriseRow.type_entreprise = "TPE";
-                //entrepriseRow.descriptif_entreprise = string.Empty;
-                entrepriseRow.date_creation_entreprise = DateTime.Now;
+                
              }
         }
 
@@ -127,6 +119,16 @@ namespace Connect
 
         private void buttonValiderEnt_Click(object sender, EventArgs e)
        {
+            entrepriseRow.nom_entreprise = textBoxNomEnt.Text;
+            entrepriseRow.adresse_entreprise = textBoxAdresseEnt.Text;
+            entrepriseRow.contact_entreprise = textBoxContactEnt.Text;
+            entrepriseRow.telephone_entreprise = textBoxTelEnt.Text;
+            entrepriseRow.statut_entreprise = (int)Enums.Statut.Actif;
+            //comboBoxStatutEnt
+            //entrepriseRow.type_entreprise = "TPE";
+            //entrepriseRow.descriptif_entreprise = string.Empty;
+            entrepriseRow.date_creation_entreprise = DateTime.Now;
+
             //DataRow entrepriseDR = ds.Tables["entreprise"].NewRow();
 
             //entrepriseDR["nom_entreprise"] = textBoxNomEnt.Text;
