@@ -684,6 +684,7 @@ namespace Connect {
                 this.columntaille_entreprise.MaxLength = 3;
                 this.columndescriptif_entreprise.MaxLength = 250;
                 this.columnstatut_entreprise.AllowDBNull = false;
+                this.columndate_creation_entreprise.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2272,12 +2273,7 @@ namespace Connect {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public System.DateTime date_creation_entreprise {
                 get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tableentreprise.date_creation_entrepriseColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'date_creation_entreprise\' in table \'entreprise\' is DBNull.", e);
-                    }
+                    return ((global::System.DateTime)(this[this.tableentreprise.date_creation_entrepriseColumn]));
                 }
                 set {
                     this[this.tableentreprise.date_creation_entrepriseColumn] = value;
@@ -2366,18 +2362,6 @@ namespace Connect {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void Setdescriptif_entrepriseNull() {
                 this[this.tableentreprise.descriptif_entrepriseColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Isdate_creation_entrepriseNull() {
-                return this.IsNull(this.tableentreprise.date_creation_entrepriseColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Setdate_creation_entrepriseNull() {
-                this[this.tableentreprise.date_creation_entrepriseColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3809,7 +3793,7 @@ SELECT entreprise_id, nom_entreprise, adresse_entreprise, contact_entreprise, te
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_entreprise_id, string Original_nom_entreprise, string Original_adresse_entreprise, string Original_contact_entreprise, string Original_telephone_entreprise, string Original_secteur_entreprise, string Original_type_entreprise, string Original_taille_entreprise, string Original_descriptif_entreprise, int Original_statut_entreprise, global::System.Nullable<global::System.DateTime> Original_date_creation_entreprise) {
+        public virtual int Delete(int Original_entreprise_id, string Original_nom_entreprise, string Original_adresse_entreprise, string Original_contact_entreprise, string Original_telephone_entreprise, string Original_secteur_entreprise, string Original_type_entreprise, string Original_taille_entreprise, string Original_descriptif_entreprise, int Original_statut_entreprise, System.DateTime Original_date_creation_entreprise) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_entreprise_id));
             if ((Original_nom_entreprise == null)) {
                 throw new global::System.ArgumentNullException("Original_nom_entreprise");
@@ -3874,14 +3858,8 @@ SELECT entreprise_id, nom_entreprise, adresse_entreprise, contact_entreprise, te
                 this.Adapter.DeleteCommand.Parameters[15].Value = ((string)(Original_descriptif_entreprise));
             }
             this.Adapter.DeleteCommand.Parameters[16].Value = ((int)(Original_statut_entreprise));
-            if ((Original_date_creation_entreprise.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[17].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[18].Value = ((System.DateTime)(Original_date_creation_entreprise.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[17].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[18].Value = global::System.DBNull.Value;
-            }
+            this.Adapter.DeleteCommand.Parameters[17].Value = ((object)(0));
+            this.Adapter.DeleteCommand.Parameters[18].Value = ((System.DateTime)(Original_date_creation_entreprise));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -3902,7 +3880,7 @@ SELECT entreprise_id, nom_entreprise, adresse_entreprise, contact_entreprise, te
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string nom_entreprise, string adresse_entreprise, string contact_entreprise, string telephone_entreprise, string secteur_entreprise, string type_entreprise, string taille_entreprise, string descriptif_entreprise, int statut_entreprise, global::System.Nullable<global::System.DateTime> date_creation_entreprise) {
+        public virtual int Insert(string nom_entreprise, string adresse_entreprise, string contact_entreprise, string telephone_entreprise, string secteur_entreprise, string type_entreprise, string taille_entreprise, string descriptif_entreprise, int statut_entreprise, System.DateTime date_creation_entreprise) {
             if ((nom_entreprise == null)) {
                 throw new global::System.ArgumentNullException("nom_entreprise");
             }
@@ -3952,12 +3930,7 @@ SELECT entreprise_id, nom_entreprise, adresse_entreprise, contact_entreprise, te
                 this.Adapter.InsertCommand.Parameters[7].Value = ((string)(descriptif_entreprise));
             }
             this.Adapter.InsertCommand.Parameters[8].Value = ((int)(statut_entreprise));
-            if ((date_creation_entreprise.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[9].Value = ((System.DateTime)(date_creation_entreprise.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[9].Value = global::System.DBNull.Value;
-            }
+            this.Adapter.InsertCommand.Parameters[9].Value = ((System.DateTime)(date_creation_entreprise));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -3988,7 +3961,7 @@ SELECT entreprise_id, nom_entreprise, adresse_entreprise, contact_entreprise, te
                     string taille_entreprise, 
                     string descriptif_entreprise, 
                     int statut_entreprise, 
-                    global::System.Nullable<global::System.DateTime> date_creation_entreprise, 
+                    System.DateTime date_creation_entreprise, 
                     int Original_entreprise_id, 
                     string Original_nom_entreprise, 
                     string Original_adresse_entreprise, 
@@ -3999,7 +3972,7 @@ SELECT entreprise_id, nom_entreprise, adresse_entreprise, contact_entreprise, te
                     string Original_taille_entreprise, 
                     string Original_descriptif_entreprise, 
                     int Original_statut_entreprise, 
-                    global::System.Nullable<global::System.DateTime> Original_date_creation_entreprise, 
+                    System.DateTime Original_date_creation_entreprise, 
                     int entreprise_id) {
             if ((nom_entreprise == null)) {
                 throw new global::System.ArgumentNullException("nom_entreprise");
@@ -4050,12 +4023,7 @@ SELECT entreprise_id, nom_entreprise, adresse_entreprise, contact_entreprise, te
                 this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(descriptif_entreprise));
             }
             this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(statut_entreprise));
-            if ((date_creation_entreprise.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((System.DateTime)(date_creation_entreprise.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
-            }
+            this.Adapter.UpdateCommand.Parameters[9].Value = ((System.DateTime)(date_creation_entreprise));
             this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(Original_entreprise_id));
             if ((Original_nom_entreprise == null)) {
                 throw new global::System.ArgumentNullException("Original_nom_entreprise");
@@ -4120,14 +4088,8 @@ SELECT entreprise_id, nom_entreprise, adresse_entreprise, contact_entreprise, te
                 this.Adapter.UpdateCommand.Parameters[25].Value = ((string)(Original_descriptif_entreprise));
             }
             this.Adapter.UpdateCommand.Parameters[26].Value = ((int)(Original_statut_entreprise));
-            if ((Original_date_creation_entreprise.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[27].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[28].Value = ((System.DateTime)(Original_date_creation_entreprise.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[27].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[28].Value = global::System.DBNull.Value;
-            }
+            this.Adapter.UpdateCommand.Parameters[27].Value = ((object)(0));
+            this.Adapter.UpdateCommand.Parameters[28].Value = ((System.DateTime)(Original_date_creation_entreprise));
             this.Adapter.UpdateCommand.Parameters[29].Value = ((int)(entreprise_id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -4159,7 +4121,7 @@ SELECT entreprise_id, nom_entreprise, adresse_entreprise, contact_entreprise, te
                     string taille_entreprise, 
                     string descriptif_entreprise, 
                     int statut_entreprise, 
-                    global::System.Nullable<global::System.DateTime> date_creation_entreprise, 
+                    System.DateTime date_creation_entreprise, 
                     int Original_entreprise_id, 
                     string Original_nom_entreprise, 
                     string Original_adresse_entreprise, 
@@ -4170,7 +4132,7 @@ SELECT entreprise_id, nom_entreprise, adresse_entreprise, contact_entreprise, te
                     string Original_taille_entreprise, 
                     string Original_descriptif_entreprise, 
                     int Original_statut_entreprise, 
-                    global::System.Nullable<global::System.DateTime> Original_date_creation_entreprise) {
+                    System.DateTime Original_date_creation_entreprise) {
             return this.Update(nom_entreprise, adresse_entreprise, contact_entreprise, telephone_entreprise, secteur_entreprise, type_entreprise, taille_entreprise, descriptif_entreprise, statut_entreprise, date_creation_entreprise, Original_entreprise_id, Original_nom_entreprise, Original_adresse_entreprise, Original_contact_entreprise, Original_telephone_entreprise, Original_secteur_entreprise, Original_type_entreprise, Original_taille_entreprise, Original_descriptif_entreprise, Original_statut_entreprise, Original_date_creation_entreprise, Original_entreprise_id);
         }
     }

@@ -63,6 +63,7 @@ namespace Connect
             datePickerCreationEnt.MinDate = DateTime.Now.AddYears(-10);
             datePickerCreationEnt.MaxDate = DateTime.Now.AddDays(1);
 
+
             if (id != -1)
             {
                 entrepriseRow = EntrepriseManager.GetEntreprise(id);
@@ -70,13 +71,13 @@ namespace Connect
                 switch (entrepriseRow.taille_entreprise)
                 {
                     case "TPE":
-                        comboBoxTailleEnt.Text = "très petite entreprise";
+                        comboBoxTailleEnt.Text = "Très Petite Entreprise";
                         break;
                     case "PE":
-                        comboBoxTailleEnt.Text = "petite entreprise";
+                        comboBoxTailleEnt.Text = "Petite Entreprise";
                         break;
                     case "GE":
-                        comboBoxTailleEnt.Text = "grande entreprise";
+                        comboBoxTailleEnt.Text = "Grande Entreprise";
                         break;
                     default:
                         break;
@@ -108,6 +109,7 @@ namespace Connect
             {
                 Connectds.entrepriseDataTable dt = new Connectds.entrepriseDataTable();
                 entrepriseRow = dt.NewentrepriseRow();
+                //entrepriseRow.date_creation_entreprise = new DateTime (DateTime.Now);
                 
              }
         }
@@ -123,26 +125,11 @@ namespace Connect
             entrepriseRow.adresse_entreprise = textBoxAdresseEnt.Text;
             entrepriseRow.contact_entreprise = textBoxContactEnt.Text;
             entrepriseRow.telephone_entreprise = textBoxTelEnt.Text;
-            entrepriseRow.statut_entreprise = (int)Enums.Statut.Actif;
-            //comboBoxStatutEnt
-            //entrepriseRow.type_entreprise = "TPE";
-            //entrepriseRow.descriptif_entreprise = string.Empty;
-            entrepriseRow.date_creation_entreprise = DateTime.Now;
-
-            //DataRow entrepriseDR = ds.Tables["entreprise"].NewRow();
-
-            //entrepriseDR["nom_entreprise"] = textBoxNomEnt.Text;
-            //entrepriseDR["adresse_entreprise"] = textBoxAdresseEnt.Text;
-            //entrepriseDR["contact_entreprise"] = textBoxContactEnt.Text;
-            //entrepriseDR["telephone_entreprise"] = textBoxTelEnt.Text;
-            //entrepriseDR["secteur_entreprise"] = textBoxSecteurEnt.Text;
-            //entrepriseDR["type_entreprise"] = textBoxTypeEnt.Text;
-            //entrepriseDR["descriptif_entreprise"] = textBoxDescripEnt.Text;
-            //entrepriseDR["taille_entreprise"] = comboBoxTailleEnt.ValueMember;
-            //entrepriseDR["statut_entreprise"] = EntrepriseManager.GetStatus(comboBoxStatutEnt.Text);
-            //entrepriseDR["date_creation_entreprise"] = datePickerCreationEnt.Value;
-
-            //ds.Tables["entreprise"].Rows.Add(entrepriseDR);
+            entrepriseRow.secteur_entreprise = textBoxSecteurEnt.Text;
+            entrepriseRow.statut_entreprise = EntrepriseManager.GetStatus(comboBoxStatutEnt.Text);
+            entrepriseRow.taille_entreprise = EntrepriseManager.GetTaille(comboBoxTailleEnt.Text);
+            entrepriseRow.descriptif_entreprise = textBoxDescripEnt.Text;
+            entrepriseRow.date_creation_entreprise = datePickerCreationEnt.Value;
 
             EntrepriseManager.SaveEntreprise(entrepriseRow);
 

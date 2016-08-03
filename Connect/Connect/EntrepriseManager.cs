@@ -40,6 +40,30 @@ namespace Connect
             }
         }
 
+        public static string GetTaille(string taille)
+        {
+            string codeTaille;
+            switch (taille)
+            {
+                case "Très Petite Entreprise":
+                    codeTaille = "TPE";
+                    break;
+
+                case "Petite Entreprise":
+                    codeTaille = "PE";
+                    break;
+
+                case "Grande Entreprise":
+                    codeTaille = "GE";
+                    break;
+
+                default:
+                    codeTaille = "";
+                    break;
+            }
+            return codeTaille;
+        }
+
         public static Connectds GetEntrepriseDS()
         {
             Connectds ds = new Connectds();

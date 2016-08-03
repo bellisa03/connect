@@ -51,7 +51,7 @@
             this.buttonValiderEnt = new System.Windows.Forms.Button();
             this.buttonAnnulerEnt = new System.Windows.Forms.Button();
             this.buttonJobsEnt = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonDeleteEnt = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // datePickerCreationEnt
@@ -63,7 +63,7 @@
             this.datePickerCreationEnt.Name = "datePickerCreationEnt";
             this.datePickerCreationEnt.Size = new System.Drawing.Size(84, 20);
             this.datePickerCreationEnt.TabIndex = 0;
-            this.datePickerCreationEnt.Value = new System.DateTime(2016, 6, 11, 0, 0, 0, 0);
+            this.datePickerCreationEnt.Value = new System.DateTime(2016, 8, 3, 0, 0, 0, 0);
             // 
             // textBoxNomEnt
             // 
@@ -223,6 +223,7 @@
             // 
             // buttonValiderEnt
             // 
+            this.buttonValiderEnt.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.buttonValiderEnt.Location = new System.Drawing.Point(63, 468);
             this.buttonValiderEnt.Name = "buttonValiderEnt";
             this.buttonValiderEnt.Size = new System.Drawing.Size(75, 23);
@@ -233,6 +234,7 @@
             // 
             // buttonAnnulerEnt
             // 
+            this.buttonAnnulerEnt.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.buttonAnnulerEnt.Location = new System.Drawing.Point(167, 468);
             this.buttonAnnulerEnt.Name = "buttonAnnulerEnt";
             this.buttonAnnulerEnt.Size = new System.Drawing.Size(75, 23);
@@ -243,6 +245,7 @@
             // 
             // buttonJobsEnt
             // 
+            this.buttonJobsEnt.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.buttonJobsEnt.Location = new System.Drawing.Point(374, 468);
             this.buttonJobsEnt.Name = "buttonJobsEnt";
             this.buttonJobsEnt.Size = new System.Drawing.Size(75, 56);
@@ -250,21 +253,22 @@
             this.buttonJobsEnt.Text = "Voir Jobs";
             this.buttonJobsEnt.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // buttonDeleteEnt
             // 
-            this.button1.Location = new System.Drawing.Point(272, 468);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 56);
-            this.button1.TabIndex = 23;
-            this.button1.Text = "Supprimer Entreprise";
-            this.button1.UseVisualStyleBackColor = true;
+            this.buttonDeleteEnt.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.buttonDeleteEnt.Location = new System.Drawing.Point(272, 468);
+            this.buttonDeleteEnt.Name = "buttonDeleteEnt";
+            this.buttonDeleteEnt.Size = new System.Drawing.Size(75, 56);
+            this.buttonDeleteEnt.TabIndex = 23;
+            this.buttonDeleteEnt.Text = "Supprimer Entreprise";
+            this.buttonDeleteEnt.UseVisualStyleBackColor = true;
             // 
             // FormEntreprise
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(469, 548);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.buttonDeleteEnt);
             this.Controls.Add(this.buttonJobsEnt);
             this.Controls.Add(this.buttonAnnulerEnt);
             this.Controls.Add(this.buttonValiderEnt);
@@ -321,7 +325,7 @@
         private System.Windows.Forms.Button buttonValiderEnt;
         private System.Windows.Forms.Button buttonAnnulerEnt;
         private System.Windows.Forms.Button buttonJobsEnt;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonDeleteEnt;
     }
 }
 

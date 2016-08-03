@@ -43,12 +43,13 @@
             this.dataGridViewListEntreprise.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewListEntreprise.Location = new System.Drawing.Point(12, 77);
             this.dataGridViewListEntreprise.Name = "dataGridViewListEntreprise";
-            this.dataGridViewListEntreprise.Size = new System.Drawing.Size(626, 150);
+            this.dataGridViewListEntreprise.Size = new System.Drawing.Size(1244, 375);
             this.dataGridViewListEntreprise.TabIndex = 0;
             // 
             // buttonListEntrepriseAfficher
             // 
-            this.buttonListEntrepriseAfficher.Location = new System.Drawing.Point(72, 277);
+            this.buttonListEntrepriseAfficher.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.buttonListEntrepriseAfficher.Location = new System.Drawing.Point(365, 504);
             this.buttonListEntrepriseAfficher.Name = "buttonListEntrepriseAfficher";
             this.buttonListEntrepriseAfficher.Size = new System.Drawing.Size(194, 23);
             this.buttonListEntrepriseAfficher.TabIndex = 3;
@@ -58,7 +59,8 @@
             // 
             // buttonListEntrepriseFermer
             // 
-            this.buttonListEntrepriseFermer.Location = new System.Drawing.Point(388, 277);
+            this.buttonListEntrepriseFermer.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.buttonListEntrepriseFermer.Location = new System.Drawing.Point(736, 504);
             this.buttonListEntrepriseFermer.Name = "buttonListEntrepriseFermer";
             this.buttonListEntrepriseFermer.Size = new System.Drawing.Size(75, 23);
             this.buttonListEntrepriseFermer.TabIndex = 4;
@@ -79,7 +81,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(651, 338);
+            this.ClientSize = new System.Drawing.Size(1269, 563);
             this.Controls.Add(this.comboBoxListEntreprise);
             this.Controls.Add(this.buttonListEntrepriseFermer);
             this.Controls.Add(this.buttonListEntrepriseAfficher);
