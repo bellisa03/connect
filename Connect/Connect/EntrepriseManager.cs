@@ -76,21 +76,34 @@ namespace Connect
         
         public static void SaveEntreprise(DataRow entrepriseRow)
         {
-            //Connectds.entrepriseDataTable entrepriseDT = new Connectds.entrepriseDataTable();
-
             using (ConnectdsTableAdapters.entrepriseTableAdapter entrepriseAdpt = new ConnectdsTableAdapters.entrepriseTableAdapter())
             {
                 entrepriseAdpt.Update(entrepriseRow);
             }
         }
 
-        public static void UpdateEntreprise(Connectds.entrepriseRow entrepriseRow)
+        //public static void UpdateEntreprise(Connectds.entrepriseRow entrepriseRow)
+        //{
+        //    //Connectds.entrepriseDataTable entrepriseDT = new Connectds.entrepriseDataTable();
+
+        //    using (ConnectdsTableAdapters.entrepriseTableAdapter entrepriseAdpt = new ConnectdsTableAdapters.entrepriseTableAdapter())
+        //    {
+        //        entrepriseAdpt.Update(entrepriseRow);
+        //    }
+        //}
+
+        public static void DeleteEntreprise(int entreprise_id)
         {
             Connectds.entrepriseDataTable entrepriseDT = new Connectds.entrepriseDataTable();
 
             using (ConnectdsTableAdapters.entrepriseTableAdapter entrepriseAdpt = new ConnectdsTableAdapters.entrepriseTableAdapter())
             {
+                entrepriseAdpt.Fill(entrepriseDT);
+                Connectds.entrepriseRow entrepriseRow = entrepriseDT.FindByentreprise_id(entreprise_id);
+                entrepriseRow.Delete();
+
                 entrepriseAdpt.Update(entrepriseDT);
+
             }
         }
     }

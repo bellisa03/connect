@@ -63,9 +63,10 @@ namespace Connect
             datePickerCreationEnt.MinDate = DateTime.Now.AddYears(-10);
             datePickerCreationEnt.MaxDate = DateTime.Now.AddDays(1);
 
-
             if (id != -1)
             {
+                buttonValiderEnt.Text = "Modifier";
+
                 entrepriseRow = EntrepriseManager.GetEntreprise(id);
 
                 switch (entrepriseRow.taille_entreprise)
@@ -109,8 +110,7 @@ namespace Connect
             {
                 Connectds.entrepriseDataTable dt = new Connectds.entrepriseDataTable();
                 entrepriseRow = dt.NewentrepriseRow();
-                //entrepriseRow.date_creation_entreprise = new DateTime (DateTime.Now);
-                
+                datePickerCreationEnt.Value = DateTime.Now;
              }
         }
 
@@ -132,9 +132,35 @@ namespace Connect
             entrepriseRow.date_creation_entreprise = datePickerCreationEnt.Value;
 
             EntrepriseManager.SaveEntreprise(entrepriseRow);
-
-            this.Close();
-
+            refreshDataGrid();
         }
+
+        private void buttonDeleteEnt_Click(object sender, EventArgs e)
+        {
+            var Result = MessageBox.Show("Etes-vous sûr de vouloir supprimer l'entreprise n°" + entrepriseRow.entreprise_id + "?", "Veuillez confirmer:", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            if (Result == DialogResult.OK)
+            {
+                EntrepriseManager.DeleteEntreprise(entrepriseRow.entreprise_id);
+                refreshDataGrid();                
+            }
+        }
+
+        /// <summary>
+        /// la méthode refreshDataGrid permet de retourner sur le listing des entreprises après une modification/ajout/suppression d'une entreprise,
+        /// Afin d'avoir la liste du DataGridView mise à jour
+        /// </summary>
+
+        private void refreshDataGrid()
+        {
+            this.Close();
+            ListingEntreprise listeEntreprise = new ListingEntreprise();
+            listeEntreprise.Show();
+        }
+
+
+        //private void textBoxSecteurEnt_Click(object sender, EventArgs e)
+        //{
+
+        //}
     }
 }

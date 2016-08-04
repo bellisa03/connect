@@ -34,6 +34,7 @@ namespace Connect
             {
                 FormEntreprise formEntreprise = new FormEntreprise(entrepriseSelectionnee);
                 formEntreprise.Show();
+                this.Close();
             }
 
         }
@@ -53,6 +54,20 @@ namespace Connect
 
             dataGridViewListEntreprise.DataSource = ds;
             dataGridViewListEntreprise.DataMember = "entreprise";
+            dataGridViewListEntreprise.ReadOnly = true;
+            dataGridViewListEntreprise.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridViewListEntreprise.Columns[8].Visible = false; //descriptif de l'entreprise -> trop verbeux pour un DataGridView
+            dataGridViewListEntreprise.Columns[0].HeaderText = "ID";
+            dataGridViewListEntreprise.Columns[1].HeaderText = "Dénomination";
+            dataGridViewListEntreprise.Columns[2].HeaderText = "Adresse";
+            dataGridViewListEntreprise.Columns[3].HeaderText = "Contact";
+            dataGridViewListEntreprise.Columns[4].HeaderText = "Téléphone";
+            dataGridViewListEntreprise.Columns[5].HeaderText = "Secteur";
+            dataGridViewListEntreprise.Columns[6].HeaderText = "Type";
+            dataGridViewListEntreprise.Columns[7].HeaderText = "Taille";
+            dataGridViewListEntreprise.Columns[9].HeaderText = "Statut";
+            dataGridViewListEntreprise.Columns[10].HeaderText = "Date de création";
+            
         }
 
         private void buttonListEntrepriseFermer_Click(object sender, EventArgs e)
@@ -60,5 +75,16 @@ namespace Connect
             this.Close();
         }
 
+        private void buttonDeleteEnt_Click(object sender, EventArgs e)
+        {
+            int value;
+            Int32.TryParse(comboBoxListEntreprise.SelectedValue.ToString(), out value);
+            var Result = MessageBox.Show("Etes-vous sûr de vouloir supprimer l'entreprise n°" + value.ToString() + "?", "Veuillez confirmer:", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            if (Result == DialogResult.OK)
+            {
+                EntrepriseManager.DeleteEntreprise(value);
+                PopulateAndBind();
+            }            
+        }
     }
 }
