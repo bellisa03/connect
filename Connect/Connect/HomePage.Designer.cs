@@ -60,7 +60,7 @@
             this.etudiantToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(1337, 24);
+            this.menuStrip.Size = new System.Drawing.Size(1384, 24);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "MenuStrip";
             // 
@@ -161,12 +161,14 @@
             this.ToolStripMenuItemListEtu.Name = "ToolStripMenuItemListEtu";
             this.ToolStripMenuItemListEtu.Size = new System.Drawing.Size(176, 22);
             this.ToolStripMenuItemListEtu.Text = "Afficher la liste";
+            this.ToolStripMenuItemListEtu.Click += new System.EventHandler(this.ToolStripMenuItemListEtu_Click);
             // 
             // ToolStripMenuItemNewEtu2
             // 
             this.ToolStripMenuItemNewEtu2.Name = "ToolStripMenuItemNewEtu2";
             this.ToolStripMenuItemNewEtu2.Size = new System.Drawing.Size(176, 22);
             this.ToolStripMenuItemNewEtu2.Text = "Nouvel Etudiant";
+            this.ToolStripMenuItemNewEtu2.Click += new System.EventHandler(this.ToolStripMenuItemNewEtu2_Click);
             // 
             // ToolStripMenuItemRechercheEtu
             // 
@@ -178,9 +180,9 @@
             // 
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel});
-            this.statusStrip.Location = new System.Drawing.Point(0, 693);
+            this.statusStrip.Location = new System.Drawing.Point(0, 739);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(1337, 22);
+            this.statusStrip.Size = new System.Drawing.Size(1384, 22);
             this.statusStrip.TabIndex = 2;
             this.statusStrip.Text = "StatusStrip";
             // 
@@ -195,7 +197,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1337, 715);
+            this.ClientSize = new System.Drawing.Size(1384, 761);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.menuStrip);
             this.IsMdiContainer = true;

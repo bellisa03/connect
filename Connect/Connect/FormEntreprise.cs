@@ -114,9 +114,16 @@ namespace Connect
              }
         }
 
-        private void buttonAnnulerEnt_Click(object sender, EventArgs e)
+        /// <summary>
+        /// la méthode refreshDataGrid permet de retourner sur le listing des entreprises après une modification/ajout/suppression d'une entreprise,
+        /// Afin d'avoir la liste du DataGridView mise à jour
+        /// </summary>
+        private void refreshDataGrid()
         {
             this.Close();
+            ListingEntreprise listeEntreprise = new ListingEntreprise();
+            listeEntreprise.MdiParent = HomePage.ActiveForm;
+            listeEntreprise.Show();
         }
 
         private void buttonValiderEnt_Click(object sender, EventArgs e)
@@ -145,22 +152,9 @@ namespace Connect
             }
         }
 
-        /// <summary>
-        /// la méthode refreshDataGrid permet de retourner sur le listing des entreprises après une modification/ajout/suppression d'une entreprise,
-        /// Afin d'avoir la liste du DataGridView mise à jour
-        /// </summary>
-
-        private void refreshDataGrid()
+        private void buttonAnnulerEnt_Click(object sender, EventArgs e)
         {
             this.Close();
-            ListingEntreprise listeEntreprise = new ListingEntreprise();
-            listeEntreprise.Show();
         }
-
-
-        //private void textBoxSecteurEnt_Click(object sender, EventArgs e)
-        //{
-
-        //}
     }
 }

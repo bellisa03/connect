@@ -54,11 +54,18 @@
     </Compile>
     <Compile Include="EntrepriseManager.cs" />
     <Compile Include="Enums.cs" />
+    <Compile Include="EtudiantManager.cs" />
     <Compile Include="FormEntreprise.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormEntreprise.Designer.cs">
       <DependentUpon>FormEntreprise.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormEtudiant.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEtudiant.Designer.cs">
+      <DependentUpon>FormEtudiant.cs</DependentUpon>
     </Compile>
     <Compile Include="HomePage.cs">
       <SubType>Form</SubType>
@@ -72,16 +79,28 @@
     <Compile Include="ListingEntreprise.Designer.cs">
       <DependentUpon>ListingEntreprise.cs</DependentUpon>
     </Compile>
+    <Compile Include="ListingEtudiant.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ListingEtudiant.Designer.cs">
+      <DependentUpon>ListingEtudiant.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormEntreprise.resx">
       <DependentUpon>FormEntreprise.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEtudiant.resx">
+      <DependentUpon>FormEtudiant.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HomePage.resx">
       <DependentUpon>HomePage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ListingEntreprise.resx">
       <DependentUpon>ListingEntreprise.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListingEtudiant.resx">
+      <DependentUpon>ListingEtudiant.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

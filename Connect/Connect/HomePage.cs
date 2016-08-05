@@ -35,6 +35,20 @@ namespace Connect
             ListingEntreprise listeEntreprise = new ListingEntreprise();
             listeEntreprise.MdiParent = this;
             listeEntreprise.Show();
-        }        
+        }
+
+        private void ToolStripMenuItemListEtu_Click(object sender, EventArgs e)
+        {
+            ListingEtudiant listeEtudiant = new ListingEtudiant();
+            listeEtudiant.MdiParent = this;
+            listeEtudiant.Show();
+        }
+
+        private void ToolStripMenuItemNewEtu2_Click(object sender, EventArgs e)
+        {
+            FormEtudiant Etudiant = new FormEtudiant();
+            Etudiant.MdiParent = this;
+            Etudiant.Show();
+        }
     }
 }
