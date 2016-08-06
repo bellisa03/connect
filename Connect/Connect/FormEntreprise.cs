@@ -23,7 +23,7 @@ namespace Connect
         public FormEntreprise()
         {
             InitializeComponent();
-            PopulateAndBind(id);    
+            PopulateAndBind(id);
         }
 
         /// <summary>

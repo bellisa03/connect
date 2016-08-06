@@ -37,9 +37,9 @@
             this.labelPrenomEtudiant = new System.Windows.Forms.Label();
             this.textBoxAdresseEtudiant = new System.Windows.Forms.TextBox();
             this.labelAdresseEtudiant = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.textBoxTelEtudiant = new System.Windows.Forms.TextBox();
             this.labelTelEtudiant = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.textBoxEmailEtudiant = new System.Windows.Forms.TextBox();
             this.labelEmailEtudiant = new System.Windows.Forms.Label();
             this.textBoxEcoleEtudiant = new System.Windows.Forms.TextBox();
             this.labelEcoleEtudiant = new System.Windows.Forms.Label();
@@ -48,27 +48,27 @@
             this.comboBoxSexeEtudiant = new System.Windows.Forms.ComboBox();
             this.dateTimePickerDdNEtudiant = new System.Windows.Forms.DateTimePicker();
             this.groupBoxScolariteEtudiant = new System.Windows.Forms.GroupBox();
-            this.labelTypeEtudiant = new System.Windows.Forms.Label();
-            this.textBoxTypeEtudiant = new System.Windows.Forms.TextBox();
             this.labelAnneeEtudiant = new System.Windows.Forms.Label();
             this.textBoxAnneeEtudiant = new System.Windows.Forms.TextBox();
+            this.labelTypeEtudiant = new System.Windows.Forms.Label();
+            this.textBoxTypeEtudiant = new System.Windows.Forms.TextBox();
             this.groupBoxProfilEtudiant = new System.Windows.Forms.GroupBox();
-            this.textBoxLangueEtudiant = new System.Windows.Forms.TextBox();
-            this.labelLangueEtudiant = new System.Windows.Forms.Label();
-            this.textBoxExperience = new System.Windows.Forms.TextBox();
-            this.labelExperienceEtudiant = new System.Windows.Forms.Label();
-            this.labelDomaineEtudiant = new System.Windows.Forms.Label();
-            this.buttonValiderDispoEtudiant = new System.Windows.Forms.Button();
-            this.textBoxDomaineEtudiant = new System.Windows.Forms.TextBox();
+            this.radioButtonPermisNonEtudiant = new System.Windows.Forms.RadioButton();
+            this.radioButtonPermisOuiEtudiant = new System.Windows.Forms.RadioButton();
+            this.labelPermisEtudiant = new System.Windows.Forms.Label();
+            this.labelRmqEtudiant = new System.Windows.Forms.Label();
+            this.textBoxRmqEtudiant = new System.Windows.Forms.TextBox();
             this.textBoxHobbiesEtudiant = new System.Windows.Forms.TextBox();
             this.labelHobbiesEtudiant = new System.Windows.Forms.Label();
-            this.textBoxRmqEtudiant = new System.Windows.Forms.TextBox();
-            this.labelRmqEtudiant = new System.Windows.Forms.Label();
-            this.labelPermisEtudiant = new System.Windows.Forms.Label();
-            this.radioButtonPermisOuiEtudiant = new System.Windows.Forms.RadioButton();
-            this.radioButtonPermisNonEtudiant = new System.Windows.Forms.RadioButton();
+            this.textBoxDomaineEtudiant = new System.Windows.Forms.TextBox();
+            this.labelDomaineEtudiant = new System.Windows.Forms.Label();
+            this.textBoxExperience = new System.Windows.Forms.TextBox();
+            this.labelExperienceEtudiant = new System.Windows.Forms.Label();
+            this.textBoxLangueEtudiant = new System.Windows.Forms.TextBox();
+            this.labelLangueEtudiant = new System.Windows.Forms.Label();
+            this.buttonValiderDispoEtudiant = new System.Windows.Forms.Button();
             this.buttonAnnulerEtudiant = new System.Windows.Forms.Button();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePickerCreaProfilEtudiant = new System.Windows.Forms.DateTimePicker();
             this.labelCreationProfil = new System.Windows.Forms.Label();
             this.groupBoxScolariteEtudiant.SuspendLayout();
             this.groupBoxProfilEtudiant.SuspendLayout();
@@ -91,6 +91,7 @@
             this.buttonValiderEtudiant.TabIndex = 1;
             this.buttonValiderEtudiant.Text = "Valider";
             this.buttonValiderEtudiant.UseVisualStyleBackColor = true;
+            this.buttonValiderEtudiant.Click += new System.EventHandler(this.buttonValiderEtudiant_Click);
             // 
             // textBoxIdEtudiant
             // 
@@ -148,12 +149,12 @@
             this.labelAdresseEtudiant.TabIndex = 7;
             this.labelAdresseEtudiant.Text = "Adresse";
             // 
-            // textBox5
+            // textBoxTelEtudiant
             // 
-            this.textBox5.Location = new System.Drawing.Point(174, 209);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(256, 20);
-            this.textBox5.TabIndex = 10;
+            this.textBoxTelEtudiant.Location = new System.Drawing.Point(174, 209);
+            this.textBoxTelEtudiant.Name = "textBoxTelEtudiant";
+            this.textBoxTelEtudiant.Size = new System.Drawing.Size(256, 20);
+            this.textBoxTelEtudiant.TabIndex = 10;
             // 
             // labelTelEtudiant
             // 
@@ -164,12 +165,12 @@
             this.labelTelEtudiant.TabIndex = 9;
             this.labelTelEtudiant.Text = "Téléphone";
             // 
-            // textBox6
+            // textBoxEmailEtudiant
             // 
-            this.textBox6.Location = new System.Drawing.Point(174, 251);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(256, 20);
-            this.textBox6.TabIndex = 12;
+            this.textBoxEmailEtudiant.Location = new System.Drawing.Point(174, 251);
+            this.textBoxEmailEtudiant.Name = "textBoxEmailEtudiant";
+            this.textBoxEmailEtudiant.Size = new System.Drawing.Size(256, 20);
+            this.textBoxEmailEtudiant.TabIndex = 12;
             // 
             // labelEmailEtudiant
             // 
@@ -245,22 +246,6 @@
             this.groupBoxScolariteEtudiant.TabStop = false;
             this.groupBoxScolariteEtudiant.Text = "Scolarité";
             // 
-            // labelTypeEtudiant
-            // 
-            this.labelTypeEtudiant.AutoSize = true;
-            this.labelTypeEtudiant.Location = new System.Drawing.Point(16, 72);
-            this.labelTypeEtudiant.Name = "labelTypeEtudiant";
-            this.labelTypeEtudiant.Size = new System.Drawing.Size(31, 13);
-            this.labelTypeEtudiant.TabIndex = 15;
-            this.labelTypeEtudiant.Text = "Type";
-            // 
-            // textBoxTypeEtudiant
-            // 
-            this.textBoxTypeEtudiant.Location = new System.Drawing.Point(57, 69);
-            this.textBoxTypeEtudiant.Name = "textBoxTypeEtudiant";
-            this.textBoxTypeEtudiant.Size = new System.Drawing.Size(222, 20);
-            this.textBoxTypeEtudiant.TabIndex = 16;
-            // 
             // labelAnneeEtudiant
             // 
             this.labelAnneeEtudiant.AutoSize = true;
@@ -276,6 +261,22 @@
             this.textBoxAnneeEtudiant.Name = "textBoxAnneeEtudiant";
             this.textBoxAnneeEtudiant.Size = new System.Drawing.Size(101, 20);
             this.textBoxAnneeEtudiant.TabIndex = 18;
+            // 
+            // labelTypeEtudiant
+            // 
+            this.labelTypeEtudiant.AutoSize = true;
+            this.labelTypeEtudiant.Location = new System.Drawing.Point(16, 72);
+            this.labelTypeEtudiant.Name = "labelTypeEtudiant";
+            this.labelTypeEtudiant.Size = new System.Drawing.Size(31, 13);
+            this.labelTypeEtudiant.TabIndex = 15;
+            this.labelTypeEtudiant.Text = "Type";
+            // 
+            // textBoxTypeEtudiant
+            // 
+            this.textBoxTypeEtudiant.Location = new System.Drawing.Point(57, 69);
+            this.textBoxTypeEtudiant.Name = "textBoxTypeEtudiant";
+            this.textBoxTypeEtudiant.Size = new System.Drawing.Size(222, 20);
+            this.textBoxTypeEtudiant.TabIndex = 16;
             // 
             // groupBoxProfilEtudiant
             // 
@@ -299,64 +300,53 @@
             this.groupBoxProfilEtudiant.TabStop = false;
             this.groupBoxProfilEtudiant.Text = "Profil";
             // 
-            // textBoxLangueEtudiant
+            // radioButtonPermisNonEtudiant
             // 
-            this.textBoxLangueEtudiant.Location = new System.Drawing.Point(152, 22);
-            this.textBoxLangueEtudiant.Name = "textBoxLangueEtudiant";
-            this.textBoxLangueEtudiant.Size = new System.Drawing.Size(297, 20);
-            this.textBoxLangueEtudiant.TabIndex = 22;
+            this.radioButtonPermisNonEtudiant.AutoSize = true;
+            this.radioButtonPermisNonEtudiant.Location = new System.Drawing.Point(329, 232);
+            this.radioButtonPermisNonEtudiant.Name = "radioButtonPermisNonEtudiant";
+            this.radioButtonPermisNonEtudiant.Size = new System.Drawing.Size(45, 17);
+            this.radioButtonPermisNonEtudiant.TabIndex = 34;
+            this.radioButtonPermisNonEtudiant.TabStop = true;
+            this.radioButtonPermisNonEtudiant.Text = "Non";
+            this.radioButtonPermisNonEtudiant.UseVisualStyleBackColor = true;
             // 
-            // labelLangueEtudiant
+            // radioButtonPermisOuiEtudiant
             // 
-            this.labelLangueEtudiant.AutoSize = true;
-            this.labelLangueEtudiant.Location = new System.Drawing.Point(10, 22);
-            this.labelLangueEtudiant.Name = "labelLangueEtudiant";
-            this.labelLangueEtudiant.Size = new System.Drawing.Size(129, 13);
-            this.labelLangueEtudiant.TabIndex = 21;
-            this.labelLangueEtudiant.Text = "Connaissance en langues";
+            this.radioButtonPermisOuiEtudiant.AutoSize = true;
+            this.radioButtonPermisOuiEtudiant.Location = new System.Drawing.Point(183, 234);
+            this.radioButtonPermisOuiEtudiant.Name = "radioButtonPermisOuiEtudiant";
+            this.radioButtonPermisOuiEtudiant.Size = new System.Drawing.Size(41, 17);
+            this.radioButtonPermisOuiEtudiant.TabIndex = 33;
+            this.radioButtonPermisOuiEtudiant.TabStop = true;
+            this.radioButtonPermisOuiEtudiant.Text = "Oui";
+            this.radioButtonPermisOuiEtudiant.UseVisualStyleBackColor = true;
             // 
-            // textBoxExperience
+            // labelPermisEtudiant
             // 
-            this.textBoxExperience.Location = new System.Drawing.Point(152, 56);
-            this.textBoxExperience.Multiline = true;
-            this.textBoxExperience.Name = "textBoxExperience";
-            this.textBoxExperience.Size = new System.Drawing.Size(297, 74);
-            this.textBoxExperience.TabIndex = 24;
+            this.labelPermisEtudiant.AutoSize = true;
+            this.labelPermisEtudiant.Location = new System.Drawing.Point(10, 234);
+            this.labelPermisEtudiant.Name = "labelPermisEtudiant";
+            this.labelPermisEtudiant.Size = new System.Drawing.Size(73, 13);
+            this.labelPermisEtudiant.TabIndex = 32;
+            this.labelPermisEtudiant.Text = "Permis voiture";
             // 
-            // labelExperienceEtudiant
+            // labelRmqEtudiant
             // 
-            this.labelExperienceEtudiant.AutoSize = true;
-            this.labelExperienceEtudiant.Location = new System.Drawing.Point(10, 59);
-            this.labelExperienceEtudiant.Name = "labelExperienceEtudiant";
-            this.labelExperienceEtudiant.Size = new System.Drawing.Size(127, 13);
-            this.labelExperienceEtudiant.TabIndex = 23;
-            this.labelExperienceEtudiant.Text = "Expériences précédentes";
+            this.labelRmqEtudiant.AutoSize = true;
+            this.labelRmqEtudiant.Location = new System.Drawing.Point(10, 358);
+            this.labelRmqEtudiant.Name = "labelRmqEtudiant";
+            this.labelRmqEtudiant.Size = new System.Drawing.Size(61, 13);
+            this.labelRmqEtudiant.TabIndex = 30;
+            this.labelRmqEtudiant.Text = "Remarques";
             // 
-            // labelDomaineEtudiant
+            // textBoxRmqEtudiant
             // 
-            this.labelDomaineEtudiant.AutoSize = true;
-            this.labelDomaineEtudiant.Location = new System.Drawing.Point(10, 148);
-            this.labelDomaineEtudiant.Name = "labelDomaineEtudiant";
-            this.labelDomaineEtudiant.Size = new System.Drawing.Size(100, 13);
-            this.labelDomaineEtudiant.TabIndex = 25;
-            this.labelDomaineEtudiant.Text = "Domaine recherché";
-            // 
-            // buttonValiderDispoEtudiant
-            // 
-            this.buttonValiderDispoEtudiant.Location = new System.Drawing.Point(157, 893);
-            this.buttonValiderDispoEtudiant.Name = "buttonValiderDispoEtudiant";
-            this.buttonValiderDispoEtudiant.Size = new System.Drawing.Size(190, 23);
-            this.buttonValiderDispoEtudiant.TabIndex = 22;
-            this.buttonValiderDispoEtudiant.Text = "Valider et Ajouter disponibilité";
-            this.buttonValiderDispoEtudiant.UseVisualStyleBackColor = true;
-            // 
-            // textBoxDomaineEtudiant
-            // 
-            this.textBoxDomaineEtudiant.Location = new System.Drawing.Point(152, 145);
-            this.textBoxDomaineEtudiant.Multiline = true;
-            this.textBoxDomaineEtudiant.Name = "textBoxDomaineEtudiant";
-            this.textBoxDomaineEtudiant.Size = new System.Drawing.Size(297, 74);
-            this.textBoxDomaineEtudiant.TabIndex = 27;
+            this.textBoxRmqEtudiant.Location = new System.Drawing.Point(152, 355);
+            this.textBoxRmqEtudiant.Multiline = true;
+            this.textBoxRmqEtudiant.Name = "textBoxRmqEtudiant";
+            this.textBoxRmqEtudiant.Size = new System.Drawing.Size(297, 74);
+            this.textBoxRmqEtudiant.TabIndex = 31;
             // 
             // textBoxHobbiesEtudiant
             // 
@@ -375,53 +365,65 @@
             this.labelHobbiesEtudiant.TabIndex = 28;
             this.labelHobbiesEtudiant.Text = "Hobbies";
             // 
-            // textBoxRmqEtudiant
+            // textBoxDomaineEtudiant
             // 
-            this.textBoxRmqEtudiant.Location = new System.Drawing.Point(152, 355);
-            this.textBoxRmqEtudiant.Multiline = true;
-            this.textBoxRmqEtudiant.Name = "textBoxRmqEtudiant";
-            this.textBoxRmqEtudiant.Size = new System.Drawing.Size(297, 74);
-            this.textBoxRmqEtudiant.TabIndex = 31;
+            this.textBoxDomaineEtudiant.Location = new System.Drawing.Point(152, 145);
+            this.textBoxDomaineEtudiant.Multiline = true;
+            this.textBoxDomaineEtudiant.Name = "textBoxDomaineEtudiant";
+            this.textBoxDomaineEtudiant.Size = new System.Drawing.Size(297, 74);
+            this.textBoxDomaineEtudiant.TabIndex = 27;
             // 
-            // labelRmqEtudiant
+            // labelDomaineEtudiant
             // 
-            this.labelRmqEtudiant.AutoSize = true;
-            this.labelRmqEtudiant.Location = new System.Drawing.Point(10, 358);
-            this.labelRmqEtudiant.Name = "labelRmqEtudiant";
-            this.labelRmqEtudiant.Size = new System.Drawing.Size(61, 13);
-            this.labelRmqEtudiant.TabIndex = 30;
-            this.labelRmqEtudiant.Text = "Remarques";
+            this.labelDomaineEtudiant.AutoSize = true;
+            this.labelDomaineEtudiant.Location = new System.Drawing.Point(10, 148);
+            this.labelDomaineEtudiant.Name = "labelDomaineEtudiant";
+            this.labelDomaineEtudiant.Size = new System.Drawing.Size(100, 13);
+            this.labelDomaineEtudiant.TabIndex = 25;
+            this.labelDomaineEtudiant.Text = "Domaine recherché";
             // 
-            // labelPermisEtudiant
+            // textBoxExperience
             // 
-            this.labelPermisEtudiant.AutoSize = true;
-            this.labelPermisEtudiant.Location = new System.Drawing.Point(10, 234);
-            this.labelPermisEtudiant.Name = "labelPermisEtudiant";
-            this.labelPermisEtudiant.Size = new System.Drawing.Size(73, 13);
-            this.labelPermisEtudiant.TabIndex = 32;
-            this.labelPermisEtudiant.Text = "Permis voiture";
+            this.textBoxExperience.Location = new System.Drawing.Point(152, 56);
+            this.textBoxExperience.Multiline = true;
+            this.textBoxExperience.Name = "textBoxExperience";
+            this.textBoxExperience.Size = new System.Drawing.Size(297, 74);
+            this.textBoxExperience.TabIndex = 24;
             // 
-            // radioButtonPermisOuiEtudiant
+            // labelExperienceEtudiant
             // 
-            this.radioButtonPermisOuiEtudiant.AutoSize = true;
-            this.radioButtonPermisOuiEtudiant.Location = new System.Drawing.Point(183, 234);
-            this.radioButtonPermisOuiEtudiant.Name = "radioButtonPermisOuiEtudiant";
-            this.radioButtonPermisOuiEtudiant.Size = new System.Drawing.Size(41, 17);
-            this.radioButtonPermisOuiEtudiant.TabIndex = 33;
-            this.radioButtonPermisOuiEtudiant.TabStop = true;
-            this.radioButtonPermisOuiEtudiant.Text = "Oui";
-            this.radioButtonPermisOuiEtudiant.UseVisualStyleBackColor = true;
+            this.labelExperienceEtudiant.AutoSize = true;
+            this.labelExperienceEtudiant.Location = new System.Drawing.Point(10, 59);
+            this.labelExperienceEtudiant.Name = "labelExperienceEtudiant";
+            this.labelExperienceEtudiant.Size = new System.Drawing.Size(127, 13);
+            this.labelExperienceEtudiant.TabIndex = 23;
+            this.labelExperienceEtudiant.Text = "Expériences précédentes";
             // 
-            // radioButtonPermisNonEtudiant
+            // textBoxLangueEtudiant
             // 
-            this.radioButtonPermisNonEtudiant.AutoSize = true;
-            this.radioButtonPermisNonEtudiant.Location = new System.Drawing.Point(329, 232);
-            this.radioButtonPermisNonEtudiant.Name = "radioButtonPermisNonEtudiant";
-            this.radioButtonPermisNonEtudiant.Size = new System.Drawing.Size(45, 17);
-            this.radioButtonPermisNonEtudiant.TabIndex = 34;
-            this.radioButtonPermisNonEtudiant.TabStop = true;
-            this.radioButtonPermisNonEtudiant.Text = "Non";
-            this.radioButtonPermisNonEtudiant.UseVisualStyleBackColor = true;
+            this.textBoxLangueEtudiant.Location = new System.Drawing.Point(152, 22);
+            this.textBoxLangueEtudiant.Name = "textBoxLangueEtudiant";
+            this.textBoxLangueEtudiant.Size = new System.Drawing.Size(297, 20);
+            this.textBoxLangueEtudiant.TabIndex = 22;
+            // 
+            // labelLangueEtudiant
+            // 
+            this.labelLangueEtudiant.AutoSize = true;
+            this.labelLangueEtudiant.Location = new System.Drawing.Point(10, 22);
+            this.labelLangueEtudiant.Name = "labelLangueEtudiant";
+            this.labelLangueEtudiant.Size = new System.Drawing.Size(129, 13);
+            this.labelLangueEtudiant.TabIndex = 21;
+            this.labelLangueEtudiant.Text = "Connaissance en langues";
+            // 
+            // buttonValiderDispoEtudiant
+            // 
+            this.buttonValiderDispoEtudiant.Location = new System.Drawing.Point(157, 893);
+            this.buttonValiderDispoEtudiant.Name = "buttonValiderDispoEtudiant";
+            this.buttonValiderDispoEtudiant.Size = new System.Drawing.Size(190, 23);
+            this.buttonValiderDispoEtudiant.TabIndex = 22;
+            this.buttonValiderDispoEtudiant.Text = "Valider et Ajouter disponibilité";
+            this.buttonValiderDispoEtudiant.UseVisualStyleBackColor = true;
+            this.buttonValiderDispoEtudiant.Click += new System.EventHandler(this.buttonValiderDispoEtudiant_Click);
             // 
             // buttonAnnulerEtudiant
             // 
@@ -431,14 +433,16 @@
             this.buttonAnnulerEtudiant.TabIndex = 23;
             this.buttonAnnulerEtudiant.Text = "Annuler";
             this.buttonAnnulerEtudiant.UseVisualStyleBackColor = true;
+            this.buttonAnnulerEtudiant.Click += new System.EventHandler(this.buttonAnnulerEtudiant_Click);
             // 
-            // dateTimePicker1
+            // dateTimePickerCreaProfilEtudiant
             // 
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(385, 858);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(86, 20);
-            this.dateTimePicker1.TabIndex = 25;
+            this.dateTimePickerCreaProfilEtudiant.Enabled = false;
+            this.dateTimePickerCreaProfilEtudiant.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePickerCreaProfilEtudiant.Location = new System.Drawing.Point(385, 858);
+            this.dateTimePickerCreaProfilEtudiant.Name = "dateTimePickerCreaProfilEtudiant";
+            this.dateTimePickerCreaProfilEtudiant.Size = new System.Drawing.Size(86, 20);
+            this.dateTimePickerCreaProfilEtudiant.TabIndex = 25;
             // 
             // labelCreationProfil
             // 
@@ -454,7 +458,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(527, 930);
-            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.dateTimePickerCreaProfilEtudiant);
             this.Controls.Add(this.labelCreationProfil);
             this.Controls.Add(this.buttonAnnulerEtudiant);
             this.Controls.Add(this.buttonValiderDispoEtudiant);
@@ -464,9 +468,9 @@
             this.Controls.Add(this.comboBoxSexeEtudiant);
             this.Controls.Add(this.labelSexeEtudiant);
             this.Controls.Add(this.labelDdNEtudiant);
-            this.Controls.Add(this.textBox6);
+            this.Controls.Add(this.textBoxEmailEtudiant);
             this.Controls.Add(this.labelEmailEtudiant);
-            this.Controls.Add(this.textBox5);
+            this.Controls.Add(this.textBoxTelEtudiant);
             this.Controls.Add(this.labelTelEtudiant);
             this.Controls.Add(this.textBoxAdresseEtudiant);
             this.Controls.Add(this.labelAdresseEtudiant);
@@ -479,6 +483,7 @@
             this.Controls.Add(this.labelIdEtudiant);
             this.Name = "FormEtudiant";
             this.Text = "Formulaire Etudiant";
+            this.Load += new System.EventHandler(this.FormEtudiant_Load);
             this.groupBoxScolariteEtudiant.ResumeLayout(false);
             this.groupBoxScolariteEtudiant.PerformLayout();
             this.groupBoxProfilEtudiant.ResumeLayout(false);
@@ -499,9 +504,9 @@
         private System.Windows.Forms.Label labelPrenomEtudiant;
         private System.Windows.Forms.TextBox textBoxAdresseEtudiant;
         private System.Windows.Forms.Label labelAdresseEtudiant;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox textBoxTelEtudiant;
         private System.Windows.Forms.Label labelTelEtudiant;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox textBoxEmailEtudiant;
         private System.Windows.Forms.Label labelEmailEtudiant;
         private System.Windows.Forms.TextBox textBoxEcoleEtudiant;
         private System.Windows.Forms.Label labelEcoleEtudiant;
@@ -530,7 +535,7 @@
         private System.Windows.Forms.TextBox textBoxDomaineEtudiant;
         private System.Windows.Forms.Button buttonValiderDispoEtudiant;
         private System.Windows.Forms.Button buttonAnnulerEtudiant;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dateTimePickerCreaProfilEtudiant;
         private System.Windows.Forms.Label labelCreationProfil;
     }
 }

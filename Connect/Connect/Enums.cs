@@ -13,4 +13,11 @@ namespace Connect.Enums
         Désactivé,
         Supprimé
     }
+
+    public enum Sexe
+    {
+        Masculin,
+        Féminin,
+        Indéterminé
+    }
 }

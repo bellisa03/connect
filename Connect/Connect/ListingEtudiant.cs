@@ -33,13 +33,13 @@ namespace Connect
             Connectds.etudiantRow etudiantSelectionne;
             Int32.TryParse(comboBoxListEtudiant.SelectedValue.ToString(), out value);
             etudiantSelectionne = EtudiantManager.GetEtudiant(value);
-            //if (value != -1)
-            //{
-            //    FormEtudiant formEtudiant = new FormEtudiant(etudiantSelectionne);
-            //    formEtudiant.MdiParent = this.MdiParent;
-            //    formEtudiant.Show();
-            //    this.Close();
-            //}
+            if (value != -1)
+            {
+                FormEtudiant formEtudiant = new FormEtudiant(etudiantSelectionne);
+                formEtudiant.MdiParent = this.MdiParent;
+                formEtudiant.Show();
+                this.Close();
+            }
         }
 
         private void buttonDeleteEtudiant_Click(object sender, EventArgs e)
