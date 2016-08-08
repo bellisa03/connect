@@ -58,6 +58,5 @@ namespace Connect
         {
             this.Close();
         }
-
     }
 }

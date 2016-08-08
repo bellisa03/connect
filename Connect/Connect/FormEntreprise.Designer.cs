@@ -45,7 +45,7 @@
             this.labelDescripEnt = new System.Windows.Forms.Label();
             this.textBoxDescripEnt = new System.Windows.Forms.TextBox();
             this.comboBoxTailleEnt = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.labelDateCreationEnt = new System.Windows.Forms.Label();
             this.comboBoxStatutEnt = new System.Windows.Forms.ComboBox();
             this.labelStatutEnt = new System.Windows.Forms.Label();
             this.buttonValiderEnt = new System.Windows.Forms.Button();
@@ -55,12 +55,14 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.labelChamps = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // datePickerCreationEnt
             // 
+            this.datePickerCreationEnt.Enabled = false;
             this.datePickerCreationEnt.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.datePickerCreationEnt.Location = new System.Drawing.Point(365, 440);
+            this.datePickerCreationEnt.Location = new System.Drawing.Point(365, 437);
             this.datePickerCreationEnt.MaxDate = new System.DateTime(2016, 12, 31, 0, 0, 0, 0);
             this.datePickerCreationEnt.MinDate = new System.DateTime(2014, 1, 1, 0, 0, 0, 0);
             this.datePickerCreationEnt.Name = "datePickerCreationEnt";
@@ -80,18 +82,18 @@
             this.labelNomEnt.AutoSize = true;
             this.labelNomEnt.Location = new System.Drawing.Point(12, 45);
             this.labelNomEnt.Name = "labelNomEnt";
-            this.labelNomEnt.Size = new System.Drawing.Size(75, 13);
+            this.labelNomEnt.Size = new System.Drawing.Size(76, 13);
             this.labelNomEnt.TabIndex = 2;
-            this.labelNomEnt.Text = "Dénomination:";
+            this.labelNomEnt.Text = "Dénomination*";
             // 
             // labelAdresseEnt
             // 
             this.labelAdresseEnt.AutoSize = true;
             this.labelAdresseEnt.Location = new System.Drawing.Point(12, 87);
             this.labelAdresseEnt.Name = "labelAdresseEnt";
-            this.labelAdresseEnt.Size = new System.Drawing.Size(48, 13);
+            this.labelAdresseEnt.Size = new System.Drawing.Size(45, 13);
             this.labelAdresseEnt.TabIndex = 4;
-            this.labelAdresseEnt.Text = "Adresse:";
+            this.labelAdresseEnt.Text = "Adresse";
             // 
             // textBoxAdresseEnt
             // 
@@ -105,9 +107,9 @@
             this.labelContactEnt.AutoSize = true;
             this.labelContactEnt.Location = new System.Drawing.Point(12, 131);
             this.labelContactEnt.Name = "labelContactEnt";
-            this.labelContactEnt.Size = new System.Drawing.Size(47, 13);
+            this.labelContactEnt.Size = new System.Drawing.Size(44, 13);
             this.labelContactEnt.TabIndex = 6;
-            this.labelContactEnt.Text = "Contact:";
+            this.labelContactEnt.Text = "Contact";
             // 
             // textBoxContactEnt
             // 
@@ -121,9 +123,9 @@
             this.labelTelEnt.AutoSize = true;
             this.labelTelEnt.Location = new System.Drawing.Point(12, 177);
             this.labelTelEnt.Name = "labelTelEnt";
-            this.labelTelEnt.Size = new System.Drawing.Size(61, 13);
+            this.labelTelEnt.Size = new System.Drawing.Size(58, 13);
             this.labelTelEnt.TabIndex = 8;
-            this.labelTelEnt.Text = "Téléphone:";
+            this.labelTelEnt.Text = "Téléphone";
             // 
             // textBoxTelEnt
             // 
@@ -137,9 +139,9 @@
             this.labelSecteurEnt.AutoSize = true;
             this.labelSecteurEnt.Location = new System.Drawing.Point(12, 221);
             this.labelSecteurEnt.Name = "labelSecteurEnt";
-            this.labelSecteurEnt.Size = new System.Drawing.Size(47, 13);
+            this.labelSecteurEnt.Size = new System.Drawing.Size(44, 13);
             this.labelSecteurEnt.TabIndex = 10;
-            this.labelSecteurEnt.Text = "Secteur:";
+            this.labelSecteurEnt.Text = "Secteur";
             // 
             // textBoxSecteurEnt
             // 
@@ -154,9 +156,9 @@
             this.labelTypeEnt.AutoSize = true;
             this.labelTypeEnt.Location = new System.Drawing.Point(12, 267);
             this.labelTypeEnt.Name = "labelTypeEnt";
-            this.labelTypeEnt.Size = new System.Drawing.Size(34, 13);
+            this.labelTypeEnt.Size = new System.Drawing.Size(31, 13);
             this.labelTypeEnt.TabIndex = 12;
-            this.labelTypeEnt.Text = "Type:";
+            this.labelTypeEnt.Text = "Type";
             // 
             // textBoxTypeEnt
             // 
@@ -170,18 +172,18 @@
             this.labelTailleEnt.AutoSize = true;
             this.labelTailleEnt.Location = new System.Drawing.Point(12, 311);
             this.labelTailleEnt.Name = "labelTailleEnt";
-            this.labelTailleEnt.Size = new System.Drawing.Size(35, 13);
+            this.labelTailleEnt.Size = new System.Drawing.Size(32, 13);
             this.labelTailleEnt.TabIndex = 13;
-            this.labelTailleEnt.Text = "Taille:";
+            this.labelTailleEnt.Text = "Taille";
             // 
             // labelDescripEnt
             // 
             this.labelDescripEnt.AutoSize = true;
             this.labelDescripEnt.Location = new System.Drawing.Point(12, 353);
             this.labelDescripEnt.Name = "labelDescripEnt";
-            this.labelDescripEnt.Size = new System.Drawing.Size(54, 13);
+            this.labelDescripEnt.Size = new System.Drawing.Size(51, 13);
             this.labelDescripEnt.TabIndex = 14;
-            this.labelDescripEnt.Text = "Descriptif:";
+            this.labelDescripEnt.Text = "Descriptif";
             // 
             // textBoxDescripEnt
             // 
@@ -199,14 +201,14 @@
             this.comboBoxTailleEnt.Size = new System.Drawing.Size(170, 21);
             this.comboBoxTailleEnt.TabIndex = 16;
             // 
-            // label1
+            // labelDateCreationEnt
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(304, 440);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(43, 13);
-            this.label1.TabIndex = 17;
-            this.label1.Text = "Crée le:";
+            this.labelDateCreationEnt.AutoSize = true;
+            this.labelDateCreationEnt.Location = new System.Drawing.Point(319, 440);
+            this.labelDateCreationEnt.Name = "labelDateCreationEnt";
+            this.labelDateCreationEnt.Size = new System.Drawing.Size(40, 13);
+            this.labelDateCreationEnt.TabIndex = 17;
+            this.labelDateCreationEnt.Text = "Crée le";
             // 
             // comboBoxStatutEnt
             // 
@@ -221,9 +223,9 @@
             this.labelStatutEnt.AutoSize = true;
             this.labelStatutEnt.Location = new System.Drawing.Point(12, 440);
             this.labelStatutEnt.Name = "labelStatutEnt";
-            this.labelStatutEnt.Size = new System.Drawing.Size(38, 13);
+            this.labelStatutEnt.Size = new System.Drawing.Size(39, 13);
             this.labelStatutEnt.TabIndex = 18;
-            this.labelStatutEnt.Text = "Statut:";
+            this.labelStatutEnt.Text = "Statut*";
             // 
             // buttonValiderEnt
             // 
@@ -298,11 +300,22 @@
             this.label4.TabIndex = 26;
             this.label4.Text = "Format: 012/12 34 56";
             // 
+            // labelChamps
+            // 
+            this.labelChamps.AutoSize = true;
+            this.labelChamps.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelChamps.Location = new System.Drawing.Point(12, 560);
+            this.labelChamps.Name = "labelChamps";
+            this.labelChamps.Size = new System.Drawing.Size(105, 13);
+            this.labelChamps.TabIndex = 27;
+            this.labelChamps.Text = "*Champs obligatoires";
+            // 
             // FormEntreprise
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 582);
+            this.Controls.Add(this.labelChamps);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -312,7 +325,7 @@
             this.Controls.Add(this.buttonValiderEnt);
             this.Controls.Add(this.comboBoxStatutEnt);
             this.Controls.Add(this.labelStatutEnt);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.labelDateCreationEnt);
             this.Controls.Add(this.comboBoxTailleEnt);
             this.Controls.Add(this.textBoxDescripEnt);
             this.Controls.Add(this.labelDescripEnt);
@@ -357,7 +370,7 @@
         private System.Windows.Forms.Label labelDescripEnt;
         private System.Windows.Forms.TextBox textBoxDescripEnt;
         private System.Windows.Forms.ComboBox comboBoxTailleEnt;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelDateCreationEnt;
         private System.Windows.Forms.ComboBox comboBoxStatutEnt;
         private System.Windows.Forms.Label labelStatutEnt;
         private System.Windows.Forms.Button buttonValiderEnt;
@@ -367,6 +380,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label labelChamps;
     }
 }
 

@@ -282,7 +282,7 @@ namespace Connect {
         private void InitClass() {
             this.DataSetName = "Connectds";
             this.Prefix = "";
-            this.Namespace = "http://tempuri.org/DataSet1.xsd";
+            this.Namespace = "http://tempuri.org/Connectds.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
             this.tableentreprise = new entrepriseDataTable();
@@ -585,7 +585,7 @@ namespace Connect {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public entrepriseRow AddentrepriseRow(string nom_entreprise, string adresse_entreprise, string contact_entreprise, string telephone_entreprise, string secteur_entreprise, string type_entreprise, string taille_entreprise, string descriptif_entreprise, int statut_entreprise, System.DateTime date_creation_entreprise) {
+            public entrepriseRow AddentrepriseRow(string nom_entreprise, string adresse_entreprise, string contact_entreprise, string telephone_entreprise, string secteur_entreprise, string type_entreprise, string taille_entreprise, string descriptif_entreprise, bool statut_entreprise, System.DateTime date_creation_entreprise) {
                 entrepriseRow rowentrepriseRow = ((entrepriseRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -662,7 +662,7 @@ namespace Connect {
                 base.Columns.Add(this.columntaille_entreprise);
                 this.columndescriptif_entreprise = new global::System.Data.DataColumn("descriptif_entreprise", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndescriptif_entreprise);
-                this.columnstatut_entreprise = new global::System.Data.DataColumn("statut_entreprise", typeof(int), null, global::System.Data.MappingType.Element);
+                this.columnstatut_entreprise = new global::System.Data.DataColumn("statut_entreprise", typeof(bool), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnstatut_entreprise);
                 this.columndate_creation_entreprise = new global::System.Data.DataColumn("date_creation_entreprise", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndate_creation_entreprise);
@@ -1095,7 +1095,7 @@ namespace Connect {
                         string experience_etudiant, 
                         string domaine_recherche_etudiant, 
                         string remarque_etudiant, 
-                        int statut_etudiant, 
+                        bool statut_etudiant, 
                         System.DateTime date_creation_etudiant) {
                 etudiantRow rowetudiantRow = ((etudiantRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
@@ -1205,7 +1205,7 @@ namespace Connect {
                 base.Columns.Add(this.columndomaine_recherche_etudiant);
                 this.columnremarque_etudiant = new global::System.Data.DataColumn("remarque_etudiant", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnremarque_etudiant);
-                this.columnstatut_etudiant = new global::System.Data.DataColumn("statut_etudiant", typeof(int), null, global::System.Data.MappingType.Element);
+                this.columnstatut_etudiant = new global::System.Data.DataColumn("statut_etudiant", typeof(bool), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnstatut_etudiant);
                 this.columndate_creation_etudiant = new global::System.Data.DataColumn("date_creation_etudiant", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndate_creation_etudiant);
@@ -1234,6 +1234,7 @@ namespace Connect {
                 this.columndomaine_recherche_etudiant.MaxLength = 500;
                 this.columnremarque_etudiant.MaxLength = 500;
                 this.columnstatut_etudiant.AllowDBNull = false;
+                this.columndate_creation_etudiant.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1567,7 +1568,7 @@ namespace Connect {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public jobRow AddjobRow(string titre_job, string descriptif_job, string profil_job, System.DateTime date_debut_job, System.DateTime date_fin_job, string horaire_job, decimal remuneration_job, bool permis_voiture_job, string remarque_job, int statut_job, entrepriseRow parententrepriseRowByFK_job_entreprise, etudiantRow parentetudiantRowByFK_job_etudiant) {
+            public jobRow AddjobRow(string titre_job, string descriptif_job, string profil_job, System.DateTime date_debut_job, System.DateTime date_fin_job, string horaire_job, decimal remuneration_job, bool permis_voiture_job, string remarque_job, bool statut_job, entrepriseRow parententrepriseRowByFK_job_entreprise, etudiantRow parentetudiantRowByFK_job_etudiant) {
                 jobRow rowjobRow = ((jobRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -1656,7 +1657,7 @@ namespace Connect {
                 base.Columns.Add(this.columnpermis_voiture_job);
                 this.columnremarque_job = new global::System.Data.DataColumn("remarque_job", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnremarque_job);
-                this.columnstatut_job = new global::System.Data.DataColumn("statut_job", typeof(int), null, global::System.Data.MappingType.Element);
+                this.columnstatut_job = new global::System.Data.DataColumn("statut_job", typeof(bool), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnstatut_job);
                 this.columnentreprise_id = new global::System.Data.DataColumn("entreprise_id", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnentreprise_id);
@@ -1984,6 +1985,9 @@ namespace Connect {
                 this.columnperiode_id.AllowDBNull = false;
                 this.columnperiode_id.ReadOnly = true;
                 this.columnperiode_id.Unique = true;
+                this.columndebut_periode.AllowDBNull = false;
+                this.columnfin_periode.AllowDBNull = false;
+                this.columnetudiant_id.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2150,11 +2154,11 @@ namespace Connect {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string adresse_entreprise {
                 get {
-                    if (this.Isadresse_entrepriseNull()) {
-                        return null;
-                    }
-                    else {
+                    try {
                         return ((string)(this[this.tableentreprise.adresse_entrepriseColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'adresse_entreprise\' in table \'entreprise\' is DBNull.", e);
                     }
                 }
                 set {
@@ -2166,11 +2170,11 @@ namespace Connect {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string contact_entreprise {
                 get {
-                    if (this.Iscontact_entrepriseNull()) {
-                        return null;
-                    }
-                    else {
+                    try {
                         return ((string)(this[this.tableentreprise.contact_entrepriseColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'contact_entreprise\' in table \'entreprise\' is DBNull.", e);
                     }
                 }
                 set {
@@ -2182,11 +2186,11 @@ namespace Connect {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string telephone_entreprise {
                 get {
-                    if (this.Istelephone_entrepriseNull()) {
-                        return null;
-                    }
-                    else {
+                    try {
                         return ((string)(this[this.tableentreprise.telephone_entrepriseColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'telephone_entreprise\' in table \'entreprise\' is DBNull.", e);
                     }
                 }
                 set {
@@ -2198,11 +2202,11 @@ namespace Connect {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string secteur_entreprise {
                 get {
-                    if (this.Issecteur_entrepriseNull()) {
-                        return null;
-                    }
-                    else {
+                    try {
                         return ((string)(this[this.tableentreprise.secteur_entrepriseColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'secteur_entreprise\' in table \'entreprise\' is DBNull.", e);
                     }
                 }
                 set {
@@ -2214,11 +2218,11 @@ namespace Connect {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string type_entreprise {
                 get {
-                    if (this.Istype_entrepriseNull()) {
-                        return null;
-                    }
-                    else {
+                    try {
                         return ((string)(this[this.tableentreprise.type_entrepriseColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'type_entreprise\' in table \'entreprise\' is DBNull.", e);
                     }
                 }
                 set {
@@ -2230,11 +2234,11 @@ namespace Connect {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string taille_entreprise {
                 get {
-                    if (this.Istaille_entrepriseNull()) {
-                        return null;
-                    }
-                    else {
+                    try {
                         return ((string)(this[this.tableentreprise.taille_entrepriseColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'taille_entreprise\' in table \'entreprise\' is DBNull.", e);
                     }
                 }
                 set {
@@ -2246,11 +2250,11 @@ namespace Connect {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string descriptif_entreprise {
                 get {
-                    if (this.Isdescriptif_entrepriseNull()) {
-                        return null;
-                    }
-                    else {
+                    try {
                         return ((string)(this[this.tableentreprise.descriptif_entrepriseColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'descriptif_entreprise\' in table \'entreprise\' is DBNull.", e);
                     }
                 }
                 set {
@@ -2260,9 +2264,9 @@ namespace Connect {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int statut_entreprise {
+            public bool statut_entreprise {
                 get {
-                    return ((int)(this[this.tableentreprise.statut_entrepriseColumn]));
+                    return ((bool)(this[this.tableentreprise.statut_entrepriseColumn]));
                 }
                 set {
                     this[this.tableentreprise.statut_entrepriseColumn] = value;
@@ -2649,9 +2653,9 @@ namespace Connect {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int statut_etudiant {
+            public bool statut_etudiant {
                 get {
-                    return ((int)(this[this.tableetudiant.statut_etudiantColumn]));
+                    return ((bool)(this[this.tableetudiant.statut_etudiantColumn]));
                 }
                 set {
                     this[this.tableetudiant.statut_etudiantColumn] = value;
@@ -2662,12 +2666,7 @@ namespace Connect {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public System.DateTime date_creation_etudiant {
                 get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tableetudiant.date_creation_etudiantColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'date_creation_etudiant\' in table \'etudiant\' is DBNull.", e);
-                    }
+                    return ((global::System.DateTime)(this[this.tableetudiant.date_creation_etudiantColumn]));
                 }
                 set {
                     this[this.tableetudiant.date_creation_etudiantColumn] = value;
@@ -2840,18 +2839,6 @@ namespace Connect {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void Setremarque_etudiantNull() {
                 this[this.tableetudiant.remarque_etudiantColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Isdate_creation_etudiantNull() {
-                return this.IsNull(this.tableetudiant.date_creation_etudiantColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Setdate_creation_etudiantNull() {
-                this[this.tableetudiant.date_creation_etudiantColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3043,9 +3030,9 @@ namespace Connect {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int statut_job {
+            public bool statut_job {
                 get {
-                    return ((int)(this[this.tablejob.statut_jobColumn]));
+                    return ((bool)(this[this.tablejob.statut_jobColumn]));
                 }
                 set {
                     this[this.tablejob.statut_jobColumn] = value;
@@ -3256,12 +3243,7 @@ namespace Connect {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public System.DateTime debut_periode {
                 get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tableperiode.debut_periodeColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'debut_periode\' in table \'periode\' is DBNull.", e);
-                    }
+                    return ((global::System.DateTime)(this[this.tableperiode.debut_periodeColumn]));
                 }
                 set {
                     this[this.tableperiode.debut_periodeColumn] = value;
@@ -3272,12 +3254,7 @@ namespace Connect {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public System.DateTime fin_periode {
                 get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tableperiode.fin_periodeColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'fin_periode\' in table \'periode\' is DBNull.", e);
-                    }
+                    return ((global::System.DateTime)(this[this.tableperiode.fin_periodeColumn]));
                 }
                 set {
                     this[this.tableperiode.fin_periodeColumn] = value;
@@ -3288,12 +3265,7 @@ namespace Connect {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public int etudiant_id {
                 get {
-                    try {
-                        return ((int)(this[this.tableperiode.etudiant_idColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'etudiant_id\' in table \'periode\' is DBNull.", e);
-                    }
+                    return ((int)(this[this.tableperiode.etudiant_idColumn]));
                 }
                 set {
                     this[this.tableperiode.etudiant_idColumn] = value;
@@ -3309,42 +3281,6 @@ namespace Connect {
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["FK_periode_etudiant"]);
                 }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Isdebut_periodeNull() {
-                return this.IsNull(this.tableperiode.debut_periodeColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Setdebut_periodeNull() {
-                this[this.tableperiode.debut_periodeColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Isfin_periodeNull() {
-                return this.IsNull(this.tableperiode.fin_periodeColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Setfin_periodeNull() {
-                this[this.tableperiode.fin_periodeColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Isetudiant_idNull() {
-                return this.IsNull(this.tableperiode.etudiant_idColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Setetudiant_idNull() {
-                this[this.tableperiode.etudiant_idColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -3623,7 +3559,7 @@ namespace Connect.ConnectdsTableAdapters {
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [entreprise] WHERE (([entreprise_id] = @Original_entreprise_id) AND ([nom_entreprise] = @Original_nom_entreprise) AND ((@IsNull_adresse_entreprise = 1 AND [adresse_entreprise] IS NULL) OR ([adresse_entreprise] = @Original_adresse_entreprise)) AND ((@IsNull_contact_entreprise = 1 AND [contact_entreprise] IS NULL) OR ([contact_entreprise] = @Original_contact_entreprise)) AND ((@IsNull_telephone_entreprise = 1 AND [telephone_entreprise] IS NULL) OR ([telephone_entreprise] = @Original_telephone_entreprise)) AND ((@IsNull_secteur_entreprise = 1 AND [secteur_entreprise] IS NULL) OR ([secteur_entreprise] = @Original_secteur_entreprise)) AND ((@IsNull_type_entreprise = 1 AND [type_entreprise] IS NULL) OR ([type_entreprise] = @Original_type_entreprise)) AND ((@IsNull_taille_entreprise = 1 AND [taille_entreprise] IS NULL) OR ([taille_entreprise] = @Original_taille_entreprise)) AND ((@IsNull_descriptif_entreprise = 1 AND [descriptif_entreprise] IS NULL) OR ([descriptif_entreprise] = @Original_descriptif_entreprise)) AND ([statut_entreprise] = @Original_statut_entreprise) AND ((@IsNull_date_creation_entreprise = 1 AND [date_creation_entreprise] IS NULL) OR ([date_creation_entreprise] = @Original_date_creation_entreprise)))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [entreprise] WHERE (([entreprise_id] = @Original_entreprise_id) AND ([nom_entreprise] = @Original_nom_entreprise) AND ((@IsNull_adresse_entreprise = 1 AND [adresse_entreprise] IS NULL) OR ([adresse_entreprise] = @Original_adresse_entreprise)) AND ((@IsNull_contact_entreprise = 1 AND [contact_entreprise] IS NULL) OR ([contact_entreprise] = @Original_contact_entreprise)) AND ((@IsNull_telephone_entreprise = 1 AND [telephone_entreprise] IS NULL) OR ([telephone_entreprise] = @Original_telephone_entreprise)) AND ((@IsNull_secteur_entreprise = 1 AND [secteur_entreprise] IS NULL) OR ([secteur_entreprise] = @Original_secteur_entreprise)) AND ((@IsNull_type_entreprise = 1 AND [type_entreprise] IS NULL) OR ([type_entreprise] = @Original_type_entreprise)) AND ((@IsNull_taille_entreprise = 1 AND [taille_entreprise] IS NULL) OR ([taille_entreprise] = @Original_taille_entreprise)) AND ((@IsNull_descriptif_entreprise = 1 AND [descriptif_entreprise] IS NULL) OR ([descriptif_entreprise] = @Original_descriptif_entreprise)) AND ([statut_entreprise] = @Original_statut_entreprise) AND ([date_creation_entreprise] = @Original_date_creation_entreprise))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_entreprise_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "entreprise_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_nom_entreprise", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "nom_entreprise", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -3641,8 +3577,7 @@ namespace Connect.ConnectdsTableAdapters {
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_taille_entreprise", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "taille_entreprise", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_descriptif_entreprise", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "descriptif_entreprise", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_descriptif_entreprise", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "descriptif_entreprise", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_statut_entreprise", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "statut_entreprise", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_date_creation_entreprise", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date_creation_entreprise", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_statut_entreprise", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "statut_entreprise", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_date_creation_entreprise", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date_creation_entreprise", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
@@ -3657,7 +3592,7 @@ SELECT entreprise_id, nom_entreprise, adresse_entreprise, contact_entreprise, te
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@type_entreprise", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "type_entreprise", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@taille_entreprise", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "taille_entreprise", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@descriptif_entreprise", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "descriptif_entreprise", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@statut_entreprise", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "statut_entreprise", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@statut_entreprise", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "statut_entreprise", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@date_creation_entreprise", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date_creation_entreprise", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
@@ -3680,12 +3615,11 @@ SELECT entreprise_id, nom_entreprise, adresse_entreprise, contact_entreprise, te
                 "([taille_entreprise] = @Original_taille_entreprise)) AND ((@IsNull_descriptif_en" +
                 "treprise = 1 AND [descriptif_entreprise] IS NULL) OR ([descriptif_entreprise] = " +
                 "@Original_descriptif_entreprise)) AND ([statut_entreprise] = @Original_statut_en" +
-                "treprise) AND ((@IsNull_date_creation_entreprise = 1 AND [date_creation_entrepri" +
-                "se] IS NULL) OR ([date_creation_entreprise] = @Original_date_creation_entreprise" +
-                ")));\r\nSELECT entreprise_id, nom_entreprise, adresse_entreprise, contact_entrepri" +
-                "se, telephone_entreprise, secteur_entreprise, type_entreprise, taille_entreprise" +
-                ", descriptif_entreprise, statut_entreprise, date_creation_entreprise FROM entrep" +
-                "rise WHERE (entreprise_id = @entreprise_id)";
+                "treprise) AND ([date_creation_entreprise] = @Original_date_creation_entreprise))" +
+                ";\r\nSELECT entreprise_id, nom_entreprise, adresse_entreprise, contact_entreprise," +
+                " telephone_entreprise, secteur_entreprise, type_entreprise, taille_entreprise, d" +
+                "escriptif_entreprise, statut_entreprise, date_creation_entreprise FROM entrepris" +
+                "e WHERE (entreprise_id = @entreprise_id)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@nom_entreprise", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "nom_entreprise", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@adresse_entreprise", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "adresse_entreprise", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -3695,7 +3629,7 @@ SELECT entreprise_id, nom_entreprise, adresse_entreprise, contact_entreprise, te
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@type_entreprise", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "type_entreprise", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@taille_entreprise", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "taille_entreprise", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@descriptif_entreprise", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "descriptif_entreprise", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@statut_entreprise", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "statut_entreprise", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@statut_entreprise", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "statut_entreprise", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@date_creation_entreprise", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date_creation_entreprise", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_entreprise_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "entreprise_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_nom_entreprise", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "nom_entreprise", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -3713,8 +3647,7 @@ SELECT entreprise_id, nom_entreprise, adresse_entreprise, contact_entreprise, te
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_taille_entreprise", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "taille_entreprise", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_descriptif_entreprise", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "descriptif_entreprise", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_descriptif_entreprise", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "descriptif_entreprise", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_statut_entreprise", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "statut_entreprise", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_date_creation_entreprise", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date_creation_entreprise", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_statut_entreprise", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "statut_entreprise", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_date_creation_entreprise", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date_creation_entreprise", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@entreprise_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "entreprise_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
@@ -3793,7 +3726,7 @@ SELECT entreprise_id, nom_entreprise, adresse_entreprise, contact_entreprise, te
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_entreprise_id, string Original_nom_entreprise, string Original_adresse_entreprise, string Original_contact_entreprise, string Original_telephone_entreprise, string Original_secteur_entreprise, string Original_type_entreprise, string Original_taille_entreprise, string Original_descriptif_entreprise, int Original_statut_entreprise, System.DateTime Original_date_creation_entreprise) {
+        public virtual int Delete(int Original_entreprise_id, string Original_nom_entreprise, string Original_adresse_entreprise, string Original_contact_entreprise, string Original_telephone_entreprise, string Original_secteur_entreprise, string Original_type_entreprise, string Original_taille_entreprise, string Original_descriptif_entreprise, bool Original_statut_entreprise, System.DateTime Original_date_creation_entreprise) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_entreprise_id));
             if ((Original_nom_entreprise == null)) {
                 throw new global::System.ArgumentNullException("Original_nom_entreprise");
@@ -3857,9 +3790,8 @@ SELECT entreprise_id, nom_entreprise, adresse_entreprise, contact_entreprise, te
                 this.Adapter.DeleteCommand.Parameters[14].Value = ((object)(0));
                 this.Adapter.DeleteCommand.Parameters[15].Value = ((string)(Original_descriptif_entreprise));
             }
-            this.Adapter.DeleteCommand.Parameters[16].Value = ((int)(Original_statut_entreprise));
-            this.Adapter.DeleteCommand.Parameters[17].Value = ((object)(0));
-            this.Adapter.DeleteCommand.Parameters[18].Value = ((System.DateTime)(Original_date_creation_entreprise));
+            this.Adapter.DeleteCommand.Parameters[16].Value = ((bool)(Original_statut_entreprise));
+            this.Adapter.DeleteCommand.Parameters[17].Value = ((System.DateTime)(Original_date_creation_entreprise));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -3880,7 +3812,7 @@ SELECT entreprise_id, nom_entreprise, adresse_entreprise, contact_entreprise, te
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string nom_entreprise, string adresse_entreprise, string contact_entreprise, string telephone_entreprise, string secteur_entreprise, string type_entreprise, string taille_entreprise, string descriptif_entreprise, int statut_entreprise, System.DateTime date_creation_entreprise) {
+        public virtual int Insert(string nom_entreprise, string adresse_entreprise, string contact_entreprise, string telephone_entreprise, string secteur_entreprise, string type_entreprise, string taille_entreprise, string descriptif_entreprise, bool statut_entreprise, System.DateTime date_creation_entreprise) {
             if ((nom_entreprise == null)) {
                 throw new global::System.ArgumentNullException("nom_entreprise");
             }
@@ -3929,7 +3861,7 @@ SELECT entreprise_id, nom_entreprise, adresse_entreprise, contact_entreprise, te
             else {
                 this.Adapter.InsertCommand.Parameters[7].Value = ((string)(descriptif_entreprise));
             }
-            this.Adapter.InsertCommand.Parameters[8].Value = ((int)(statut_entreprise));
+            this.Adapter.InsertCommand.Parameters[8].Value = ((bool)(statut_entreprise));
             this.Adapter.InsertCommand.Parameters[9].Value = ((System.DateTime)(date_creation_entreprise));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -3960,7 +3892,7 @@ SELECT entreprise_id, nom_entreprise, adresse_entreprise, contact_entreprise, te
                     string type_entreprise, 
                     string taille_entreprise, 
                     string descriptif_entreprise, 
-                    int statut_entreprise, 
+                    bool statut_entreprise, 
                     System.DateTime date_creation_entreprise, 
                     int Original_entreprise_id, 
                     string Original_nom_entreprise, 
@@ -3971,7 +3903,7 @@ SELECT entreprise_id, nom_entreprise, adresse_entreprise, contact_entreprise, te
                     string Original_type_entreprise, 
                     string Original_taille_entreprise, 
                     string Original_descriptif_entreprise, 
-                    int Original_statut_entreprise, 
+                    bool Original_statut_entreprise, 
                     System.DateTime Original_date_creation_entreprise, 
                     int entreprise_id) {
             if ((nom_entreprise == null)) {
@@ -4022,7 +3954,7 @@ SELECT entreprise_id, nom_entreprise, adresse_entreprise, contact_entreprise, te
             else {
                 this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(descriptif_entreprise));
             }
-            this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(statut_entreprise));
+            this.Adapter.UpdateCommand.Parameters[8].Value = ((bool)(statut_entreprise));
             this.Adapter.UpdateCommand.Parameters[9].Value = ((System.DateTime)(date_creation_entreprise));
             this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(Original_entreprise_id));
             if ((Original_nom_entreprise == null)) {
@@ -4087,10 +4019,9 @@ SELECT entreprise_id, nom_entreprise, adresse_entreprise, contact_entreprise, te
                 this.Adapter.UpdateCommand.Parameters[24].Value = ((object)(0));
                 this.Adapter.UpdateCommand.Parameters[25].Value = ((string)(Original_descriptif_entreprise));
             }
-            this.Adapter.UpdateCommand.Parameters[26].Value = ((int)(Original_statut_entreprise));
-            this.Adapter.UpdateCommand.Parameters[27].Value = ((object)(0));
-            this.Adapter.UpdateCommand.Parameters[28].Value = ((System.DateTime)(Original_date_creation_entreprise));
-            this.Adapter.UpdateCommand.Parameters[29].Value = ((int)(entreprise_id));
+            this.Adapter.UpdateCommand.Parameters[26].Value = ((bool)(Original_statut_entreprise));
+            this.Adapter.UpdateCommand.Parameters[27].Value = ((System.DateTime)(Original_date_creation_entreprise));
+            this.Adapter.UpdateCommand.Parameters[28].Value = ((int)(entreprise_id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -4120,7 +4051,7 @@ SELECT entreprise_id, nom_entreprise, adresse_entreprise, contact_entreprise, te
                     string type_entreprise, 
                     string taille_entreprise, 
                     string descriptif_entreprise, 
-                    int statut_entreprise, 
+                    bool statut_entreprise, 
                     System.DateTime date_creation_entreprise, 
                     int Original_entreprise_id, 
                     string Original_nom_entreprise, 
@@ -4131,7 +4062,7 @@ SELECT entreprise_id, nom_entreprise, adresse_entreprise, contact_entreprise, te
                     string Original_type_entreprise, 
                     string Original_taille_entreprise, 
                     string Original_descriptif_entreprise, 
-                    int Original_statut_entreprise, 
+                    bool Original_statut_entreprise, 
                     System.DateTime Original_date_creation_entreprise) {
             return this.Update(nom_entreprise, adresse_entreprise, contact_entreprise, telephone_entreprise, secteur_entreprise, type_entreprise, taille_entreprise, descriptif_entreprise, statut_entreprise, date_creation_entreprise, Original_entreprise_id, Original_nom_entreprise, Original_adresse_entreprise, Original_contact_entreprise, Original_telephone_entreprise, Original_secteur_entreprise, Original_type_entreprise, Original_taille_entreprise, Original_descriptif_entreprise, Original_statut_entreprise, Original_date_creation_entreprise, Original_entreprise_id);
         }
@@ -4305,9 +4236,8 @@ SELECT entreprise_id, nom_entreprise, adresse_entreprise, contact_entreprise, te
                 "[domaine_recherche_etudiant] IS NULL) OR ([domaine_recherche_etudiant] = @Origin" +
                 "al_domaine_recherche_etudiant)) AND ((@IsNull_remarque_etudiant = 1 AND [remarqu" +
                 "e_etudiant] IS NULL) OR ([remarque_etudiant] = @Original_remarque_etudiant)) AND" +
-                " ([statut_etudiant] = @Original_statut_etudiant) AND ((@IsNull_date_creation_etu" +
-                "diant = 1 AND [date_creation_etudiant] IS NULL) OR ([date_creation_etudiant] = @" +
-                "Original_date_creation_etudiant)))";
+                " ([statut_etudiant] = @Original_statut_etudiant) AND ([date_creation_etudiant] =" +
+                " @Original_date_creation_etudiant))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_etudiant_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "etudiant_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_nom_etudiant", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "nom_etudiant", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -4340,8 +4270,7 @@ SELECT entreprise_id, nom_entreprise, adresse_entreprise, contact_entreprise, te
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_domaine_recherche_etudiant", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "domaine_recherche_etudiant", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_remarque_etudiant", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "remarque_etudiant", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_remarque_etudiant", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "remarque_etudiant", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_statut_etudiant", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "statut_etudiant", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_date_creation_etudiant", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date_creation_etudiant", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_statut_etudiant", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "statut_etudiant", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_date_creation_etudiant", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date_creation_etudiant", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
@@ -4364,7 +4293,7 @@ SELECT etudiant_id, nom_etudiant, prenom_etudiant, date_naissance_etudiant, sexe
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@experience_etudiant", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "experience_etudiant", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@domaine_recherche_etudiant", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "domaine_recherche_etudiant", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@remarque_etudiant", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "remarque_etudiant", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@statut_etudiant", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "statut_etudiant", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@statut_etudiant", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "statut_etudiant", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@date_creation_etudiant", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date_creation_etudiant", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
@@ -4403,14 +4332,13 @@ SELECT etudiant_id, nom_etudiant, prenom_etudiant, date_naissance_etudiant, sexe
                 "rche_etudiant] IS NULL) OR ([domaine_recherche_etudiant] = @Original_domaine_rec" +
                 "herche_etudiant)) AND ((@IsNull_remarque_etudiant = 1 AND [remarque_etudiant] IS" +
                 " NULL) OR ([remarque_etudiant] = @Original_remarque_etudiant)) AND ([statut_etud" +
-                "iant] = @Original_statut_etudiant) AND ((@IsNull_date_creation_etudiant = 1 AND " +
-                "[date_creation_etudiant] IS NULL) OR ([date_creation_etudiant] = @Original_date_" +
-                "creation_etudiant)));\r\nSELECT etudiant_id, nom_etudiant, prenom_etudiant, date_n" +
-                "aissance_etudiant, sexe_etudiant, adresse_etudiant, telephone_etudiant, email_et" +
-                "udiant, langues_etudiant, type_etudes_etudiant, annee_scolaire_etudiant, ecole_e" +
-                "tudiant, permis_voiture_etudiant, hobbies_etudiant, experience_etudiant, domaine" +
-                "_recherche_etudiant, remarque_etudiant, statut_etudiant, date_creation_etudiant " +
-                "FROM etudiant WHERE (etudiant_id = @etudiant_id)";
+                "iant] = @Original_statut_etudiant) AND ([date_creation_etudiant] = @Original_dat" +
+                "e_creation_etudiant));\r\nSELECT etudiant_id, nom_etudiant, prenom_etudiant, date_" +
+                "naissance_etudiant, sexe_etudiant, adresse_etudiant, telephone_etudiant, email_e" +
+                "tudiant, langues_etudiant, type_etudes_etudiant, annee_scolaire_etudiant, ecole_" +
+                "etudiant, permis_voiture_etudiant, hobbies_etudiant, experience_etudiant, domain" +
+                "e_recherche_etudiant, remarque_etudiant, statut_etudiant, date_creation_etudiant" +
+                " FROM etudiant WHERE (etudiant_id = @etudiant_id)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@nom_etudiant", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "nom_etudiant", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@prenom_etudiant", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "prenom_etudiant", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -4428,7 +4356,7 @@ SELECT etudiant_id, nom_etudiant, prenom_etudiant, date_naissance_etudiant, sexe
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@experience_etudiant", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "experience_etudiant", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@domaine_recherche_etudiant", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "domaine_recherche_etudiant", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@remarque_etudiant", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "remarque_etudiant", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@statut_etudiant", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "statut_etudiant", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@statut_etudiant", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "statut_etudiant", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@date_creation_etudiant", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date_creation_etudiant", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_etudiant_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "etudiant_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_nom_etudiant", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "nom_etudiant", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -4461,8 +4389,7 @@ SELECT etudiant_id, nom_etudiant, prenom_etudiant, date_naissance_etudiant, sexe
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_domaine_recherche_etudiant", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "domaine_recherche_etudiant", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_remarque_etudiant", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "remarque_etudiant", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_remarque_etudiant", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "remarque_etudiant", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_statut_etudiant", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "statut_etudiant", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_date_creation_etudiant", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date_creation_etudiant", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_statut_etudiant", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "statut_etudiant", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_date_creation_etudiant", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date_creation_etudiant", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@etudiant_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "etudiant_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
@@ -4559,8 +4486,8 @@ SELECT etudiant_id, nom_etudiant, prenom_etudiant, date_naissance_etudiant, sexe
                     string Original_experience_etudiant, 
                     string Original_domaine_recherche_etudiant, 
                     string Original_remarque_etudiant, 
-                    int Original_statut_etudiant, 
-                    global::System.Nullable<global::System.DateTime> Original_date_creation_etudiant) {
+                    bool Original_statut_etudiant, 
+                    System.DateTime Original_date_creation_etudiant) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_etudiant_id));
             if ((Original_nom_etudiant == null)) {
                 throw new global::System.ArgumentNullException("Original_nom_etudiant");
@@ -4686,15 +4613,8 @@ SELECT etudiant_id, nom_etudiant, prenom_etudiant, date_naissance_etudiant, sexe
                 this.Adapter.DeleteCommand.Parameters[29].Value = ((object)(0));
                 this.Adapter.DeleteCommand.Parameters[30].Value = ((string)(Original_remarque_etudiant));
             }
-            this.Adapter.DeleteCommand.Parameters[31].Value = ((int)(Original_statut_etudiant));
-            if ((Original_date_creation_etudiant.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[32].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[33].Value = ((System.DateTime)(Original_date_creation_etudiant.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[32].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[33].Value = global::System.DBNull.Value;
-            }
+            this.Adapter.DeleteCommand.Parameters[31].Value = ((bool)(Original_statut_etudiant));
+            this.Adapter.DeleteCommand.Parameters[32].Value = ((System.DateTime)(Original_date_creation_etudiant));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -4732,8 +4652,8 @@ SELECT etudiant_id, nom_etudiant, prenom_etudiant, date_naissance_etudiant, sexe
                     string experience_etudiant, 
                     string domaine_recherche_etudiant, 
                     string remarque_etudiant, 
-                    int statut_etudiant, 
-                    global::System.Nullable<global::System.DateTime> date_creation_etudiant) {
+                    bool statut_etudiant, 
+                    System.DateTime date_creation_etudiant) {
             if ((nom_etudiant == null)) {
                 throw new global::System.ArgumentNullException("nom_etudiant");
             }
@@ -4830,13 +4750,8 @@ SELECT etudiant_id, nom_etudiant, prenom_etudiant, date_naissance_etudiant, sexe
             else {
                 this.Adapter.InsertCommand.Parameters[15].Value = ((string)(remarque_etudiant));
             }
-            this.Adapter.InsertCommand.Parameters[16].Value = ((int)(statut_etudiant));
-            if ((date_creation_etudiant.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[17].Value = ((System.DateTime)(date_creation_etudiant.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[17].Value = global::System.DBNull.Value;
-            }
+            this.Adapter.InsertCommand.Parameters[16].Value = ((bool)(statut_etudiant));
+            this.Adapter.InsertCommand.Parameters[17].Value = ((System.DateTime)(date_creation_etudiant));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -4874,8 +4789,8 @@ SELECT etudiant_id, nom_etudiant, prenom_etudiant, date_naissance_etudiant, sexe
                     string experience_etudiant, 
                     string domaine_recherche_etudiant, 
                     string remarque_etudiant, 
-                    int statut_etudiant, 
-                    global::System.Nullable<global::System.DateTime> date_creation_etudiant, 
+                    bool statut_etudiant, 
+                    System.DateTime date_creation_etudiant, 
                     int Original_etudiant_id, 
                     string Original_nom_etudiant, 
                     string Original_prenom_etudiant, 
@@ -4893,8 +4808,8 @@ SELECT etudiant_id, nom_etudiant, prenom_etudiant, date_naissance_etudiant, sexe
                     string Original_experience_etudiant, 
                     string Original_domaine_recherche_etudiant, 
                     string Original_remarque_etudiant, 
-                    int Original_statut_etudiant, 
-                    global::System.Nullable<global::System.DateTime> Original_date_creation_etudiant, 
+                    bool Original_statut_etudiant, 
+                    System.DateTime Original_date_creation_etudiant, 
                     int etudiant_id) {
             if ((nom_etudiant == null)) {
                 throw new global::System.ArgumentNullException("nom_etudiant");
@@ -4992,13 +4907,8 @@ SELECT etudiant_id, nom_etudiant, prenom_etudiant, date_naissance_etudiant, sexe
             else {
                 this.Adapter.UpdateCommand.Parameters[15].Value = ((string)(remarque_etudiant));
             }
-            this.Adapter.UpdateCommand.Parameters[16].Value = ((int)(statut_etudiant));
-            if ((date_creation_etudiant.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[17].Value = ((System.DateTime)(date_creation_etudiant.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[17].Value = global::System.DBNull.Value;
-            }
+            this.Adapter.UpdateCommand.Parameters[16].Value = ((bool)(statut_etudiant));
+            this.Adapter.UpdateCommand.Parameters[17].Value = ((System.DateTime)(date_creation_etudiant));
             this.Adapter.UpdateCommand.Parameters[18].Value = ((int)(Original_etudiant_id));
             if ((Original_nom_etudiant == null)) {
                 throw new global::System.ArgumentNullException("Original_nom_etudiant");
@@ -5124,16 +5034,9 @@ SELECT etudiant_id, nom_etudiant, prenom_etudiant, date_naissance_etudiant, sexe
                 this.Adapter.UpdateCommand.Parameters[47].Value = ((object)(0));
                 this.Adapter.UpdateCommand.Parameters[48].Value = ((string)(Original_remarque_etudiant));
             }
-            this.Adapter.UpdateCommand.Parameters[49].Value = ((int)(Original_statut_etudiant));
-            if ((Original_date_creation_etudiant.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[50].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[51].Value = ((System.DateTime)(Original_date_creation_etudiant.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[50].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[51].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[52].Value = ((int)(etudiant_id));
+            this.Adapter.UpdateCommand.Parameters[49].Value = ((bool)(Original_statut_etudiant));
+            this.Adapter.UpdateCommand.Parameters[50].Value = ((System.DateTime)(Original_date_creation_etudiant));
+            this.Adapter.UpdateCommand.Parameters[51].Value = ((int)(etudiant_id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -5171,8 +5074,8 @@ SELECT etudiant_id, nom_etudiant, prenom_etudiant, date_naissance_etudiant, sexe
                     string experience_etudiant, 
                     string domaine_recherche_etudiant, 
                     string remarque_etudiant, 
-                    int statut_etudiant, 
-                    global::System.Nullable<global::System.DateTime> date_creation_etudiant, 
+                    bool statut_etudiant, 
+                    System.DateTime date_creation_etudiant, 
                     int Original_etudiant_id, 
                     string Original_nom_etudiant, 
                     string Original_prenom_etudiant, 
@@ -5190,8 +5093,8 @@ SELECT etudiant_id, nom_etudiant, prenom_etudiant, date_naissance_etudiant, sexe
                     string Original_experience_etudiant, 
                     string Original_domaine_recherche_etudiant, 
                     string Original_remarque_etudiant, 
-                    int Original_statut_etudiant, 
-                    global::System.Nullable<global::System.DateTime> Original_date_creation_etudiant) {
+                    bool Original_statut_etudiant, 
+                    System.DateTime Original_date_creation_etudiant) {
             return this.Update(nom_etudiant, prenom_etudiant, date_naissance_etudiant, sexe_etudiant, adresse_etudiant, telephone_etudiant, email_etudiant, langues_etudiant, type_etudes_etudiant, annee_scolaire_etudiant, ecole_etudiant, permis_voiture_etudiant, hobbies_etudiant, experience_etudiant, domaine_recherche_etudiant, remarque_etudiant, statut_etudiant, date_creation_etudiant, Original_etudiant_id, Original_nom_etudiant, Original_prenom_etudiant, Original_date_naissance_etudiant, Original_sexe_etudiant, Original_adresse_etudiant, Original_telephone_etudiant, Original_email_etudiant, Original_langues_etudiant, Original_type_etudes_etudiant, Original_annee_scolaire_etudiant, Original_ecole_etudiant, Original_permis_voiture_etudiant, Original_hobbies_etudiant, Original_experience_etudiant, Original_domaine_recherche_etudiant, Original_remarque_etudiant, Original_statut_etudiant, Original_date_creation_etudiant, Original_etudiant_id);
         }
     }
@@ -5353,7 +5256,7 @@ SELECT etudiant_id, nom_etudiant, prenom_etudiant, date_naissance_etudiant, sexe
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_permis_voiture_job", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "permis_voiture_job", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_remarque_job", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "remarque_job", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_remarque_job", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "remarque_job", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_statut_job", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "statut_job", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_statut_job", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "statut_job", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_entreprise_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "entreprise_id", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_entreprise_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "entreprise_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_etudiant_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "etudiant_id", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
@@ -5372,7 +5275,7 @@ SELECT job_id, titre_job, descriptif_job, profil_job, date_debut_job, date_fin_j
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@remuneration_job", global::System.Data.SqlDbType.Money, 0, global::System.Data.ParameterDirection.Input, 0, 0, "remuneration_job", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@permis_voiture_job", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "permis_voiture_job", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@remarque_job", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "remarque_job", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@statut_job", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "statut_job", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@statut_job", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "statut_job", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@entreprise_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "entreprise_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@etudiant_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "etudiant_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
@@ -5411,7 +5314,7 @@ SELECT job_id, titre_job, descriptif_job, profil_job, date_debut_job, date_fin_j
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@remuneration_job", global::System.Data.SqlDbType.Money, 0, global::System.Data.ParameterDirection.Input, 0, 0, "remuneration_job", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@permis_voiture_job", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "permis_voiture_job", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@remarque_job", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "remarque_job", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@statut_job", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "statut_job", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@statut_job", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "statut_job", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@entreprise_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "entreprise_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@etudiant_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "etudiant_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_job_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "job_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -5432,7 +5335,7 @@ SELECT job_id, titre_job, descriptif_job, profil_job, date_debut_job, date_fin_j
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_permis_voiture_job", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "permis_voiture_job", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_remarque_job", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "remarque_job", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_remarque_job", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "remarque_job", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_statut_job", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "statut_job", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_statut_job", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "statut_job", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_entreprise_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "entreprise_id", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_entreprise_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "entreprise_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_etudiant_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "etudiant_id", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
@@ -5514,7 +5417,7 @@ SELECT job_id, titre_job, descriptif_job, profil_job, date_debut_job, date_fin_j
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_job_id, string Original_titre_job, string Original_descriptif_job, string Original_profil_job, global::System.Nullable<global::System.DateTime> Original_date_debut_job, global::System.Nullable<global::System.DateTime> Original_date_fin_job, string Original_horaire_job, global::System.Nullable<decimal> Original_remuneration_job, global::System.Nullable<bool> Original_permis_voiture_job, string Original_remarque_job, int Original_statut_job, global::System.Nullable<int> Original_entreprise_id, global::System.Nullable<int> Original_etudiant_id) {
+        public virtual int Delete(int Original_job_id, string Original_titre_job, string Original_descriptif_job, string Original_profil_job, global::System.Nullable<global::System.DateTime> Original_date_debut_job, global::System.Nullable<global::System.DateTime> Original_date_fin_job, string Original_horaire_job, global::System.Nullable<decimal> Original_remuneration_job, global::System.Nullable<bool> Original_permis_voiture_job, string Original_remarque_job, bool Original_statut_job, global::System.Nullable<int> Original_entreprise_id, global::System.Nullable<int> Original_etudiant_id) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_job_id));
             if ((Original_titre_job == null)) {
                 throw new global::System.ArgumentNullException("Original_titre_job");
@@ -5586,7 +5489,7 @@ SELECT job_id, titre_job, descriptif_job, profil_job, date_debut_job, date_fin_j
                 this.Adapter.DeleteCommand.Parameters[16].Value = ((object)(0));
                 this.Adapter.DeleteCommand.Parameters[17].Value = ((string)(Original_remarque_job));
             }
-            this.Adapter.DeleteCommand.Parameters[18].Value = ((int)(Original_statut_job));
+            this.Adapter.DeleteCommand.Parameters[18].Value = ((bool)(Original_statut_job));
             if ((Original_entreprise_id.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[19].Value = ((object)(0));
                 this.Adapter.DeleteCommand.Parameters[20].Value = ((int)(Original_entreprise_id.Value));
@@ -5623,7 +5526,7 @@ SELECT job_id, titre_job, descriptif_job, profil_job, date_debut_job, date_fin_j
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string titre_job, string descriptif_job, string profil_job, global::System.Nullable<global::System.DateTime> date_debut_job, global::System.Nullable<global::System.DateTime> date_fin_job, string horaire_job, global::System.Nullable<decimal> remuneration_job, global::System.Nullable<bool> permis_voiture_job, string remarque_job, int statut_job, global::System.Nullable<int> entreprise_id, global::System.Nullable<int> etudiant_id) {
+        public virtual int Insert(string titre_job, string descriptif_job, string profil_job, global::System.Nullable<global::System.DateTime> date_debut_job, global::System.Nullable<global::System.DateTime> date_fin_job, string horaire_job, global::System.Nullable<decimal> remuneration_job, global::System.Nullable<bool> permis_voiture_job, string remarque_job, bool statut_job, global::System.Nullable<int> entreprise_id, global::System.Nullable<int> etudiant_id) {
             if ((titre_job == null)) {
                 throw new global::System.ArgumentNullException("titre_job");
             }
@@ -5678,7 +5581,7 @@ SELECT job_id, titre_job, descriptif_job, profil_job, date_debut_job, date_fin_j
             else {
                 this.Adapter.InsertCommand.Parameters[8].Value = ((string)(remarque_job));
             }
-            this.Adapter.InsertCommand.Parameters[9].Value = ((int)(statut_job));
+            this.Adapter.InsertCommand.Parameters[9].Value = ((bool)(statut_job));
             if ((entreprise_id.HasValue == true)) {
                 this.Adapter.InsertCommand.Parameters[10].Value = ((int)(entreprise_id.Value));
             }
@@ -5721,7 +5624,7 @@ SELECT job_id, titre_job, descriptif_job, profil_job, date_debut_job, date_fin_j
                     global::System.Nullable<decimal> remuneration_job, 
                     global::System.Nullable<bool> permis_voiture_job, 
                     string remarque_job, 
-                    int statut_job, 
+                    bool statut_job, 
                     global::System.Nullable<int> entreprise_id, 
                     global::System.Nullable<int> etudiant_id, 
                     int Original_job_id, 
@@ -5734,7 +5637,7 @@ SELECT job_id, titre_job, descriptif_job, profil_job, date_debut_job, date_fin_j
                     global::System.Nullable<decimal> Original_remuneration_job, 
                     global::System.Nullable<bool> Original_permis_voiture_job, 
                     string Original_remarque_job, 
-                    int Original_statut_job, 
+                    bool Original_statut_job, 
                     global::System.Nullable<int> Original_entreprise_id, 
                     global::System.Nullable<int> Original_etudiant_id, 
                     int job_id) {
@@ -5792,7 +5695,7 @@ SELECT job_id, titre_job, descriptif_job, profil_job, date_debut_job, date_fin_j
             else {
                 this.Adapter.UpdateCommand.Parameters[8].Value = ((string)(remarque_job));
             }
-            this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(statut_job));
+            this.Adapter.UpdateCommand.Parameters[9].Value = ((bool)(statut_job));
             if ((entreprise_id.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(entreprise_id.Value));
             }
@@ -5876,7 +5779,7 @@ SELECT job_id, titre_job, descriptif_job, profil_job, date_debut_job, date_fin_j
                 this.Adapter.UpdateCommand.Parameters[28].Value = ((object)(0));
                 this.Adapter.UpdateCommand.Parameters[29].Value = ((string)(Original_remarque_job));
             }
-            this.Adapter.UpdateCommand.Parameters[30].Value = ((int)(Original_statut_job));
+            this.Adapter.UpdateCommand.Parameters[30].Value = ((bool)(Original_statut_job));
             if ((Original_entreprise_id.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[31].Value = ((object)(0));
                 this.Adapter.UpdateCommand.Parameters[32].Value = ((int)(Original_entreprise_id.Value));
@@ -5924,7 +5827,7 @@ SELECT job_id, titre_job, descriptif_job, profil_job, date_debut_job, date_fin_j
                     global::System.Nullable<decimal> remuneration_job, 
                     global::System.Nullable<bool> permis_voiture_job, 
                     string remarque_job, 
-                    int statut_job, 
+                    bool statut_job, 
                     global::System.Nullable<int> entreprise_id, 
                     global::System.Nullable<int> etudiant_id, 
                     int Original_job_id, 
@@ -5937,7 +5840,7 @@ SELECT job_id, titre_job, descriptif_job, profil_job, date_debut_job, date_fin_j
                     global::System.Nullable<decimal> Original_remuneration_job, 
                     global::System.Nullable<bool> Original_permis_voiture_job, 
                     string Original_remarque_job, 
-                    int Original_statut_job, 
+                    bool Original_statut_job, 
                     global::System.Nullable<int> Original_entreprise_id, 
                     global::System.Nullable<int> Original_etudiant_id) {
             return this.Update(titre_job, descriptif_job, profil_job, date_debut_job, date_fin_job, horaire_job, remuneration_job, permis_voiture_job, remarque_job, statut_job, entreprise_id, etudiant_id, Original_job_id, Original_titre_job, Original_descriptif_job, Original_profil_job, Original_date_debut_job, Original_date_fin_job, Original_horaire_job, Original_remuneration_job, Original_permis_voiture_job, Original_remarque_job, Original_statut_job, Original_entreprise_id, Original_etudiant_id, Original_job_id);
@@ -6072,14 +5975,13 @@ SELECT job_id, titre_job, descriptif_job, profil_job, date_debut_job, date_fin_j
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [periode] WHERE (([periode_id] = @Original_periode_id) AND ((@IsNull_debut_periode = 1 AND [debut_periode] IS NULL) OR ([debut_periode] = @Original_debut_periode)) AND ((@IsNull_fin_periode = 1 AND [fin_periode] IS NULL) OR ([fin_periode] = @Original_fin_periode)) AND ((@IsNull_etudiant_id = 1 AND [etudiant_id] IS NULL) OR ([etudiant_id] = @Original_etudiant_id)))";
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [periode] WHERE (([periode_id] = @Original_periode_id) AND ([debut_pe" +
+                "riode] = @Original_debut_periode) AND ([fin_periode] = @Original_fin_periode) AN" +
+                "D ([etudiant_id] = @Original_etudiant_id))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_periode_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "periode_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_debut_periode", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "debut_periode", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_debut_periode", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "debut_periode", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_fin_periode", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "fin_periode", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_fin_periode", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "fin_periode", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_etudiant_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "etudiant_id", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_etudiant_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "etudiant_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
@@ -6092,18 +5994,15 @@ SELECT job_id, titre_job, descriptif_job, profil_job, date_debut_job, date_fin_j
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@etudiant_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "etudiant_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [periode] SET [debut_periode] = @debut_periode, [fin_periode] = @fin_periode, [etudiant_id] = @etudiant_id WHERE (([periode_id] = @Original_periode_id) AND ((@IsNull_debut_periode = 1 AND [debut_periode] IS NULL) OR ([debut_periode] = @Original_debut_periode)) AND ((@IsNull_fin_periode = 1 AND [fin_periode] IS NULL) OR ([fin_periode] = @Original_fin_periode)) AND ((@IsNull_etudiant_id = 1 AND [etudiant_id] IS NULL) OR ([etudiant_id] = @Original_etudiant_id)));
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [periode] SET [debut_periode] = @debut_periode, [fin_periode] = @fin_periode, [etudiant_id] = @etudiant_id WHERE (([periode_id] = @Original_periode_id) AND ([debut_periode] = @Original_debut_periode) AND ([fin_periode] = @Original_fin_periode) AND ([etudiant_id] = @Original_etudiant_id));
 SELECT periode_id, debut_periode, fin_periode, etudiant_id FROM periode WHERE (periode_id = @periode_id)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@debut_periode", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "debut_periode", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@fin_periode", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "fin_periode", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@etudiant_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "etudiant_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_periode_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "periode_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_debut_periode", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "debut_periode", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_debut_periode", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "debut_periode", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_fin_periode", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "fin_periode", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_fin_periode", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "fin_periode", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_etudiant_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "etudiant_id", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_etudiant_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "etudiant_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@periode_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "periode_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
@@ -6182,32 +6081,11 @@ SELECT periode_id, debut_periode, fin_periode, etudiant_id FROM periode WHERE (p
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_periode_id, global::System.Nullable<global::System.DateTime> Original_debut_periode, global::System.Nullable<global::System.DateTime> Original_fin_periode, global::System.Nullable<int> Original_etudiant_id) {
+        public virtual int Delete(int Original_periode_id, System.DateTime Original_debut_periode, System.DateTime Original_fin_periode, int Original_etudiant_id) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_periode_id));
-            if ((Original_debut_periode.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((System.DateTime)(Original_debut_periode.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            if ((Original_fin_periode.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((System.DateTime)(Original_fin_periode.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            if ((Original_etudiant_id.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((int)(Original_etudiant_id.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
+            this.Adapter.DeleteCommand.Parameters[1].Value = ((System.DateTime)(Original_debut_periode));
+            this.Adapter.DeleteCommand.Parameters[2].Value = ((System.DateTime)(Original_fin_periode));
+            this.Adapter.DeleteCommand.Parameters[3].Value = ((int)(Original_etudiant_id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -6228,25 +6106,10 @@ SELECT periode_id, debut_periode, fin_periode, etudiant_id FROM periode WHERE (p
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(global::System.Nullable<global::System.DateTime> debut_periode, global::System.Nullable<global::System.DateTime> fin_periode, global::System.Nullable<int> etudiant_id) {
-            if ((debut_periode.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((System.DateTime)(debut_periode.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
-            if ((fin_periode.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((System.DateTime)(fin_periode.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            if ((etudiant_id.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((int)(etudiant_id.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
+        public virtual int Insert(System.DateTime debut_periode, System.DateTime fin_periode, int etudiant_id) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((System.DateTime)(debut_periode));
+            this.Adapter.InsertCommand.Parameters[1].Value = ((System.DateTime)(fin_periode));
+            this.Adapter.InsertCommand.Parameters[2].Value = ((int)(etudiant_id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -6267,51 +6130,15 @@ SELECT periode_id, debut_periode, fin_periode, etudiant_id FROM periode WHERE (p
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(global::System.Nullable<global::System.DateTime> debut_periode, global::System.Nullable<global::System.DateTime> fin_periode, global::System.Nullable<int> etudiant_id, int Original_periode_id, global::System.Nullable<global::System.DateTime> Original_debut_periode, global::System.Nullable<global::System.DateTime> Original_fin_periode, global::System.Nullable<int> Original_etudiant_id, int periode_id) {
-            if ((debut_periode.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[0].Value = ((System.DateTime)(debut_periode.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
-            if ((fin_periode.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[1].Value = ((System.DateTime)(fin_periode.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            if ((etudiant_id.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(etudiant_id.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
+        public virtual int Update(System.DateTime debut_periode, System.DateTime fin_periode, int etudiant_id, int Original_periode_id, System.DateTime Original_debut_periode, System.DateTime Original_fin_periode, int Original_etudiant_id, int periode_id) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((System.DateTime)(debut_periode));
+            this.Adapter.UpdateCommand.Parameters[1].Value = ((System.DateTime)(fin_periode));
+            this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(etudiant_id));
             this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(Original_periode_id));
-            if ((Original_debut_periode.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((System.DateTime)(Original_debut_periode.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            if ((Original_fin_periode.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((System.DateTime)(Original_fin_periode.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
-            }
-            if ((Original_etudiant_id.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(Original_etudiant_id.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(periode_id));
+            this.Adapter.UpdateCommand.Parameters[4].Value = ((System.DateTime)(Original_debut_periode));
+            this.Adapter.UpdateCommand.Parameters[5].Value = ((System.DateTime)(Original_fin_periode));
+            this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Original_etudiant_id));
+            this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(periode_id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -6332,7 +6159,7 @@ SELECT periode_id, debut_periode, fin_periode, etudiant_id FROM periode WHERE (p
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(global::System.Nullable<global::System.DateTime> debut_periode, global::System.Nullable<global::System.DateTime> fin_periode, global::System.Nullable<int> etudiant_id, int Original_periode_id, global::System.Nullable<global::System.DateTime> Original_debut_periode, global::System.Nullable<global::System.DateTime> Original_fin_periode, global::System.Nullable<int> Original_etudiant_id) {
+        public virtual int Update(System.DateTime debut_periode, System.DateTime fin_periode, int etudiant_id, int Original_periode_id, System.DateTime Original_debut_periode, System.DateTime Original_fin_periode, int Original_etudiant_id) {
             return this.Update(debut_periode, fin_periode, etudiant_id, Original_periode_id, Original_debut_periode, Original_fin_periode, Original_etudiant_id, Original_periode_id);
         }
     }

@@ -52,6 +52,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Connectds.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Disponibilite.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Disponibilite.Designer.cs">
+      <DependentUpon>Disponibilite.cs</DependentUpon>
+    </Compile>
     <Compile Include="EntrepriseManager.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="EtudiantManager.cs" />
@@ -87,6 +93,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Disponibilite.resx">
+      <DependentUpon>Disponibilite.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormEntreprise.resx">
       <DependentUpon>FormEntreprise.cs</DependentUpon>
     </EmbeddedResource>

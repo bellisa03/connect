@@ -10,8 +10,7 @@ namespace Connect.Enums
     public enum Statut
     {
         Actif,
-        Désactivé,
-        Supprimé
+        Désactivé
     }
 
     public enum Sexe

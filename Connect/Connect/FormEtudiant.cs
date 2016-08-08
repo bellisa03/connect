@@ -14,6 +14,7 @@ namespace Connect
     {
         Connectds ds;
         Connectds.etudiantRow etudiantRow;
+        Connectds.etudiantDataTable etudiantDT = new Connectds.etudiantDataTable();
         int id = -1;
 
         /// <summary>
@@ -61,7 +62,6 @@ namespace Connect
 
             if (id != -1)
             {
-                buttonValiderEtudiant.Text = "Modifier";
                 etudiantRow = EtudiantManager.GetEtudiant(id);
 
                 switch (etudiantRow.sexe_etudiant)
@@ -116,31 +116,75 @@ namespace Connect
                 permisNonBinding.Parse += (s, args) => args.Value = (bool)args.Value ? false : true;
                 // Binding:
                 radioButtonPermisNonEtudiant.DataBindings.Add(permisNonBinding);
+
+                // création du binding pour le checkbox Actif
+                var actifBinding = new Binding("Checked", etudiantRow, "statut_etudiant");
+                // Format = lecture à partir du datasource, retourne "true" s'il lit la valeur 1
+                actifBinding.Format += (s, args) => args.Value = ((bool)args.Value) == true;
+                // Parse = écriture dans le datasource, retourne la valeur false s'il lit la valeur 2
+                actifBinding.Parse += (s, args) => args.Value = (bool)args.Value ? true : false;
+                // Binding:
+                checkBoxActif.DataBindings.Add(actifBinding);
             }
             else
             {
-                Connectds.etudiantDataTable dt = new Connectds.etudiantDataTable();
-                etudiantRow = dt.NewetudiantRow();
+                
+                etudiantRow = etudiantDT.NewetudiantRow();
                 dateTimePickerCreaProfilEtudiant.Value = DateTime.Now;
-                textBoxIdEtudiant.Text = etudiantRow.etudiant_id.ToString();
+                //textBoxIdEtudiant.Text = etudiantRow.etudiant_id.ToString();
+                labelIdEtudiant.Visible = false;
+                textBoxIdEtudiant.Visible = false;
             }
+        }
+        /// <summary>
+        /// la méthode refreshDataGrid permet de retourner sur le listing des étudiants après une modification/ajout/suppression d'un profil étudiant,
+        /// Afin d'avoir la liste du DataGridView mise à jour
+        /// </summary>
+        private void refreshDataGrid()
+        {
+            this.Close();
+            ListingEtudiant listeEtudiant = new ListingEtudiant();
+            listeEtudiant.MdiParent = HomePage.ActiveForm;
+            listeEtudiant.Show();
         }
 
         private void buttonValiderEtudiant_Click(object sender, EventArgs e)
         {
-
+            Valider();
+            refreshDataGrid();
         }
 
         private void buttonValiderDispoEtudiant_Click(object sender, EventArgs e)
         {
-
+            Valider();
+            Disponibilite disponibilite = new Disponibilite(id);
+            disponibilite.MdiParent = HomePage.ActiveForm;
+            disponibilite.Show();
         }
 
         private void Valider()
         {
-            if (radioButtonPermisOuiEtudiant.Checked) etudiantRow.permis_voiture_etudiant = true;
-            if (radioButtonPermisNonEtudiant.Checked) etudiantRow.permis_voiture_etudiant = false;
+            etudiantRow.nom_etudiant = textBoxNomEtudiant.Text;
+            etudiantRow.prenom_etudiant = textBoxPrenomEtudiant.Text;
+            etudiantRow.date_naissance_etudiant = dateTimePickerDdNEtudiant.Value;
+            etudiantRow.sexe_etudiant = EtudiantManager.GetSexe(comboBoxSexeEtudiant.Text);
+            etudiantRow.adresse_etudiant = textBoxAdresseEtudiant.Text;
+            etudiantRow.telephone_etudiant = textBoxTelEtudiant.Text;
+            etudiantRow.email_etudiant = textBoxEmailEtudiant.Text;
+            etudiantRow.ecole_etudiant = textBoxEcoleEtudiant.Text;
+            etudiantRow.annee_scolaire_etudiant = textBoxAnneeEtudiant.Text;
+            etudiantRow.type_etudes_etudiant = textBoxTypeEtudiant.Text;
+            etudiantRow.langues_etudiant = textBoxLangueEtudiant.Text;
+            etudiantRow.experience_etudiant = textBoxExperience.Text;
+            etudiantRow.domaine_recherche_etudiant = textBoxDomaineEtudiant.Text;
+            etudiantRow.hobbies_etudiant = textBoxHobbiesEtudiant.Text;
+            etudiantRow.date_creation_etudiant = dateTimePickerCreaProfilEtudiant.Value;
+            //if (radioButtonPermisOuiEtudiant.Checked) etudiantRow.permis_voiture_etudiant = true;
+            //if (radioButtonPermisNonEtudiant.Checked) etudiantRow.permis_voiture_etudiant = false;
 
+            EtudiantManager.SaveEtudiant(etudiantRow);
+            
+            
         }
 
         private void buttonAnnulerEtudiant_Click(object sender, EventArgs e)

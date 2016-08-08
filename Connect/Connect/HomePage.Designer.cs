@@ -93,6 +93,7 @@
             this.ToolStripMenuItemNewEtu.Name = "ToolStripMenuItemNewEtu";
             this.ToolStripMenuItemNewEtu.Size = new System.Drawing.Size(176, 22);
             this.ToolStripMenuItemNewEtu.Text = "Nouvel Etudiant";
+            this.ToolStripMenuItemNewEtu.Click += new System.EventHandler(this.ToolStripMenuItemNewEtu2_Click);
             // 
             // ToolStripMenuItemFermer
             // 
@@ -180,7 +181,7 @@
             // 
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel});
-            this.statusStrip.Location = new System.Drawing.Point(0, 739);
+            this.statusStrip.Location = new System.Drawing.Point(0, 839);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Size = new System.Drawing.Size(1384, 22);
             this.statusStrip.TabIndex = 2;
@@ -197,7 +198,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1384, 761);
+            this.ClientSize = new System.Drawing.Size(1384, 861);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.menuStrip);
             this.IsMdiContainer = true;

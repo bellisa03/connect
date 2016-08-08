@@ -43,7 +43,7 @@
             this.dataGridViewListEntreprise.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridViewListEntreprise.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dataGridViewListEntreprise.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewListEntreprise.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
@@ -55,6 +55,7 @@
             this.dataGridViewListEntreprise.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewListEntreprise.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewListEntreprise.Location = new System.Drawing.Point(12, 77);
+            this.dataGridViewListEntreprise.MultiSelect = false;
             this.dataGridViewListEntreprise.Name = "dataGridViewListEntreprise";
             this.dataGridViewListEntreprise.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewListEntreprise.Size = new System.Drawing.Size(1032, 408);

@@ -54,7 +54,7 @@ namespace Connect
         {
             comboBoxStatutEnt.Items.Add(Enums.Statut.Actif.ToString());
             comboBoxStatutEnt.Items.Add(Enums.Statut.Désactivé.ToString());
-            comboBoxStatutEnt.Items.Add(Enums.Statut.Supprimé.ToString());
+            comboBoxStatutEnt.SelectedIndex = comboBoxStatutEnt.Items.IndexOf(Enums.Statut.Actif.ToString());
 
             comboBoxTailleEnt.Items.Add("Très Petite Entreprise");
             comboBoxTailleEnt.Items.Add("Petite Entreprise");
@@ -85,14 +85,11 @@ namespace Connect
                 }
                 switch (entrepriseRow.statut_entreprise)
                 {
-                    case 1:
+                    case true:
                         comboBoxStatutEnt.Text = Enums.Statut.Actif.ToString();
                         break;
-                    case 2:
+                    case false:
                         comboBoxStatutEnt.Text = Enums.Statut.Désactivé.ToString();
-                        break;
-                    case 3:
-                        comboBoxStatutEnt.Text = Enums.Statut.Supprimé.ToString();
                         break;
                     default:
                         break;
@@ -133,6 +130,7 @@ namespace Connect
             entrepriseRow.contact_entreprise = textBoxContactEnt.Text;
             entrepriseRow.telephone_entreprise = textBoxTelEnt.Text;
             entrepriseRow.secteur_entreprise = textBoxSecteurEnt.Text;
+            entrepriseRow.type_entreprise = textBoxTypeEnt.Text;
             entrepriseRow.statut_entreprise = EntrepriseManager.GetStatus(comboBoxStatutEnt.Text);
             entrepriseRow.taille_entreprise = EntrepriseManager.GetTaille(comboBoxTailleEnt.Text);
             entrepriseRow.descriptif_entreprise = textBoxDescripEnt.Text;

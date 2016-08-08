@@ -69,7 +69,9 @@
             this.buttonValiderDispoEtudiant = new System.Windows.Forms.Button();
             this.buttonAnnulerEtudiant = new System.Windows.Forms.Button();
             this.dateTimePickerCreaProfilEtudiant = new System.Windows.Forms.DateTimePicker();
+            this.labelChamps = new System.Windows.Forms.Label();
             this.labelCreationProfil = new System.Windows.Forms.Label();
+            this.checkBoxActif = new System.Windows.Forms.CheckBox();
             this.groupBoxScolariteEtudiant.SuspendLayout();
             this.groupBoxProfilEtudiant.SuspendLayout();
             this.SuspendLayout();
@@ -98,7 +100,7 @@
             this.textBoxIdEtudiant.Location = new System.Drawing.Point(174, 15);
             this.textBoxIdEtudiant.Name = "textBoxIdEtudiant";
             this.textBoxIdEtudiant.ReadOnly = true;
-            this.textBoxIdEtudiant.Size = new System.Drawing.Size(256, 20);
+            this.textBoxIdEtudiant.Size = new System.Drawing.Size(151, 20);
             this.textBoxIdEtudiant.TabIndex = 2;
             // 
             // textBoxNomEtudiant
@@ -113,9 +115,9 @@
             this.labelNomEtudiant.AutoSize = true;
             this.labelNomEtudiant.Location = new System.Drawing.Point(67, 55);
             this.labelNomEtudiant.Name = "labelNomEtudiant";
-            this.labelNomEtudiant.Size = new System.Drawing.Size(29, 13);
+            this.labelNomEtudiant.Size = new System.Drawing.Size(33, 13);
             this.labelNomEtudiant.TabIndex = 3;
-            this.labelNomEtudiant.Text = "Nom";
+            this.labelNomEtudiant.Text = "Nom*";
             // 
             // textBoxPrenomEtudiant
             // 
@@ -129,9 +131,9 @@
             this.labelPrenomEtudiant.AutoSize = true;
             this.labelPrenomEtudiant.Location = new System.Drawing.Point(67, 93);
             this.labelPrenomEtudiant.Name = "labelPrenomEtudiant";
-            this.labelPrenomEtudiant.Size = new System.Drawing.Size(43, 13);
+            this.labelPrenomEtudiant.Size = new System.Drawing.Size(47, 13);
             this.labelPrenomEtudiant.TabIndex = 5;
-            this.labelPrenomEtudiant.Text = "Prénom";
+            this.labelPrenomEtudiant.Text = "Prénom*";
             // 
             // textBoxAdresseEtudiant
             // 
@@ -444,6 +446,16 @@
             this.dateTimePickerCreaProfilEtudiant.Size = new System.Drawing.Size(86, 20);
             this.dateTimePickerCreaProfilEtudiant.TabIndex = 25;
             // 
+            // labelChamps
+            // 
+            this.labelChamps.AutoSize = true;
+            this.labelChamps.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelChamps.Location = new System.Drawing.Point(19, 923);
+            this.labelChamps.Name = "labelChamps";
+            this.labelChamps.Size = new System.Drawing.Size(105, 13);
+            this.labelChamps.TabIndex = 28;
+            this.labelChamps.Text = "*Champs obligatoires";
+            // 
             // labelCreationProfil
             // 
             this.labelCreationProfil.AutoSize = true;
@@ -453,11 +465,25 @@
             this.labelCreationProfil.TabIndex = 24;
             this.labelCreationProfil.Text = "Profil crée le";
             // 
+            // checkBoxActif
+            // 
+            this.checkBoxActif.AutoSize = true;
+            this.checkBoxActif.Checked = true;
+            this.checkBoxActif.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxActif.Location = new System.Drawing.Point(360, 17);
+            this.checkBoxActif.Name = "checkBoxActif";
+            this.checkBoxActif.Size = new System.Drawing.Size(51, 17);
+            this.checkBoxActif.TabIndex = 31;
+            this.checkBoxActif.Text = "Actif*";
+            this.checkBoxActif.UseVisualStyleBackColor = true;
+            // 
             // FormEtudiant
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(527, 930);
+            this.ClientSize = new System.Drawing.Size(527, 945);
+            this.Controls.Add(this.checkBoxActif);
+            this.Controls.Add(this.labelChamps);
             this.Controls.Add(this.dateTimePickerCreaProfilEtudiant);
             this.Controls.Add(this.labelCreationProfil);
             this.Controls.Add(this.buttonAnnulerEtudiant);
@@ -482,7 +508,9 @@
             this.Controls.Add(this.buttonValiderEtudiant);
             this.Controls.Add(this.labelIdEtudiant);
             this.Name = "FormEtudiant";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Formulaire Etudiant";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.FormEtudiant_Load);
             this.groupBoxScolariteEtudiant.ResumeLayout(false);
             this.groupBoxScolariteEtudiant.PerformLayout();
@@ -536,6 +564,8 @@
         private System.Windows.Forms.Button buttonValiderDispoEtudiant;
         private System.Windows.Forms.Button buttonAnnulerEtudiant;
         private System.Windows.Forms.DateTimePicker dateTimePickerCreaProfilEtudiant;
+        private System.Windows.Forms.Label labelChamps;
         private System.Windows.Forms.Label labelCreationProfil;
+        private System.Windows.Forms.CheckBox checkBoxActif;
     }
 }

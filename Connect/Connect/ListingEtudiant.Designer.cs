@@ -29,14 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.buttonDeleteEtudiant = new System.Windows.Forms.Button();
             this.buttonListEtudiantFermer = new System.Windows.Forms.Button();
             this.buttonListEtudiantAfficher = new System.Windows.Forms.Button();
             this.dataGridViewListEtudiant = new System.Windows.Forms.DataGridView();
-            this.connectds = new Connect.Connectds();
-            this.etudiantBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.etudiantTableAdapter = new Connect.ConnectdsTableAdapters.etudiantTableAdapter();
             this.etudiantidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nometudiantDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.prenometudiantDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -47,17 +44,21 @@
             this.anneescolaireetudiantDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ecoleetudiantDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.permisvoitureetudiantDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.statut_etudiant = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.etudiantBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.connectds = new Connect.Connectds();
+            this.etudiantTableAdapter = new Connect.ConnectdsTableAdapters.etudiantTableAdapter();
             this.comboBoxListEtudiant = new System.Windows.Forms.ComboBox();
             this.labelID = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewListEtudiant)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.connectds)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.etudiantBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.connectds)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonDeleteEtudiant
             // 
             this.buttonDeleteEtudiant.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.buttonDeleteEtudiant.Location = new System.Drawing.Point(390, 397);
+            this.buttonDeleteEtudiant.Location = new System.Drawing.Point(419, 415);
             this.buttonDeleteEtudiant.Name = "buttonDeleteEtudiant";
             this.buttonDeleteEtudiant.Size = new System.Drawing.Size(116, 23);
             this.buttonDeleteEtudiant.TabIndex = 9;
@@ -68,7 +69,7 @@
             // buttonListEtudiantFermer
             // 
             this.buttonListEtudiantFermer.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.buttonListEtudiantFermer.Location = new System.Drawing.Point(650, 397);
+            this.buttonListEtudiantFermer.Location = new System.Drawing.Point(679, 415);
             this.buttonListEtudiantFermer.Name = "buttonListEtudiantFermer";
             this.buttonListEtudiantFermer.Size = new System.Drawing.Size(116, 23);
             this.buttonListEtudiantFermer.TabIndex = 8;
@@ -79,7 +80,7 @@
             // buttonListEtudiantAfficher
             // 
             this.buttonListEtudiantAfficher.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.buttonListEtudiantAfficher.Location = new System.Drawing.Point(122, 397);
+            this.buttonListEtudiantAfficher.Location = new System.Drawing.Point(151, 415);
             this.buttonListEtudiantAfficher.Name = "buttonListEtudiantAfficher";
             this.buttonListEtudiantAfficher.Size = new System.Drawing.Size(116, 23);
             this.buttonListEtudiantAfficher.TabIndex = 7;
@@ -95,15 +96,15 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewListEtudiant.AutoGenerateColumns = false;
-            this.dataGridViewListEtudiant.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewListEtudiant.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridViewListEtudiant.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewListEtudiant.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewListEtudiant.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewListEtudiant.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.etudiantidDataGridViewTextBoxColumn,
@@ -115,28 +116,16 @@
             this.typeetudesetudiantDataGridViewTextBoxColumn,
             this.anneescolaireetudiantDataGridViewTextBoxColumn,
             this.ecoleetudiantDataGridViewTextBoxColumn,
-            this.permisvoitureetudiantDataGridViewCheckBoxColumn});
+            this.permisvoitureetudiantDataGridViewCheckBoxColumn,
+            this.statut_etudiant});
             this.dataGridViewListEtudiant.DataSource = this.etudiantBindingSource;
-            this.dataGridViewListEtudiant.Location = new System.Drawing.Point(40, 75);
+            this.dataGridViewListEtudiant.Location = new System.Drawing.Point(12, 75);
+            this.dataGridViewListEtudiant.MultiSelect = false;
             this.dataGridViewListEtudiant.Name = "dataGridViewListEtudiant";
             this.dataGridViewListEtudiant.ReadOnly = true;
             this.dataGridViewListEtudiant.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewListEtudiant.Size = new System.Drawing.Size(817, 294);
+            this.dataGridViewListEtudiant.Size = new System.Drawing.Size(933, 312);
             this.dataGridViewListEtudiant.TabIndex = 11;
-            // 
-            // connectds
-            // 
-            this.connectds.DataSetName = "Connectds";
-            this.connectds.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // etudiantBindingSource
-            // 
-            this.etudiantBindingSource.DataMember = "etudiant";
-            this.etudiantBindingSource.DataSource = this.connectds;
-            // 
-            // etudiantTableAdapter
-            // 
-            this.etudiantTableAdapter.ClearBeforeFill = true;
             // 
             // etudiantidDataGridViewTextBoxColumn
             // 
@@ -144,7 +133,6 @@
             this.etudiantidDataGridViewTextBoxColumn.HeaderText = "ID";
             this.etudiantidDataGridViewTextBoxColumn.Name = "etudiantidDataGridViewTextBoxColumn";
             this.etudiantidDataGridViewTextBoxColumn.ReadOnly = true;
-            this.etudiantidDataGridViewTextBoxColumn.Width = 45;
             // 
             // nometudiantDataGridViewTextBoxColumn
             // 
@@ -152,7 +140,6 @@
             this.nometudiantDataGridViewTextBoxColumn.HeaderText = "Nom";
             this.nometudiantDataGridViewTextBoxColumn.Name = "nometudiantDataGridViewTextBoxColumn";
             this.nometudiantDataGridViewTextBoxColumn.ReadOnly = true;
-            this.nometudiantDataGridViewTextBoxColumn.Width = 57;
             // 
             // prenometudiantDataGridViewTextBoxColumn
             // 
@@ -160,7 +147,6 @@
             this.prenometudiantDataGridViewTextBoxColumn.HeaderText = "Prénom";
             this.prenometudiantDataGridViewTextBoxColumn.Name = "prenometudiantDataGridViewTextBoxColumn";
             this.prenometudiantDataGridViewTextBoxColumn.ReadOnly = true;
-            this.prenometudiantDataGridViewTextBoxColumn.Width = 74;
             // 
             // datenaissanceetudiantDataGridViewTextBoxColumn
             // 
@@ -168,7 +154,6 @@
             this.datenaissanceetudiantDataGridViewTextBoxColumn.HeaderText = "Date de naissance";
             this.datenaissanceetudiantDataGridViewTextBoxColumn.Name = "datenaissanceetudiantDataGridViewTextBoxColumn";
             this.datenaissanceetudiantDataGridViewTextBoxColumn.ReadOnly = true;
-            this.datenaissanceetudiantDataGridViewTextBoxColumn.Width = 126;
             // 
             // sexeetudiantDataGridViewTextBoxColumn
             // 
@@ -176,7 +161,6 @@
             this.sexeetudiantDataGridViewTextBoxColumn.HeaderText = "Sexe";
             this.sexeetudiantDataGridViewTextBoxColumn.Name = "sexeetudiantDataGridViewTextBoxColumn";
             this.sexeetudiantDataGridViewTextBoxColumn.ReadOnly = true;
-            this.sexeetudiantDataGridViewTextBoxColumn.Width = 60;
             // 
             // telephoneetudiantDataGridViewTextBoxColumn
             // 
@@ -184,7 +168,6 @@
             this.telephoneetudiantDataGridViewTextBoxColumn.HeaderText = "Téléphone";
             this.telephoneetudiantDataGridViewTextBoxColumn.Name = "telephoneetudiantDataGridViewTextBoxColumn";
             this.telephoneetudiantDataGridViewTextBoxColumn.ReadOnly = true;
-            this.telephoneetudiantDataGridViewTextBoxColumn.Width = 92;
             // 
             // typeetudesetudiantDataGridViewTextBoxColumn
             // 
@@ -192,7 +175,6 @@
             this.typeetudesetudiantDataGridViewTextBoxColumn.HeaderText = "Etude";
             this.typeetudesetudiantDataGridViewTextBoxColumn.Name = "typeetudesetudiantDataGridViewTextBoxColumn";
             this.typeetudesetudiantDataGridViewTextBoxColumn.ReadOnly = true;
-            this.typeetudesetudiantDataGridViewTextBoxColumn.Width = 65;
             // 
             // anneescolaireetudiantDataGridViewTextBoxColumn
             // 
@@ -200,7 +182,6 @@
             this.anneescolaireetudiantDataGridViewTextBoxColumn.HeaderText = "Année scolaire";
             this.anneescolaireetudiantDataGridViewTextBoxColumn.Name = "anneescolaireetudiantDataGridViewTextBoxColumn";
             this.anneescolaireetudiantDataGridViewTextBoxColumn.ReadOnly = true;
-            this.anneescolaireetudiantDataGridViewTextBoxColumn.Width = 106;
             // 
             // ecoleetudiantDataGridViewTextBoxColumn
             // 
@@ -208,7 +189,6 @@
             this.ecoleetudiantDataGridViewTextBoxColumn.HeaderText = "Ecole";
             this.ecoleetudiantDataGridViewTextBoxColumn.Name = "ecoleetudiantDataGridViewTextBoxColumn";
             this.ecoleetudiantDataGridViewTextBoxColumn.ReadOnly = true;
-            this.ecoleetudiantDataGridViewTextBoxColumn.Width = 64;
             // 
             // permisvoitureetudiantDataGridViewCheckBoxColumn
             // 
@@ -216,7 +196,29 @@
             this.permisvoitureetudiantDataGridViewCheckBoxColumn.HeaderText = "Permis voiture";
             this.permisvoitureetudiantDataGridViewCheckBoxColumn.Name = "permisvoitureetudiantDataGridViewCheckBoxColumn";
             this.permisvoitureetudiantDataGridViewCheckBoxColumn.ReadOnly = true;
-            this.permisvoitureetudiantDataGridViewCheckBoxColumn.Width = 84;
+            // 
+            // statut_etudiant
+            // 
+            this.statut_etudiant.DataPropertyName = "statut_etudiant";
+            this.statut_etudiant.HeaderText = "Profil Actif";
+            this.statut_etudiant.Name = "statut_etudiant";
+            this.statut_etudiant.ReadOnly = true;
+            this.statut_etudiant.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.statut_etudiant.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // etudiantBindingSource
+            // 
+            this.etudiantBindingSource.DataMember = "etudiant";
+            this.etudiantBindingSource.DataSource = this.connectds;
+            // 
+            // connectds
+            // 
+            this.connectds.DataSetName = "Connectds";
+            this.connectds.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // etudiantTableAdapter
+            // 
+            this.etudiantTableAdapter.ClearBeforeFill = true;
             // 
             // comboBoxListEtudiant
             // 
@@ -243,7 +245,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(898, 460);
+            this.ClientSize = new System.Drawing.Size(957, 478);
             this.Controls.Add(this.labelID);
             this.Controls.Add(this.comboBoxListEtudiant);
             this.Controls.Add(this.dataGridViewListEtudiant);
@@ -254,8 +256,8 @@
             this.Text = "Listing Etudiants";
             this.Load += new System.EventHandler(this.ListingEtudiant_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewListEtudiant)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.connectds)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.etudiantBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.connectds)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -270,6 +272,8 @@
         private Connectds connectds;
         private System.Windows.Forms.BindingSource etudiantBindingSource;
         private ConnectdsTableAdapters.etudiantTableAdapter etudiantTableAdapter;
+        private System.Windows.Forms.ComboBox comboBoxListEtudiant;
+        private System.Windows.Forms.Label labelID;
         private System.Windows.Forms.DataGridViewTextBoxColumn etudiantidDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nometudiantDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn prenometudiantDataGridViewTextBoxColumn;
@@ -280,7 +284,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn anneescolaireetudiantDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ecoleetudiantDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn permisvoitureetudiantDataGridViewCheckBoxColumn;
-        private System.Windows.Forms.ComboBox comboBoxListEtudiant;
-        private System.Windows.Forms.Label labelID;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn statut_etudiant;
     }
 }

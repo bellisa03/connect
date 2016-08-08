@@ -22,21 +22,19 @@ namespace Connect
             return entrepriseRow;
         }
 
-        public static int GetStatus(string statut)
+        public static bool GetStatus(string statut)
         {
             switch (statut)
             {
                 case "Actif":
-                    return 1;
-                    
+                    return true;
+
                 case "Désactivé":
-                    return 2;
-                    
-                case "Supprimé":
-                    return 3;
-                    
+                    return false;
+
                 default:
-                    return -1;
+                    return true;
+
             }
         }
 
