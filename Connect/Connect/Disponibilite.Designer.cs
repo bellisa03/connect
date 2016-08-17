@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.labelIdEtudiant = new System.Windows.Forms.Label();
             this.textBoxIdEtudiant = new System.Windows.Forms.TextBox();
             this.labelDebutPeriode = new System.Windows.Forms.Label();
@@ -38,19 +38,20 @@
             this.datePickerDebutPeriode = new System.Windows.Forms.DateTimePicker();
             this.datePickerFinPeriode = new System.Windows.Forms.DateTimePicker();
             this.dataGridViewPeriode = new System.Windows.Forms.DataGridView();
+            this.periodeidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.debutperiodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.finperiodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.etudiantidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.periodeBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.connectds = new Connect.Connectds();
-            this.periodeTableAdapter = new Connect.ConnectdsTableAdapters.periodeTableAdapter();
-            this.buttonFermer = new System.Windows.Forms.Button();
+            this.buttonFermerDisponibilite = new System.Windows.Forms.Button();
             this.buttonValiderDisponibilite = new System.Windows.Forms.Button();
             this.textBoxNom = new System.Windows.Forms.TextBox();
             this.labelEtudiant = new System.Windows.Forms.Label();
             this.buttonSupprimerDisponibilite = new System.Windows.Forms.Button();
-            this.etudiantidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.finperiodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.debutperiodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.periodeidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.labelChamps = new System.Windows.Forms.Label();
+            this.buttonUpdateDisponibilite = new System.Windows.Forms.Button();
+            this.periodeTableAdapter = new Connect.ConnectdsTableAdapters.periodeTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPeriode)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.periodeBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.connectds)).BeginInit();
@@ -110,14 +111,14 @@
             this.dataGridViewPeriode.AllowUserToAddRows = false;
             this.dataGridViewPeriode.AutoGenerateColumns = false;
             this.dataGridViewPeriode.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewPeriode.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewPeriode.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridViewPeriode.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewPeriode.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.periodeidDataGridViewTextBoxColumn,
@@ -125,20 +126,48 @@
             this.finperiodeDataGridViewTextBoxColumn,
             this.etudiantidDataGridViewTextBoxColumn});
             this.dataGridViewPeriode.DataSource = this.periodeBindingSource;
+            this.dataGridViewPeriode.GridColor = System.Drawing.SystemColors.ActiveCaption;
             this.dataGridViewPeriode.Location = new System.Drawing.Point(48, 203);
             this.dataGridViewPeriode.MultiSelect = false;
             this.dataGridViewPeriode.Name = "dataGridViewPeriode";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewPeriode.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewPeriode.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridViewPeriode.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewPeriode.Size = new System.Drawing.Size(370, 150);
             this.dataGridViewPeriode.TabIndex = 7;
+            this.dataGridViewPeriode.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewPeriode_CellClick);
+            // 
+            // periodeidDataGridViewTextBoxColumn
+            // 
+            this.periodeidDataGridViewTextBoxColumn.DataPropertyName = "periode_id";
+            this.periodeidDataGridViewTextBoxColumn.HeaderText = "Période";
+            this.periodeidDataGridViewTextBoxColumn.Name = "periodeidDataGridViewTextBoxColumn";
+            this.periodeidDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // debutperiodeDataGridViewTextBoxColumn
+            // 
+            this.debutperiodeDataGridViewTextBoxColumn.DataPropertyName = "debut_periode";
+            this.debutperiodeDataGridViewTextBoxColumn.HeaderText = "Début";
+            this.debutperiodeDataGridViewTextBoxColumn.Name = "debutperiodeDataGridViewTextBoxColumn";
+            // 
+            // finperiodeDataGridViewTextBoxColumn
+            // 
+            this.finperiodeDataGridViewTextBoxColumn.DataPropertyName = "fin_periode";
+            this.finperiodeDataGridViewTextBoxColumn.HeaderText = "Fin";
+            this.finperiodeDataGridViewTextBoxColumn.Name = "finperiodeDataGridViewTextBoxColumn";
+            // 
+            // etudiantidDataGridViewTextBoxColumn
+            // 
+            this.etudiantidDataGridViewTextBoxColumn.DataPropertyName = "etudiant_id";
+            this.etudiantidDataGridViewTextBoxColumn.HeaderText = "etudiant_id";
+            this.etudiantidDataGridViewTextBoxColumn.Name = "etudiantidDataGridViewTextBoxColumn";
+            this.etudiantidDataGridViewTextBoxColumn.Visible = false;
             // 
             // periodeBindingSource
             // 
@@ -150,27 +179,23 @@
             this.connectds.DataSetName = "Connectds";
             this.connectds.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // periodeTableAdapter
+            // buttonFermerDisponibilite
             // 
-            this.periodeTableAdapter.ClearBeforeFill = true;
-            // 
-            // buttonFermer
-            // 
-            this.buttonFermer.Location = new System.Drawing.Point(343, 379);
-            this.buttonFermer.Name = "buttonFermer";
-            this.buttonFermer.Size = new System.Drawing.Size(75, 23);
-            this.buttonFermer.TabIndex = 8;
-            this.buttonFermer.Text = "Fermer";
-            this.buttonFermer.UseVisualStyleBackColor = true;
-            this.buttonFermer.Click += new System.EventHandler(this.buttonFermer_Click);
+            this.buttonFermerDisponibilite.Location = new System.Drawing.Point(348, 392);
+            this.buttonFermerDisponibilite.Name = "buttonFermerDisponibilite";
+            this.buttonFermerDisponibilite.Size = new System.Drawing.Size(70, 23);
+            this.buttonFermerDisponibilite.TabIndex = 8;
+            this.buttonFermerDisponibilite.Text = "Fermer";
+            this.buttonFermerDisponibilite.UseVisualStyleBackColor = true;
+            this.buttonFermerDisponibilite.Click += new System.EventHandler(this.buttonFermerDisponibilite_Click);
             // 
             // buttonValiderDisponibilite
             // 
-            this.buttonValiderDisponibilite.Location = new System.Drawing.Point(158, 163);
+            this.buttonValiderDisponibilite.Location = new System.Drawing.Point(48, 165);
             this.buttonValiderDisponibilite.Name = "buttonValiderDisponibilite";
-            this.buttonValiderDisponibilite.Size = new System.Drawing.Size(138, 23);
+            this.buttonValiderDisponibilite.Size = new System.Drawing.Size(70, 23);
             this.buttonValiderDisponibilite.TabIndex = 9;
-            this.buttonValiderDisponibilite.Text = "Ajouter disponibilité";
+            this.buttonValiderDisponibilite.Text = "Ajouter";
             this.buttonValiderDisponibilite.UseVisualStyleBackColor = true;
             this.buttonValiderDisponibilite.Click += new System.EventHandler(this.buttonValiderDisponibilite_Click);
             // 
@@ -193,39 +218,13 @@
             // 
             // buttonSupprimerDisponibilite
             // 
-            this.buttonSupprimerDisponibilite.Location = new System.Drawing.Point(48, 379);
+            this.buttonSupprimerDisponibilite.Location = new System.Drawing.Point(170, 368);
             this.buttonSupprimerDisponibilite.Name = "buttonSupprimerDisponibilite";
-            this.buttonSupprimerDisponibilite.Size = new System.Drawing.Size(200, 23);
+            this.buttonSupprimerDisponibilite.Size = new System.Drawing.Size(116, 23);
             this.buttonSupprimerDisponibilite.TabIndex = 14;
-            this.buttonSupprimerDisponibilite.Text = "Supprimer disponibilité sélectionnée";
+            this.buttonSupprimerDisponibilite.Text = "Supprimer sélection";
             this.buttonSupprimerDisponibilite.UseVisualStyleBackColor = true;
             this.buttonSupprimerDisponibilite.Click += new System.EventHandler(this.buttonSupprimerDisponibilite_Click);
-            // 
-            // etudiantidDataGridViewTextBoxColumn
-            // 
-            this.etudiantidDataGridViewTextBoxColumn.DataPropertyName = "etudiant_id";
-            this.etudiantidDataGridViewTextBoxColumn.HeaderText = "etudiant_id";
-            this.etudiantidDataGridViewTextBoxColumn.Name = "etudiantidDataGridViewTextBoxColumn";
-            this.etudiantidDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // finperiodeDataGridViewTextBoxColumn
-            // 
-            this.finperiodeDataGridViewTextBoxColumn.DataPropertyName = "fin_periode";
-            this.finperiodeDataGridViewTextBoxColumn.HeaderText = "Fin";
-            this.finperiodeDataGridViewTextBoxColumn.Name = "finperiodeDataGridViewTextBoxColumn";
-            // 
-            // debutperiodeDataGridViewTextBoxColumn
-            // 
-            this.debutperiodeDataGridViewTextBoxColumn.DataPropertyName = "debut_periode";
-            this.debutperiodeDataGridViewTextBoxColumn.HeaderText = "Début";
-            this.debutperiodeDataGridViewTextBoxColumn.Name = "debutperiodeDataGridViewTextBoxColumn";
-            // 
-            // periodeidDataGridViewTextBoxColumn
-            // 
-            this.periodeidDataGridViewTextBoxColumn.DataPropertyName = "periode_id";
-            this.periodeidDataGridViewTextBoxColumn.HeaderText = "Période";
-            this.periodeidDataGridViewTextBoxColumn.Name = "periodeidDataGridViewTextBoxColumn";
-            this.periodeidDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // labelChamps
             // 
@@ -233,21 +232,36 @@
             this.labelChamps.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelChamps.Location = new System.Drawing.Point(45, 414);
             this.labelChamps.Name = "labelChamps";
-            this.labelChamps.Size = new System.Drawing.Size(105, 13);
+            this.labelChamps.Size = new System.Drawing.Size(259, 13);
             this.labelChamps.TabIndex = 29;
-            this.labelChamps.Text = "*Champs obligatoires";
+            this.labelChamps.Text = "*Ajuster les dates avant de cliquer sur Ajouter/Modifier";
+            // 
+            // buttonUpdateDisponibilite
+            // 
+            this.buttonUpdateDisponibilite.Location = new System.Drawing.Point(48, 368);
+            this.buttonUpdateDisponibilite.Name = "buttonUpdateDisponibilite";
+            this.buttonUpdateDisponibilite.Size = new System.Drawing.Size(116, 23);
+            this.buttonUpdateDisponibilite.TabIndex = 30;
+            this.buttonUpdateDisponibilite.Text = "Modifier sélection";
+            this.buttonUpdateDisponibilite.UseVisualStyleBackColor = true;
+            this.buttonUpdateDisponibilite.Click += new System.EventHandler(this.buttonUpdateDisponibilite_Click);
+            // 
+            // periodeTableAdapter
+            // 
+            this.periodeTableAdapter.ClearBeforeFill = true;
             // 
             // Disponibilite
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(468, 436);
+            this.Controls.Add(this.buttonUpdateDisponibilite);
             this.Controls.Add(this.labelChamps);
             this.Controls.Add(this.buttonSupprimerDisponibilite);
             this.Controls.Add(this.textBoxNom);
             this.Controls.Add(this.labelEtudiant);
             this.Controls.Add(this.buttonValiderDisponibilite);
-            this.Controls.Add(this.buttonFermer);
+            this.Controls.Add(this.buttonFermerDisponibilite);
             this.Controls.Add(this.dataGridViewPeriode);
             this.Controls.Add(this.datePickerFinPeriode);
             this.Controls.Add(this.datePickerDebutPeriode);
@@ -277,7 +291,7 @@
         private Connectds connectds;
         private System.Windows.Forms.BindingSource periodeBindingSource;
         private ConnectdsTableAdapters.periodeTableAdapter periodeTableAdapter;
-        private System.Windows.Forms.Button buttonFermer;
+        private System.Windows.Forms.Button buttonFermerDisponibilite;
         private System.Windows.Forms.Button buttonValiderDisponibilite;
         private System.Windows.Forms.TextBox textBoxNom;
         private System.Windows.Forms.Label labelEtudiant;
@@ -287,5 +301,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn finperiodeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn etudiantidDataGridViewTextBoxColumn;
         private System.Windows.Forms.Label labelChamps;
+        private System.Windows.Forms.Button buttonUpdateDisponibilite;
     }
 }

@@ -54,9 +54,20 @@ namespace Connect
             }
         }
 
+        private void buttonDisponibilite_Click(object sender, EventArgs e)
+        {
+            int value;
+            Int32.TryParse(comboBoxListEtudiant.SelectedValue.ToString(), out value);
+            this.Close();
+            Disponibilite disponibilite = new Disponibilite(value);
+            disponibilite.MdiParent = HomePage.ActiveForm;
+            disponibilite.Show();
+        }
+
         private void buttonListEtudiantFermer_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+
     }
 }

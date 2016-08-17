@@ -50,6 +50,7 @@
             this.etudiantTableAdapter = new Connect.ConnectdsTableAdapters.etudiantTableAdapter();
             this.comboBoxListEtudiant = new System.Windows.Forms.ComboBox();
             this.labelID = new System.Windows.Forms.Label();
+            this.buttonDisponibilite = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewListEtudiant)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.etudiantBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.connectds)).BeginInit();
@@ -58,7 +59,7 @@
             // buttonDeleteEtudiant
             // 
             this.buttonDeleteEtudiant.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.buttonDeleteEtudiant.Location = new System.Drawing.Point(419, 415);
+            this.buttonDeleteEtudiant.Location = new System.Drawing.Point(357, 415);
             this.buttonDeleteEtudiant.Name = "buttonDeleteEtudiant";
             this.buttonDeleteEtudiant.Size = new System.Drawing.Size(116, 23);
             this.buttonDeleteEtudiant.TabIndex = 9;
@@ -69,7 +70,7 @@
             // buttonListEtudiantFermer
             // 
             this.buttonListEtudiantFermer.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.buttonListEtudiantFermer.Location = new System.Drawing.Point(679, 415);
+            this.buttonListEtudiantFermer.Location = new System.Drawing.Point(774, 415);
             this.buttonListEtudiantFermer.Name = "buttonListEtudiantFermer";
             this.buttonListEtudiantFermer.Size = new System.Drawing.Size(116, 23);
             this.buttonListEtudiantFermer.TabIndex = 8;
@@ -80,7 +81,7 @@
             // buttonListEtudiantAfficher
             // 
             this.buttonListEtudiantAfficher.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.buttonListEtudiantAfficher.Location = new System.Drawing.Point(151, 415);
+            this.buttonListEtudiantAfficher.Location = new System.Drawing.Point(80, 415);
             this.buttonListEtudiantAfficher.Name = "buttonListEtudiantAfficher";
             this.buttonListEtudiantAfficher.Size = new System.Drawing.Size(116, 23);
             this.buttonListEtudiantAfficher.TabIndex = 7;
@@ -241,11 +242,23 @@
             this.labelID.TabIndex = 13;
             this.labelID.Text = "ID :";
             // 
+            // buttonDisponibilite
+            // 
+            this.buttonDisponibilite.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.buttonDisponibilite.Location = new System.Drawing.Point(215, 415);
+            this.buttonDisponibilite.Name = "buttonDisponibilite";
+            this.buttonDisponibilite.Size = new System.Drawing.Size(116, 23);
+            this.buttonDisponibilite.TabIndex = 14;
+            this.buttonDisponibilite.Text = "Voir disponibilité";
+            this.buttonDisponibilite.UseVisualStyleBackColor = true;
+            this.buttonDisponibilite.Click += new System.EventHandler(this.buttonDisponibilite_Click);
+            // 
             // ListingEtudiant
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(957, 478);
+            this.Controls.Add(this.buttonDisponibilite);
             this.Controls.Add(this.labelID);
             this.Controls.Add(this.comboBoxListEtudiant);
             this.Controls.Add(this.dataGridViewListEtudiant);
@@ -285,5 +298,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ecoleetudiantDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn permisvoitureetudiantDataGridViewCheckBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn statut_etudiant;
+        private System.Windows.Forms.Button buttonDisponibilite;
     }
 }

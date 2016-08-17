@@ -468,56 +468,50 @@ SELECT periode_id, debut_periode, fin_periode, etudiant_id FROM periode WHERE (p
           <xs:complexType>
             <xs:sequence>
               <xs:element name="entreprise_id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnentreprise_id" msprop:Generator_ColumnPropNameInRow="entreprise_id" msprop:Generator_ColumnPropNameInTable="entreprise_idColumn" msprop:Generator_UserColumnName="entreprise_id" type="xs:int" />
-              <xs:element name="nom_entreprise" msprop:Generator_ColumnVarNameInTable="columnnom_entreprise" msprop:Generator_ColumnPropNameInRow="nom_entreprise" msprop:Generator_ColumnPropNameInTable="nom_entrepriseColumn" msprop:Generator_UserColumnName="nom_entreprise">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="50" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="adresse_entreprise" msprop:Generator_ColumnVarNameInTable="columnadresse_entreprise" msprop:Generator_ColumnPropNameInRow="adresse_entreprise" msprop:Generator_ColumnPropNameInTable="adresse_entrepriseColumn" msprop:Generator_UserColumnName="adresse_entreprise" minOccurs="0">
+              <xs:element name="nom_entreprise" msprop:nullValue="_throw" msprop:Generator_ColumnPropNameInRow="nom_entreprise" msprop:Generator_ColumnVarNameInTable="columnnom_entreprise" msprop:Generator_ColumnPropNameInTable="nom_entrepriseColumn" msprop:Generator_UserColumnName="nom_entreprise" type="xs:string" default=" " />
+              <xs:element name="adresse_entreprise" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="adresse_entreprise" msprop:Generator_ColumnVarNameInTable="columnadresse_entreprise" msprop:Generator_ColumnPropNameInTable="adresse_entrepriseColumn" msprop:Generator_UserColumnName="adresse_entreprise" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="250" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="contact_entreprise" msprop:Generator_ColumnVarNameInTable="columncontact_entreprise" msprop:Generator_ColumnPropNameInRow="contact_entreprise" msprop:Generator_ColumnPropNameInTable="contact_entrepriseColumn" msprop:Generator_UserColumnName="contact_entreprise" minOccurs="0">
+              <xs:element name="contact_entreprise" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="contact_entreprise" msprop:Generator_ColumnVarNameInTable="columncontact_entreprise" msprop:Generator_ColumnPropNameInTable="contact_entrepriseColumn" msprop:Generator_UserColumnName="contact_entreprise" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="50" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="telephone_entreprise" msprop:Generator_ColumnVarNameInTable="columntelephone_entreprise" msprop:Generator_ColumnPropNameInRow="telephone_entreprise" msprop:Generator_ColumnPropNameInTable="telephone_entrepriseColumn" msprop:Generator_UserColumnName="telephone_entreprise" minOccurs="0">
+              <xs:element name="telephone_entreprise" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="telephone_entreprise" msprop:Generator_ColumnVarNameInTable="columntelephone_entreprise" msprop:Generator_ColumnPropNameInTable="telephone_entrepriseColumn" msprop:Generator_UserColumnName="telephone_entreprise" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="20" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="secteur_entreprise" msprop:Generator_ColumnVarNameInTable="columnsecteur_entreprise" msprop:Generator_ColumnPropNameInRow="secteur_entreprise" msprop:Generator_ColumnPropNameInTable="secteur_entrepriseColumn" msprop:Generator_UserColumnName="secteur_entreprise" minOccurs="0">
+              <xs:element name="secteur_entreprise" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="secteur_entreprise" msprop:Generator_ColumnVarNameInTable="columnsecteur_entreprise" msprop:Generator_ColumnPropNameInTable="secteur_entrepriseColumn" msprop:Generator_UserColumnName="secteur_entreprise" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="50" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="type_entreprise" msprop:Generator_ColumnVarNameInTable="columntype_entreprise" msprop:Generator_ColumnPropNameInRow="type_entreprise" msprop:Generator_ColumnPropNameInTable="type_entrepriseColumn" msprop:Generator_UserColumnName="type_entreprise" minOccurs="0">
+              <xs:element name="type_entreprise" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="type_entreprise" msprop:Generator_ColumnVarNameInTable="columntype_entreprise" msprop:Generator_ColumnPropNameInTable="type_entrepriseColumn" msprop:Generator_UserColumnName="type_entreprise" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="50" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="taille_entreprise" msprop:Generator_ColumnVarNameInTable="columntaille_entreprise" msprop:Generator_ColumnPropNameInRow="taille_entreprise" msprop:Generator_ColumnPropNameInTable="taille_entrepriseColumn" msprop:Generator_UserColumnName="taille_entreprise" minOccurs="0">
+              <xs:element name="taille_entreprise" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="taille_entreprise" msprop:Generator_ColumnVarNameInTable="columntaille_entreprise" msprop:Generator_ColumnPropNameInTable="taille_entrepriseColumn" msprop:Generator_UserColumnName="taille_entreprise" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="3" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="descriptif_entreprise" msprop:Generator_ColumnVarNameInTable="columndescriptif_entreprise" msprop:Generator_ColumnPropNameInRow="descriptif_entreprise" msprop:Generator_ColumnPropNameInTable="descriptif_entrepriseColumn" msprop:Generator_UserColumnName="descriptif_entreprise" minOccurs="0">
+              <xs:element name="descriptif_entreprise" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="descriptif_entreprise" msprop:Generator_ColumnVarNameInTable="columndescriptif_entreprise" msprop:Generator_ColumnPropNameInTable="descriptif_entrepriseColumn" msprop:Generator_UserColumnName="descriptif_entreprise" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="250" />
@@ -533,14 +527,14 @@ SELECT periode_id, debut_periode, fin_periode, etudiant_id FROM periode WHERE (p
           <xs:complexType>
             <xs:sequence>
               <xs:element name="etudiant_id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnetudiant_id" msprop:Generator_ColumnPropNameInRow="etudiant_id" msprop:Generator_ColumnPropNameInTable="etudiant_idColumn" msprop:Generator_UserColumnName="etudiant_id" type="xs:int" />
-              <xs:element name="nom_etudiant" msprop:Generator_ColumnVarNameInTable="columnnom_etudiant" msprop:Generator_ColumnPropNameInRow="nom_etudiant" msprop:Generator_ColumnPropNameInTable="nom_etudiantColumn" msprop:Generator_UserColumnName="nom_etudiant">
+              <xs:element name="nom_etudiant" msprop:Generator_ColumnVarNameInTable="columnnom_etudiant" msprop:Generator_ColumnPropNameInRow="nom_etudiant" msprop:Generator_ColumnPropNameInTable="nom_etudiantColumn" msprop:Generator_UserColumnName="nom_etudiant" default=" ">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="50" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="prenom_etudiant" msprop:Generator_ColumnVarNameInTable="columnprenom_etudiant" msprop:Generator_ColumnPropNameInRow="prenom_etudiant" msprop:Generator_ColumnPropNameInTable="prenom_etudiantColumn" msprop:Generator_UserColumnName="prenom_etudiant">
+              <xs:element name="prenom_etudiant" msprop:Generator_ColumnVarNameInTable="columnprenom_etudiant" msprop:Generator_ColumnPropNameInRow="prenom_etudiant" msprop:Generator_ColumnPropNameInTable="prenom_etudiantColumn" msprop:Generator_UserColumnName="prenom_etudiant" default=" ">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="50" />
@@ -642,7 +636,7 @@ SELECT periode_id, debut_periode, fin_periode, etudiant_id FROM periode WHERE (p
           <xs:complexType>
             <xs:sequence>
               <xs:element name="job_id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnjob_id" msprop:Generator_ColumnPropNameInRow="job_id" msprop:Generator_ColumnPropNameInTable="job_idColumn" msprop:Generator_UserColumnName="job_id" type="xs:int" />
-              <xs:element name="titre_job" msprop:Generator_ColumnVarNameInTable="columntitre_job" msprop:Generator_ColumnPropNameInRow="titre_job" msprop:Generator_ColumnPropNameInTable="titre_jobColumn" msprop:Generator_UserColumnName="titre_job">
+              <xs:element name="titre_job" msprop:nullValue="_throw" msprop:Generator_ColumnPropNameInRow="titre_job" msprop:Generator_ColumnVarNameInTable="columntitre_job" msprop:Generator_ColumnPropNameInTable="titre_jobColumn" msprop:Generator_UserColumnName="titre_job" default=" ">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="50" />

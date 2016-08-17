@@ -80,6 +80,13 @@ namespace Connect
             }
         }
 
+        public static void AddEntreprise(Connectds.entrepriseRow entrepriseRow)
+        {
+            using (ConnectdsTableAdapters.entrepriseTableAdapter entrepriseAdpt = new ConnectdsTableAdapters.entrepriseTableAdapter())
+            {
+                entrepriseAdpt.Insert(entrepriseRow.nom_entreprise, entrepriseRow.adresse_entreprise, entrepriseRow.contact_entreprise, entrepriseRow.telephone_entreprise, entrepriseRow.secteur_entreprise, entrepriseRow.type_entreprise, entrepriseRow.taille_entreprise, entrepriseRow.descriptif_entreprise, entrepriseRow.statut_entreprise, entrepriseRow.date_creation_entreprise);
+            }
+        }
         //public static void UpdateEntreprise(Connectds.entrepriseRow entrepriseRow)
         //{
         //    //Connectds.entrepriseDataTable entrepriseDT = new Connectds.entrepriseDataTable();

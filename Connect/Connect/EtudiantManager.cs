@@ -64,14 +64,17 @@ namespace Connect
             return ds;
         }
 
-        public static Connectds GetPeriodeDS()
+        public static Connectds.periodeRow GetPeriode(int periode_id)
         {
-            Connectds ds = new Connectds();
+            Connectds.periodeDataTable periodeDT = new Connectds.periodeDataTable();
+
             using (ConnectdsTableAdapters.periodeTableAdapter periodeAdpt = new ConnectdsTableAdapters.periodeTableAdapter())
             {
-                periodeAdpt.Fill(ds.periode);
+                periodeAdpt.Fill(periodeDT);
             }
-            return ds;
+            Connectds.periodeRow periodeRow = periodeDT.FindByperiode_id(periode_id);
+
+            return periodeRow;
         }
 
         public static void SaveEtudiant(DataRow etudiantRow)
@@ -81,7 +84,16 @@ namespace Connect
                 etudiantAdpt.Update(etudiantRow);
             }
         }
-
+        
+        public static void AddEtudiant(Connectds.etudiantRow etudiantRow)
+        {
+            using (ConnectdsTableAdapters.etudiantTableAdapter etudiantAdpt = new ConnectdsTableAdapters.etudiantTableAdapter())
+            {
+                etudiantAdpt.Insert(etudiantRow.nom_etudiant, etudiantRow.prenom_etudiant, etudiantRow.date_naissance_etudiant, etudiantRow.sexe_etudiant, etudiantRow.adresse_etudiant, etudiantRow.telephone_etudiant, etudiantRow.email_etudiant, etudiantRow.langues_etudiant,
+                    etudiantRow.type_etudes_etudiant, etudiantRow.annee_scolaire_etudiant, etudiantRow.ecole_etudiant, etudiantRow.permis_voiture_etudiant, etudiantRow.hobbies_etudiant, etudiantRow.experience_etudiant,etudiantRow.domaine_recherche_etudiant,
+                    etudiantRow.remarque_etudiant,etudiantRow.statut_etudiant,etudiantRow.date_creation_etudiant);
+            }
+        }
         public static void DeleteEtudiant(int etudiant_id)
         {
             Connectds.etudiantDataTable etudiantDT = new Connectds.etudiantDataTable();
@@ -102,6 +114,14 @@ namespace Connect
             using (ConnectdsTableAdapters.periodeTableAdapter periodeAdpt = new ConnectdsTableAdapters.periodeTableAdapter())
             {
                 periodeAdpt.Update(periodeRow);
+            }
+        }
+
+        public static void AddPeriode(Connectds.periodeRow periodeRow)
+        {
+            using (ConnectdsTableAdapters.periodeTableAdapter periodeAdpt = new ConnectdsTableAdapters.periodeTableAdapter())
+            {
+                periodeAdpt.Insert(periodeRow.debut_periode, periodeRow.fin_periode, periodeRow.etudiant_id);
             }
         }
 

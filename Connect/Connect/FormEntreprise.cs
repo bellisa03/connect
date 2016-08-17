@@ -94,6 +94,21 @@ namespace Connect
                     default:
                         break;
                 }
+            }
+            else
+            {
+                Connectds.entrepriseDataTable dt = new Connectds.entrepriseDataTable();
+                entrepriseRow = dt.NewentrepriseRow();
+
+                entrepriseRow.nom_entreprise = string.Empty;
+                entrepriseRow.descriptif_entreprise = string.Empty;
+                entrepriseRow.type_entreprise = string.Empty;
+                entrepriseRow.taille_entreprise = "PE";
+                entrepriseRow.statut_entreprise = true;
+                entrepriseRow.date_creation_entreprise = DateTime.Now;
+                datePickerCreationEnt.Value = DateTime.Now;
+            }
+
                 textBoxNomEnt.DataBindings.Add("Text", entrepriseRow, "nom_entreprise");
                 textBoxAdresseEnt.DataBindings.Add("Text", entrepriseRow, "adresse_entreprise");
                 textBoxContactEnt.DataBindings.Add("Text", entrepriseRow, "contact_entreprise");
@@ -102,13 +117,6 @@ namespace Connect
                 textBoxTypeEnt.DataBindings.Add("Text", entrepriseRow, "type_entreprise");
                 textBoxDescripEnt.DataBindings.Add("Text", entrepriseRow, "descriptif_entreprise");
                 datePickerCreationEnt.DataBindings.Add("Value", entrepriseRow, "date_creation_entreprise");
-            }
-            else
-            {
-                Connectds.entrepriseDataTable dt = new Connectds.entrepriseDataTable();
-                entrepriseRow = dt.NewentrepriseRow();
-                datePickerCreationEnt.Value = DateTime.Now;
-             }
         }
 
         /// <summary>
@@ -124,19 +132,14 @@ namespace Connect
         }
 
         private void buttonValiderEnt_Click(object sender, EventArgs e)
-       {
-            entrepriseRow.nom_entreprise = textBoxNomEnt.Text;
-            entrepriseRow.adresse_entreprise = textBoxAdresseEnt.Text;
-            entrepriseRow.contact_entreprise = textBoxContactEnt.Text;
-            entrepriseRow.telephone_entreprise = textBoxTelEnt.Text;
-            entrepriseRow.secteur_entreprise = textBoxSecteurEnt.Text;
-            entrepriseRow.type_entreprise = textBoxTypeEnt.Text;
+        {
             entrepriseRow.statut_entreprise = EntrepriseManager.GetStatus(comboBoxStatutEnt.Text);
             entrepriseRow.taille_entreprise = EntrepriseManager.GetTaille(comboBoxTailleEnt.Text);
-            entrepriseRow.descriptif_entreprise = textBoxDescripEnt.Text;
-            entrepriseRow.date_creation_entreprise = datePickerCreationEnt.Value;
 
-            EntrepriseManager.SaveEntreprise(entrepriseRow);
+            if (id == -1)
+                EntrepriseManager.AddEntreprise(entrepriseRow);
+            else
+                EntrepriseManager.SaveEntreprise(entrepriseRow);
             refreshDataGrid();
         }
 
