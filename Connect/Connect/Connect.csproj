@@ -79,6 +79,12 @@
     <Compile Include="HomePage.Designer.cs">
       <DependentUpon>HomePage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Job.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Job.Designer.cs">
+      <DependentUpon>Job.cs</DependentUpon>
+    </Compile>
     <Compile Include="ListingEntreprise.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,6 +96,12 @@
     </Compile>
     <Compile Include="ListingEtudiant.Designer.cs">
       <DependentUpon>ListingEtudiant.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ListingJobs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ListingJobs.Designer.cs">
+      <DependentUpon>ListingJobs.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -105,11 +117,17 @@
     <EmbeddedResource Include="HomePage.resx">
       <DependentUpon>HomePage.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Job.resx">
+      <DependentUpon>Job.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ListingEntreprise.resx">
       <DependentUpon>ListingEntreprise.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ListingEtudiant.resx">
       <DependentUpon>ListingEtudiant.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListingJobs.resx">
+      <DependentUpon>ListingJobs.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

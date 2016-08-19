@@ -9,6 +9,30 @@ namespace Connect
 {
     class EntrepriseManager
     {
+
+        public static Connectds GetDS()
+        {
+            Connectds ds = new Connectds();
+
+            using(ConnectdsTableAdapters.entrepriseTableAdapter entrepriseAdpt = new ConnectdsTableAdapters.entrepriseTableAdapter())
+            {
+                entrepriseAdpt.Fill(ds.entreprise);
+            }
+            using(ConnectdsTableAdapters.etudiantTableAdapter etudiantAdpt = new ConnectdsTableAdapters.etudiantTableAdapter())
+            {
+                etudiantAdpt.Fill(ds.etudiant);
+            }
+            using(ConnectdsTableAdapters.jobTableAdapter jobAdpt = new ConnectdsTableAdapters.jobTableAdapter())
+            {
+                jobAdpt.Fill(ds.job);
+            }
+            using(ConnectdsTableAdapters.periodeTableAdapter periodeAdpt = new ConnectdsTableAdapters.periodeTableAdapter())
+            {
+                periodeAdpt.Fill(ds.periode);
+            }
+
+            return ds;
+        }
         public static Connectds.entrepriseRow GetEntreprise(int entreprise_id)
         {
             Connectds.entrepriseDataTable entrepriseDT = new Connectds.entrepriseDataTable();
@@ -87,15 +111,6 @@ namespace Connect
                 entrepriseAdpt.Insert(entrepriseRow.nom_entreprise, entrepriseRow.adresse_entreprise, entrepriseRow.contact_entreprise, entrepriseRow.telephone_entreprise, entrepriseRow.secteur_entreprise, entrepriseRow.type_entreprise, entrepriseRow.taille_entreprise, entrepriseRow.descriptif_entreprise, entrepriseRow.statut_entreprise, entrepriseRow.date_creation_entreprise);
             }
         }
-        //public static void UpdateEntreprise(Connectds.entrepriseRow entrepriseRow)
-        //{
-        //    //Connectds.entrepriseDataTable entrepriseDT = new Connectds.entrepriseDataTable();
-
-        //    using (ConnectdsTableAdapters.entrepriseTableAdapter entrepriseAdpt = new ConnectdsTableAdapters.entrepriseTableAdapter())
-        //    {
-        //        entrepriseAdpt.Update(entrepriseRow);
-        //    }
-        //}
 
         public static void DeleteEntreprise(int entreprise_id)
         {
@@ -109,6 +124,20 @@ namespace Connect
 
                 entrepriseAdpt.Update(entrepriseDT);
 
+            }
+        }
+
+        public static void DeleteJob(int job_id)
+        {
+            Connectds.jobDataTable jobDT = new Connectds.jobDataTable();
+
+            using (ConnectdsTableAdapters.jobTableAdapter jobAdpt = new ConnectdsTableAdapters.jobTableAdapter())
+            {
+                jobAdpt.Fill(jobDT);
+                Connectds.jobRow jobRow = jobDT.FindByjob_id(job_id);
+                jobRow.Delete();
+
+                jobAdpt.Update(jobDT);
             }
         }
     }

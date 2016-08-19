@@ -22,7 +22,11 @@ namespace Connect
             return etudiantRow;
         }
 
-
+        /// <summary>
+        /// Retourne la liste des périodes disponibles pour un étudiant donné
+        /// </summary>
+        /// <param name="etudiant_id"></param>
+        /// <returns></returns>
         public static List<Connectds.periodeRow> GetDisponibiliteList(int etudiant_id)
         {
             Connectds.periodeDataTable periodeDT = new Connectds.periodeDataTable();

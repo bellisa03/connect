@@ -18,16 +18,11 @@ namespace Connect
             InitializeComponent();
         }
 
-        private void fermerConnectToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
         private void ToolStripMenuItemNewEnt_Click(object sender, EventArgs e)
         {
-            FormEntreprise Entreprise = new FormEntreprise();
-            Entreprise.MdiParent = this;
-            Entreprise.Show();
+            FormEntreprise entreprise = new FormEntreprise();
+            entreprise.MdiParent = this;
+            entreprise.Show();
         }
 
         private void ToolStripMenuItemListEnt_Click(object sender, EventArgs e)
@@ -37,6 +32,13 @@ namespace Connect
             listeEntreprise.Show();
         }
 
+        private void ToolStripMenuItemNewEtu_Click(object sender, EventArgs e)
+        {
+            FormEtudiant etudiant = new FormEtudiant();
+            etudiant.MdiParent = this;
+            etudiant.Show();
+        }
+
         private void ToolStripMenuItemListEtu_Click(object sender, EventArgs e)
         {
             ListingEtudiant listeEtudiant = new ListingEtudiant();
@@ -44,11 +46,24 @@ namespace Connect
             listeEtudiant.Show();
         }
 
-        private void ToolStripMenuItemNewEtu2_Click(object sender, EventArgs e)
+        private void ToolStripMenuItemNewJob_Click(object sender, EventArgs e)
         {
-            FormEtudiant Etudiant = new FormEtudiant();
-            Etudiant.MdiParent = this;
-            Etudiant.Show();
+            Job job = new Job();
+            job.MdiParent = this;
+            job.Show();
         }
+
+        private void ToolStripMenuItemShowJob_Click(object sender, EventArgs e)
+        {
+            ListingJobs listeJobs = new ListingJobs();
+            listeJobs.MdiParent = this;
+            listeJobs.Show();
+        }
+
+        private void fermerConnectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
     }
 }

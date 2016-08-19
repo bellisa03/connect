@@ -28,15 +28,15 @@ namespace Connect {
         
         private etudiantDataTable tableetudiant;
         
+        private periodeDataTable tableperiode;
+        
         private jobDataTable tablejob;
         
-        private periodeDataTable tableperiode;
+        private global::System.Data.DataRelation relationFK_periode_etudiant;
         
         private global::System.Data.DataRelation relationFK_job_entreprise;
         
         private global::System.Data.DataRelation relationFK_job_etudiant;
-        
-        private global::System.Data.DataRelation relationFK_periode_etudiant;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -49,6 +49,7 @@ namespace Connect {
             base.Tables.CollectionChanged += schemaChangedHandler;
             base.Relations.CollectionChanged += schemaChangedHandler;
             this.EndInit();
+            this.InitExpressions();
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -60,6 +61,9 @@ namespace Connect {
                 global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler1 = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
                 this.Tables.CollectionChanged += schemaChangedHandler1;
                 this.Relations.CollectionChanged += schemaChangedHandler1;
+                if ((this.DetermineSchemaSerializationMode(info, context) == global::System.Data.SchemaSerializationMode.ExcludeSchema)) {
+                    this.InitExpressions();
+                }
                 return;
             }
             string strSchema = ((string)(info.GetValue("XmlSchema", typeof(string))));
@@ -72,11 +76,11 @@ namespace Connect {
                 if ((ds.Tables["etudiant"] != null)) {
                     base.Tables.Add(new etudiantDataTable(ds.Tables["etudiant"]));
                 }
-                if ((ds.Tables["job"] != null)) {
-                    base.Tables.Add(new jobDataTable(ds.Tables["job"]));
-                }
                 if ((ds.Tables["periode"] != null)) {
                     base.Tables.Add(new periodeDataTable(ds.Tables["periode"]));
+                }
+                if ((ds.Tables["job"] != null)) {
+                    base.Tables.Add(new jobDataTable(ds.Tables["job"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -89,6 +93,7 @@ namespace Connect {
             }
             else {
                 this.ReadXmlSchema(new global::System.Xml.XmlTextReader(new global::System.IO.StringReader(strSchema)));
+                this.InitExpressions();
             }
             this.GetSerializationData(info, context);
             global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
@@ -120,9 +125,9 @@ namespace Connect {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public jobDataTable job {
+        public periodeDataTable periode {
             get {
-                return this.tablejob;
+                return this.tableperiode;
             }
         }
         
@@ -130,9 +135,9 @@ namespace Connect {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public periodeDataTable periode {
+        public jobDataTable job {
             get {
-                return this.tableperiode;
+                return this.tablejob;
             }
         }
         
@@ -180,6 +185,7 @@ namespace Connect {
         public override global::System.Data.DataSet Clone() {
             Connectds cln = ((Connectds)(base.Clone()));
             cln.InitVars();
+            cln.InitExpressions();
             cln.SchemaSerializationMode = this.SchemaSerializationMode;
             return cln;
         }
@@ -209,11 +215,11 @@ namespace Connect {
                 if ((ds.Tables["etudiant"] != null)) {
                     base.Tables.Add(new etudiantDataTable(ds.Tables["etudiant"]));
                 }
-                if ((ds.Tables["job"] != null)) {
-                    base.Tables.Add(new jobDataTable(ds.Tables["job"]));
-                }
                 if ((ds.Tables["periode"] != null)) {
                     base.Tables.Add(new periodeDataTable(ds.Tables["periode"]));
+                }
+                if ((ds.Tables["job"] != null)) {
+                    base.Tables.Add(new jobDataTable(ds.Tables["job"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -260,21 +266,21 @@ namespace Connect {
                     this.tableetudiant.InitVars();
                 }
             }
-            this.tablejob = ((jobDataTable)(base.Tables["job"]));
-            if ((initTable == true)) {
-                if ((this.tablejob != null)) {
-                    this.tablejob.InitVars();
-                }
-            }
             this.tableperiode = ((periodeDataTable)(base.Tables["periode"]));
             if ((initTable == true)) {
                 if ((this.tableperiode != null)) {
                     this.tableperiode.InitVars();
                 }
             }
+            this.tablejob = ((jobDataTable)(base.Tables["job"]));
+            if ((initTable == true)) {
+                if ((this.tablejob != null)) {
+                    this.tablejob.InitVars();
+                }
+            }
+            this.relationFK_periode_etudiant = this.Relations["FK_periode_etudiant"];
             this.relationFK_job_entreprise = this.Relations["FK_job_entreprise"];
             this.relationFK_job_etudiant = this.Relations["FK_job_etudiant"];
-            this.relationFK_periode_etudiant = this.Relations["FK_periode_etudiant"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -289,10 +295,14 @@ namespace Connect {
             base.Tables.Add(this.tableentreprise);
             this.tableetudiant = new etudiantDataTable();
             base.Tables.Add(this.tableetudiant);
-            this.tablejob = new jobDataTable();
-            base.Tables.Add(this.tablejob);
             this.tableperiode = new periodeDataTable();
             base.Tables.Add(this.tableperiode);
+            this.tablejob = new jobDataTable(false);
+            base.Tables.Add(this.tablejob);
+            this.relationFK_periode_etudiant = new global::System.Data.DataRelation("FK_periode_etudiant", new global::System.Data.DataColumn[] {
+                        this.tableetudiant.etudiant_idColumn}, new global::System.Data.DataColumn[] {
+                        this.tableperiode.etudiant_idColumn}, false);
+            this.Relations.Add(this.relationFK_periode_etudiant);
             this.relationFK_job_entreprise = new global::System.Data.DataRelation("FK_job_entreprise", new global::System.Data.DataColumn[] {
                         this.tableentreprise.entreprise_idColumn}, new global::System.Data.DataColumn[] {
                         this.tablejob.entreprise_idColumn}, false);
@@ -301,10 +311,6 @@ namespace Connect {
                         this.tableetudiant.etudiant_idColumn}, new global::System.Data.DataColumn[] {
                         this.tablejob.etudiant_idColumn}, false);
             this.Relations.Add(this.relationFK_job_etudiant);
-            this.relationFK_periode_etudiant = new global::System.Data.DataRelation("FK_periode_etudiant", new global::System.Data.DataColumn[] {
-                        this.tableetudiant.etudiant_idColumn}, new global::System.Data.DataColumn[] {
-                        this.tableperiode.etudiant_idColumn}, false);
-            this.Relations.Add(this.relationFK_periode_etudiant);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -321,13 +327,13 @@ namespace Connect {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private bool ShouldSerializejob() {
+        private bool ShouldSerializeperiode() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private bool ShouldSerializeperiode() {
+        private bool ShouldSerializejob() {
             return false;
         }
         
@@ -386,6 +392,13 @@ namespace Connect {
             return type;
         }
         
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitExpressions() {
+            this.job.nom_etudiant_jobColumn.Expression = "Parent(FK_job_etudiant).nom_etudiant";
+            this.job.nom_entreprise_jobColumn.Expression = "Parent(FK_job_entreprise).nom_entreprise";
+        }
+        
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public delegate void entrepriseRowChangeEventHandler(object sender, entrepriseRowChangeEvent e);
         
@@ -393,10 +406,10 @@ namespace Connect {
         public delegate void etudiantRowChangeEventHandler(object sender, etudiantRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public delegate void jobRowChangeEventHandler(object sender, jobRowChangeEvent e);
+        public delegate void periodeRowChangeEventHandler(object sender, periodeRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public delegate void periodeRowChangeEventHandler(object sender, periodeRowChangeEvent e);
+        public delegate void jobRowChangeEventHandler(object sender, jobRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -1368,450 +1381,6 @@ namespace Connect {
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class jobDataTable : global::System.Data.TypedTableBase<jobRow> {
-            
-            private global::System.Data.DataColumn columnjob_id;
-            
-            private global::System.Data.DataColumn columntitre_job;
-            
-            private global::System.Data.DataColumn columndescriptif_job;
-            
-            private global::System.Data.DataColumn columnprofil_job;
-            
-            private global::System.Data.DataColumn columndate_debut_job;
-            
-            private global::System.Data.DataColumn columndate_fin_job;
-            
-            private global::System.Data.DataColumn columnhoraire_job;
-            
-            private global::System.Data.DataColumn columnremuneration_job;
-            
-            private global::System.Data.DataColumn columnpermis_voiture_job;
-            
-            private global::System.Data.DataColumn columnremarque_job;
-            
-            private global::System.Data.DataColumn columnstatut_job;
-            
-            private global::System.Data.DataColumn columnentreprise_id;
-            
-            private global::System.Data.DataColumn columnetudiant_id;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public jobDataTable() {
-                this.TableName = "job";
-                this.BeginInit();
-                this.InitClass();
-                this.EndInit();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal jobDataTable(global::System.Data.DataTable table) {
-                this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
-                    this.CaseSensitive = table.CaseSensitive;
-                }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
-                    this.Locale = table.Locale;
-                }
-                if ((table.Namespace != table.DataSet.Namespace)) {
-                    this.Namespace = table.Namespace;
-                }
-                this.Prefix = table.Prefix;
-                this.MinimumCapacity = table.MinimumCapacity;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected jobDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
-                this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn job_idColumn {
-                get {
-                    return this.columnjob_id;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn titre_jobColumn {
-                get {
-                    return this.columntitre_job;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn descriptif_jobColumn {
-                get {
-                    return this.columndescriptif_job;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn profil_jobColumn {
-                get {
-                    return this.columnprofil_job;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn date_debut_jobColumn {
-                get {
-                    return this.columndate_debut_job;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn date_fin_jobColumn {
-                get {
-                    return this.columndate_fin_job;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn horaire_jobColumn {
-                get {
-                    return this.columnhoraire_job;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn remuneration_jobColumn {
-                get {
-                    return this.columnremuneration_job;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn permis_voiture_jobColumn {
-                get {
-                    return this.columnpermis_voiture_job;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn remarque_jobColumn {
-                get {
-                    return this.columnremarque_job;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn statut_jobColumn {
-                get {
-                    return this.columnstatut_job;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn entreprise_idColumn {
-                get {
-                    return this.columnentreprise_id;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn etudiant_idColumn {
-                get {
-                    return this.columnetudiant_id;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
-                    return this.Rows.Count;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public jobRow this[int index] {
-                get {
-                    return ((jobRow)(this.Rows[index]));
-                }
-            }
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event jobRowChangeEventHandler jobRowChanging;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event jobRowChangeEventHandler jobRowChanged;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event jobRowChangeEventHandler jobRowDeleting;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event jobRowChangeEventHandler jobRowDeleted;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void AddjobRow(jobRow row) {
-                this.Rows.Add(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public jobRow AddjobRow(string titre_job, string descriptif_job, string profil_job, System.DateTime date_debut_job, System.DateTime date_fin_job, string horaire_job, decimal remuneration_job, bool permis_voiture_job, string remarque_job, bool statut_job, entrepriseRow parententrepriseRowByFK_job_entreprise, etudiantRow parentetudiantRowByFK_job_etudiant) {
-                jobRow rowjobRow = ((jobRow)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
-                        null,
-                        titre_job,
-                        descriptif_job,
-                        profil_job,
-                        date_debut_job,
-                        date_fin_job,
-                        horaire_job,
-                        remuneration_job,
-                        permis_voiture_job,
-                        remarque_job,
-                        statut_job,
-                        null,
-                        null};
-                if ((parententrepriseRowByFK_job_entreprise != null)) {
-                    columnValuesArray[11] = parententrepriseRowByFK_job_entreprise[0];
-                }
-                if ((parentetudiantRowByFK_job_etudiant != null)) {
-                    columnValuesArray[12] = parentetudiantRowByFK_job_etudiant[0];
-                }
-                rowjobRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowjobRow);
-                return rowjobRow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public jobRow FindByjob_id(int job_id) {
-                return ((jobRow)(this.Rows.Find(new object[] {
-                            job_id})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public override global::System.Data.DataTable Clone() {
-                jobDataTable cln = ((jobDataTable)(base.Clone()));
-                cln.InitVars();
-                return cln;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Data.DataTable CreateInstance() {
-                return new jobDataTable();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal void InitVars() {
-                this.columnjob_id = base.Columns["job_id"];
-                this.columntitre_job = base.Columns["titre_job"];
-                this.columndescriptif_job = base.Columns["descriptif_job"];
-                this.columnprofil_job = base.Columns["profil_job"];
-                this.columndate_debut_job = base.Columns["date_debut_job"];
-                this.columndate_fin_job = base.Columns["date_fin_job"];
-                this.columnhoraire_job = base.Columns["horaire_job"];
-                this.columnremuneration_job = base.Columns["remuneration_job"];
-                this.columnpermis_voiture_job = base.Columns["permis_voiture_job"];
-                this.columnremarque_job = base.Columns["remarque_job"];
-                this.columnstatut_job = base.Columns["statut_job"];
-                this.columnentreprise_id = base.Columns["entreprise_id"];
-                this.columnetudiant_id = base.Columns["etudiant_id"];
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            private void InitClass() {
-                this.columnjob_id = new global::System.Data.DataColumn("job_id", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnjob_id);
-                this.columntitre_job = new global::System.Data.DataColumn("titre_job", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columntitre_job);
-                this.columndescriptif_job = new global::System.Data.DataColumn("descriptif_job", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columndescriptif_job);
-                this.columnprofil_job = new global::System.Data.DataColumn("profil_job", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnprofil_job);
-                this.columndate_debut_job = new global::System.Data.DataColumn("date_debut_job", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columndate_debut_job);
-                this.columndate_fin_job = new global::System.Data.DataColumn("date_fin_job", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columndate_fin_job);
-                this.columnhoraire_job = new global::System.Data.DataColumn("horaire_job", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnhoraire_job);
-                this.columnremuneration_job = new global::System.Data.DataColumn("remuneration_job", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnremuneration_job);
-                this.columnpermis_voiture_job = new global::System.Data.DataColumn("permis_voiture_job", typeof(bool), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnpermis_voiture_job);
-                this.columnremarque_job = new global::System.Data.DataColumn("remarque_job", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnremarque_job);
-                this.columnstatut_job = new global::System.Data.DataColumn("statut_job", typeof(bool), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnstatut_job);
-                this.columnentreprise_id = new global::System.Data.DataColumn("entreprise_id", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnentreprise_id);
-                this.columnetudiant_id = new global::System.Data.DataColumn("etudiant_id", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnetudiant_id);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnjob_id}, true));
-                this.columnjob_id.AutoIncrement = true;
-                this.columnjob_id.AutoIncrementSeed = -1;
-                this.columnjob_id.AutoIncrementStep = -1;
-                this.columnjob_id.AllowDBNull = false;
-                this.columnjob_id.ReadOnly = true;
-                this.columnjob_id.Unique = true;
-                this.columntitre_job.AllowDBNull = false;
-                this.columntitre_job.DefaultValue = ((string)(" "));
-                this.columntitre_job.MaxLength = 50;
-                this.columndescriptif_job.MaxLength = 250;
-                this.columnprofil_job.MaxLength = 500;
-                this.columnhoraire_job.MaxLength = 100;
-                this.columnremarque_job.MaxLength = 100;
-                this.columnstatut_job.AllowDBNull = false;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public jobRow NewjobRow() {
-                return ((jobRow)(this.NewRow()));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new jobRow(builder);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Type GetRowType() {
-                return typeof(jobRow);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanged(e);
-                if ((this.jobRowChanged != null)) {
-                    this.jobRowChanged(this, new jobRowChangeEvent(((jobRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanging(e);
-                if ((this.jobRowChanging != null)) {
-                    this.jobRowChanging(this, new jobRowChangeEvent(((jobRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleted(e);
-                if ((this.jobRowDeleted != null)) {
-                    this.jobRowDeleted(this, new jobRowChangeEvent(((jobRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleting(e);
-                if ((this.jobRowDeleting != null)) {
-                    this.jobRowDeleting(this, new jobRowChangeEvent(((jobRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void RemovejobRow(jobRow row) {
-                this.Rows.Remove(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                Connectds ds = new Connectds();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-                any1.MinOccurs = new decimal(0);
-                any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-                any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute1.Name = "namespace";
-                attribute1.FixedValue = ds.Namespace;
-                type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "jobDataTable";
-                type.Attributes.Add(attribute2);
-                type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
-                        dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                            s2.SetLength(0);
-                            schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
-                                s1.Position = 0;
-                                s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
-                                if ((s1.Position == s1.Length)) {
-                                    return type;
-                                }
-                            }
-                        }
-                    }
-                    finally {
-                        if ((s1 != null)) {
-                            s1.Close();
-                        }
-                        if ((s2 != null)) {
-                            s2.Close();
-                        }
-                    }
-                }
-                xs.Add(dsSchema);
-                return type;
-            }
-        }
-        
-        /// <summary>
-        ///Represents the strongly named DataTable class.
-        ///</summary>
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class periodeDataTable : global::System.Data.TypedTableBase<periodeRow> {
             
             private global::System.Data.DataColumn columnperiode_id;
@@ -2077,6 +1646,543 @@ namespace Connect {
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
                 attribute2.FixedValue = "periodeDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class jobDataTable : global::System.Data.TypedTableBase<jobRow> {
+            
+            private global::System.Data.DataColumn columnjob_id;
+            
+            private global::System.Data.DataColumn columntitre_job;
+            
+            private global::System.Data.DataColumn columndescriptif_job;
+            
+            private global::System.Data.DataColumn columnprofil_job;
+            
+            private global::System.Data.DataColumn columndate_debut_job;
+            
+            private global::System.Data.DataColumn columndate_fin_job;
+            
+            private global::System.Data.DataColumn columnhoraire_job;
+            
+            private global::System.Data.DataColumn columnremuneration_job;
+            
+            private global::System.Data.DataColumn columnpermis_voiture_job;
+            
+            private global::System.Data.DataColumn columnremarque_job;
+            
+            private global::System.Data.DataColumn columnstatut_job;
+            
+            private global::System.Data.DataColumn columndate_publication_job;
+            
+            private global::System.Data.DataColumn columnentreprise_id;
+            
+            private global::System.Data.DataColumn columnetudiant_id;
+            
+            private global::System.Data.DataColumn columnnom_etudiant_job;
+            
+            private global::System.Data.DataColumn columnnom_entreprise_job;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public jobDataTable() : 
+                    this(false) {
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public jobDataTable(bool initExpressions) {
+                this.TableName = "job";
+                this.BeginInit();
+                this.InitClass();
+                if ((initExpressions == true)) {
+                    this.InitExpressions();
+                }
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal jobDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected jobDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn job_idColumn {
+                get {
+                    return this.columnjob_id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn titre_jobColumn {
+                get {
+                    return this.columntitre_job;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn descriptif_jobColumn {
+                get {
+                    return this.columndescriptif_job;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn profil_jobColumn {
+                get {
+                    return this.columnprofil_job;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn date_debut_jobColumn {
+                get {
+                    return this.columndate_debut_job;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn date_fin_jobColumn {
+                get {
+                    return this.columndate_fin_job;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn horaire_jobColumn {
+                get {
+                    return this.columnhoraire_job;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn remuneration_jobColumn {
+                get {
+                    return this.columnremuneration_job;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn permis_voiture_jobColumn {
+                get {
+                    return this.columnpermis_voiture_job;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn remarque_jobColumn {
+                get {
+                    return this.columnremarque_job;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn statut_jobColumn {
+                get {
+                    return this.columnstatut_job;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn date_publication_jobColumn {
+                get {
+                    return this.columndate_publication_job;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn entreprise_idColumn {
+                get {
+                    return this.columnentreprise_id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn etudiant_idColumn {
+                get {
+                    return this.columnetudiant_id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn nom_etudiant_jobColumn {
+                get {
+                    return this.columnnom_etudiant_job;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn nom_entreprise_jobColumn {
+                get {
+                    return this.columnnom_entreprise_job;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public jobRow this[int index] {
+                get {
+                    return ((jobRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event jobRowChangeEventHandler jobRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event jobRowChangeEventHandler jobRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event jobRowChangeEventHandler jobRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event jobRowChangeEventHandler jobRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void AddjobRow(jobRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public jobRow AddjobRow(string titre_job, string descriptif_job, string profil_job, System.DateTime date_debut_job, System.DateTime date_fin_job, string horaire_job, decimal remuneration_job, bool permis_voiture_job, string remarque_job, bool statut_job, System.DateTime date_publication_job, entrepriseRow parententrepriseRowByFK_job_entreprise, etudiantRow parentetudiantRowByFK_job_etudiant, string nom_etudiant_job, string nom_entreprise_job) {
+                jobRow rowjobRow = ((jobRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        titre_job,
+                        descriptif_job,
+                        profil_job,
+                        date_debut_job,
+                        date_fin_job,
+                        horaire_job,
+                        remuneration_job,
+                        permis_voiture_job,
+                        remarque_job,
+                        statut_job,
+                        date_publication_job,
+                        null,
+                        null,
+                        nom_etudiant_job,
+                        nom_entreprise_job};
+                if ((parententrepriseRowByFK_job_entreprise != null)) {
+                    columnValuesArray[12] = parententrepriseRowByFK_job_entreprise[0];
+                }
+                if ((parentetudiantRowByFK_job_etudiant != null)) {
+                    columnValuesArray[13] = parentetudiantRowByFK_job_etudiant[0];
+                }
+                rowjobRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowjobRow);
+                return rowjobRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public jobRow AddjobRow(string titre_job, string descriptif_job, string profil_job, System.DateTime date_debut_job, System.DateTime date_fin_job, string horaire_job, decimal remuneration_job, bool permis_voiture_job, string remarque_job, bool statut_job, System.DateTime date_publication_job, entrepriseRow parententrepriseRowByFK_job_entreprise, etudiantRow parentetudiantRowByFK_job_etudiant) {
+                jobRow rowjobRow = ((jobRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        titre_job,
+                        descriptif_job,
+                        profil_job,
+                        date_debut_job,
+                        date_fin_job,
+                        horaire_job,
+                        remuneration_job,
+                        permis_voiture_job,
+                        remarque_job,
+                        statut_job,
+                        date_publication_job,
+                        null,
+                        null,
+                        null,
+                        null};
+                if ((parententrepriseRowByFK_job_entreprise != null)) {
+                    columnValuesArray[12] = parententrepriseRowByFK_job_entreprise[0];
+                }
+                if ((parentetudiantRowByFK_job_etudiant != null)) {
+                    columnValuesArray[13] = parentetudiantRowByFK_job_etudiant[0];
+                }
+                rowjobRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowjobRow);
+                return rowjobRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public jobRow FindByjob_id(int job_id) {
+                return ((jobRow)(this.Rows.Find(new object[] {
+                            job_id})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                jobDataTable cln = ((jobDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new jobDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal void InitVars() {
+                this.columnjob_id = base.Columns["job_id"];
+                this.columntitre_job = base.Columns["titre_job"];
+                this.columndescriptif_job = base.Columns["descriptif_job"];
+                this.columnprofil_job = base.Columns["profil_job"];
+                this.columndate_debut_job = base.Columns["date_debut_job"];
+                this.columndate_fin_job = base.Columns["date_fin_job"];
+                this.columnhoraire_job = base.Columns["horaire_job"];
+                this.columnremuneration_job = base.Columns["remuneration_job"];
+                this.columnpermis_voiture_job = base.Columns["permis_voiture_job"];
+                this.columnremarque_job = base.Columns["remarque_job"];
+                this.columnstatut_job = base.Columns["statut_job"];
+                this.columndate_publication_job = base.Columns["date_publication_job"];
+                this.columnentreprise_id = base.Columns["entreprise_id"];
+                this.columnetudiant_id = base.Columns["etudiant_id"];
+                this.columnnom_etudiant_job = base.Columns["nom_etudiant_job"];
+                this.columnnom_entreprise_job = base.Columns["nom_entreprise_job"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            private void InitClass() {
+                this.columnjob_id = new global::System.Data.DataColumn("job_id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnjob_id);
+                this.columntitre_job = new global::System.Data.DataColumn("titre_job", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columntitre_job);
+                this.columndescriptif_job = new global::System.Data.DataColumn("descriptif_job", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndescriptif_job);
+                this.columnprofil_job = new global::System.Data.DataColumn("profil_job", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnprofil_job);
+                this.columndate_debut_job = new global::System.Data.DataColumn("date_debut_job", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndate_debut_job);
+                this.columndate_fin_job = new global::System.Data.DataColumn("date_fin_job", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndate_fin_job);
+                this.columnhoraire_job = new global::System.Data.DataColumn("horaire_job", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnhoraire_job);
+                this.columnremuneration_job = new global::System.Data.DataColumn("remuneration_job", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnremuneration_job);
+                this.columnpermis_voiture_job = new global::System.Data.DataColumn("permis_voiture_job", typeof(bool), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpermis_voiture_job);
+                this.columnremarque_job = new global::System.Data.DataColumn("remarque_job", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnremarque_job);
+                this.columnstatut_job = new global::System.Data.DataColumn("statut_job", typeof(bool), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnstatut_job);
+                this.columndate_publication_job = new global::System.Data.DataColumn("date_publication_job", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndate_publication_job);
+                this.columnentreprise_id = new global::System.Data.DataColumn("entreprise_id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnentreprise_id);
+                this.columnetudiant_id = new global::System.Data.DataColumn("etudiant_id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnetudiant_id);
+                this.columnnom_etudiant_job = new global::System.Data.DataColumn("nom_etudiant_job", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnnom_etudiant_job);
+                this.columnnom_entreprise_job = new global::System.Data.DataColumn("nom_entreprise_job", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnnom_entreprise_job);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnjob_id}, true));
+                this.columnjob_id.AutoIncrement = true;
+                this.columnjob_id.AutoIncrementSeed = -1;
+                this.columnjob_id.AutoIncrementStep = -1;
+                this.columnjob_id.AllowDBNull = false;
+                this.columnjob_id.ReadOnly = true;
+                this.columnjob_id.Unique = true;
+                this.columntitre_job.AllowDBNull = false;
+                this.columntitre_job.DefaultValue = ((string)(" "));
+                this.columntitre_job.MaxLength = 50;
+                this.columndescriptif_job.MaxLength = 250;
+                this.columnprofil_job.MaxLength = 500;
+                this.columnhoraire_job.MaxLength = 100;
+                this.columnremarque_job.MaxLength = 100;
+                this.columnstatut_job.AllowDBNull = false;
+                this.columndate_publication_job.AllowDBNull = false;
+                this.columnnom_etudiant_job.ReadOnly = true;
+                this.columnnom_entreprise_job.ReadOnly = true;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public jobRow NewjobRow() {
+                return ((jobRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new jobRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(jobRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            private void InitExpressions() {
+                this.nom_etudiant_jobColumn.Expression = "Parent(FK_job_etudiant).nom_etudiant";
+                this.nom_entreprise_jobColumn.Expression = "Parent(FK_job_entreprise).nom_entreprise";
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.jobRowChanged != null)) {
+                    this.jobRowChanged(this, new jobRowChangeEvent(((jobRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.jobRowChanging != null)) {
+                    this.jobRowChanging(this, new jobRowChangeEvent(((jobRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.jobRowDeleted != null)) {
+                    this.jobRowDeleted(this, new jobRowChangeEvent(((jobRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.jobRowDeleting != null)) {
+                    this.jobRowDeleting(this, new jobRowChangeEvent(((jobRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void RemovejobRow(jobRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                Connectds ds = new Connectds();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "jobDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -2846,6 +2952,17 @@ namespace Connect {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public periodeRow[] GetperiodeRows() {
+                if ((this.Table.ChildRelations["FK_periode_etudiant"] == null)) {
+                    return new periodeRow[0];
+                }
+                else {
+                    return ((periodeRow[])(base.GetChildRows(this.Table.ChildRelations["FK_periode_etudiant"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public jobRow[] GetjobRows() {
                 if ((this.Table.ChildRelations["FK_job_etudiant"] == null)) {
                     return new jobRow[0];
@@ -2854,15 +2971,74 @@ namespace Connect {
                     return ((jobRow[])(base.GetChildRows(this.Table.ChildRelations["FK_job_etudiant"])));
                 }
             }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class periodeRow : global::System.Data.DataRow {
+            
+            private periodeDataTable tableperiode;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public periodeRow[] GetperiodeRows() {
-                if ((this.Table.ChildRelations["FK_periode_etudiant"] == null)) {
-                    return new periodeRow[0];
+            internal periodeRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableperiode = ((periodeDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int periode_id {
+                get {
+                    return ((int)(this[this.tableperiode.periode_idColumn]));
                 }
-                else {
-                    return ((periodeRow[])(base.GetChildRows(this.Table.ChildRelations["FK_periode_etudiant"])));
+                set {
+                    this[this.tableperiode.periode_idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime debut_periode {
+                get {
+                    return ((global::System.DateTime)(this[this.tableperiode.debut_periodeColumn]));
+                }
+                set {
+                    this[this.tableperiode.debut_periodeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime fin_periode {
+                get {
+                    return ((global::System.DateTime)(this[this.tableperiode.fin_periodeColumn]));
+                }
+                set {
+                    this[this.tableperiode.fin_periodeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int etudiant_id {
+                get {
+                    return ((int)(this[this.tableperiode.etudiant_idColumn]));
+                }
+                set {
+                    this[this.tableperiode.etudiant_idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public etudiantRow etudiantRow {
+                get {
+                    return ((etudiantRow)(this.GetParentRow(this.Table.ParentRelations["FK_periode_etudiant"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_periode_etudiant"]);
                 }
             }
         }
@@ -3044,6 +3220,17 @@ namespace Connect {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime date_publication_job {
+                get {
+                    return ((global::System.DateTime)(this[this.tablejob.date_publication_jobColumn]));
+                }
+                set {
+                    this[this.tablejob.date_publication_jobColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public int entreprise_id {
                 get {
                     try {
@@ -3071,6 +3258,38 @@ namespace Connect {
                 }
                 set {
                     this[this.tablejob.etudiant_idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string nom_etudiant_job {
+                get {
+                    try {
+                        return ((string)(this[this.tablejob.nom_etudiant_jobColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'nom_etudiant_job\' in table \'job\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablejob.nom_etudiant_jobColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string nom_entreprise_job {
+                get {
+                    try {
+                        return ((string)(this[this.tablejob.nom_entreprise_jobColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'nom_entreprise_job\' in table \'job\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablejob.nom_entreprise_jobColumn] = value;
                 }
             }
             
@@ -3215,75 +3434,29 @@ namespace Connect {
             public void Setetudiant_idNull() {
                 this[this.tablejob.etudiant_idColumn] = global::System.Convert.DBNull;
             }
-        }
-        
-        /// <summary>
-        ///Represents strongly named DataRow class.
-        ///</summary>
-        public partial class periodeRow : global::System.Data.DataRow {
-            
-            private periodeDataTable tableperiode;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal periodeRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tableperiode = ((periodeDataTable)(this.Table));
+            public bool Isnom_etudiant_jobNull() {
+                return this.IsNull(this.tablejob.nom_etudiant_jobColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int periode_id {
-                get {
-                    return ((int)(this[this.tableperiode.periode_idColumn]));
-                }
-                set {
-                    this[this.tableperiode.periode_idColumn] = value;
-                }
+            public void Setnom_etudiant_jobNull() {
+                this[this.tablejob.nom_etudiant_jobColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public System.DateTime debut_periode {
-                get {
-                    return ((global::System.DateTime)(this[this.tableperiode.debut_periodeColumn]));
-                }
-                set {
-                    this[this.tableperiode.debut_periodeColumn] = value;
-                }
+            public bool Isnom_entreprise_jobNull() {
+                return this.IsNull(this.tablejob.nom_entreprise_jobColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public System.DateTime fin_periode {
-                get {
-                    return ((global::System.DateTime)(this[this.tableperiode.fin_periodeColumn]));
-                }
-                set {
-                    this[this.tableperiode.fin_periodeColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int etudiant_id {
-                get {
-                    return ((int)(this[this.tableperiode.etudiant_idColumn]));
-                }
-                set {
-                    this[this.tableperiode.etudiant_idColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public etudiantRow etudiantRow {
-                get {
-                    return ((etudiantRow)(this.GetParentRow(this.Table.ParentRelations["FK_periode_etudiant"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_periode_etudiant"]);
-                }
+            public void Setnom_entreprise_jobNull() {
+                this[this.tablejob.nom_entreprise_jobColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -3359,22 +3532,22 @@ namespace Connect {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public class jobRowChangeEvent : global::System.EventArgs {
+        public class periodeRowChangeEvent : global::System.EventArgs {
             
-            private jobRow eventRow;
+            private periodeRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public jobRowChangeEvent(jobRow row, global::System.Data.DataRowAction action) {
+            public periodeRowChangeEvent(periodeRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public jobRow Row {
+            public periodeRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -3393,22 +3566,22 @@ namespace Connect {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public class periodeRowChangeEvent : global::System.EventArgs {
+        public class jobRowChangeEvent : global::System.EventArgs {
             
-            private periodeRow eventRow;
+            private jobRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public periodeRowChangeEvent(periodeRow row, global::System.Data.DataRowAction action) {
+            public jobRowChangeEvent(jobRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public periodeRow Row {
+            public jobRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -5111,754 +5284,6 @@ SELECT etudiant_id, nom_etudiant, prenom_etudiant, date_naissance_etudiant, sexe
     [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
         ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class jobTableAdapter : global::System.ComponentModel.Component {
-        
-        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
-        
-        private global::System.Data.SqlClient.SqlConnection _connection;
-        
-        private global::System.Data.SqlClient.SqlTransaction _transaction;
-        
-        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
-        
-        private bool _clearBeforeFill;
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public jobTableAdapter() {
-            this.ClearBeforeFill = true;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
-            get {
-                if ((this._adapter == null)) {
-                    this.InitAdapter();
-                }
-                return this._adapter;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        internal global::System.Data.SqlClient.SqlConnection Connection {
-            get {
-                if ((this._connection == null)) {
-                    this.InitConnection();
-                }
-                return this._connection;
-            }
-            set {
-                this._connection = value;
-                if ((this.Adapter.InsertCommand != null)) {
-                    this.Adapter.InsertCommand.Connection = value;
-                }
-                if ((this.Adapter.DeleteCommand != null)) {
-                    this.Adapter.DeleteCommand.Connection = value;
-                }
-                if ((this.Adapter.UpdateCommand != null)) {
-                    this.Adapter.UpdateCommand.Connection = value;
-                }
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    if ((this.CommandCollection[i] != null)) {
-                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
-                    }
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        internal global::System.Data.SqlClient.SqlTransaction Transaction {
-            get {
-                return this._transaction;
-            }
-            set {
-                this._transaction = value;
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    this.CommandCollection[i].Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.DeleteCommand != null))) {
-                    this.Adapter.DeleteCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.InsertCommand != null))) {
-                    this.Adapter.InsertCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.UpdateCommand != null))) {
-                    this.Adapter.UpdateCommand.Transaction = this._transaction;
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
-            get {
-                if ((this._commandCollection == null)) {
-                    this.InitCommandCollection();
-                }
-                return this._commandCollection;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public bool ClearBeforeFill {
-            get {
-                return this._clearBeforeFill;
-            }
-            set {
-                this._clearBeforeFill = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private void InitAdapter() {
-            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
-            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
-            tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "job";
-            tableMapping.ColumnMappings.Add("job_id", "job_id");
-            tableMapping.ColumnMappings.Add("titre_job", "titre_job");
-            tableMapping.ColumnMappings.Add("descriptif_job", "descriptif_job");
-            tableMapping.ColumnMappings.Add("profil_job", "profil_job");
-            tableMapping.ColumnMappings.Add("date_debut_job", "date_debut_job");
-            tableMapping.ColumnMappings.Add("date_fin_job", "date_fin_job");
-            tableMapping.ColumnMappings.Add("horaire_job", "horaire_job");
-            tableMapping.ColumnMappings.Add("remuneration_job", "remuneration_job");
-            tableMapping.ColumnMappings.Add("permis_voiture_job", "permis_voiture_job");
-            tableMapping.ColumnMappings.Add("remarque_job", "remarque_job");
-            tableMapping.ColumnMappings.Add("statut_job", "statut_job");
-            tableMapping.ColumnMappings.Add("entreprise_id", "entreprise_id");
-            tableMapping.ColumnMappings.Add("etudiant_id", "etudiant_id");
-            this._adapter.TableMappings.Add(tableMapping);
-            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [job] WHERE (([job_id] = @Original_job_id) AND ([titre_job] = @Original_titre_job) AND ((@IsNull_descriptif_job = 1 AND [descriptif_job] IS NULL) OR ([descriptif_job] = @Original_descriptif_job)) AND ((@IsNull_profil_job = 1 AND [profil_job] IS NULL) OR ([profil_job] = @Original_profil_job)) AND ((@IsNull_date_debut_job = 1 AND [date_debut_job] IS NULL) OR ([date_debut_job] = @Original_date_debut_job)) AND ((@IsNull_date_fin_job = 1 AND [date_fin_job] IS NULL) OR ([date_fin_job] = @Original_date_fin_job)) AND ((@IsNull_horaire_job = 1 AND [horaire_job] IS NULL) OR ([horaire_job] = @Original_horaire_job)) AND ((@IsNull_remuneration_job = 1 AND [remuneration_job] IS NULL) OR ([remuneration_job] = @Original_remuneration_job)) AND ((@IsNull_permis_voiture_job = 1 AND [permis_voiture_job] IS NULL) OR ([permis_voiture_job] = @Original_permis_voiture_job)) AND ((@IsNull_remarque_job = 1 AND [remarque_job] IS NULL) OR ([remarque_job] = @Original_remarque_job)) AND ([statut_job] = @Original_statut_job) AND ((@IsNull_entreprise_id = 1 AND [entreprise_id] IS NULL) OR ([entreprise_id] = @Original_entreprise_id)) AND ((@IsNull_etudiant_id = 1 AND [etudiant_id] IS NULL) OR ([etudiant_id] = @Original_etudiant_id)))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_job_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "job_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_titre_job", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "titre_job", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_descriptif_job", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "descriptif_job", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_descriptif_job", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "descriptif_job", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_profil_job", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "profil_job", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_profil_job", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "profil_job", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_date_debut_job", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date_debut_job", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_date_debut_job", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date_debut_job", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_date_fin_job", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date_fin_job", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_date_fin_job", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date_fin_job", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_horaire_job", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "horaire_job", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_horaire_job", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "horaire_job", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_remuneration_job", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "remuneration_job", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_remuneration_job", global::System.Data.SqlDbType.Money, 0, global::System.Data.ParameterDirection.Input, 0, 0, "remuneration_job", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_permis_voiture_job", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "permis_voiture_job", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_permis_voiture_job", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "permis_voiture_job", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_remarque_job", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "remarque_job", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_remarque_job", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "remarque_job", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_statut_job", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "statut_job", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_entreprise_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "entreprise_id", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_entreprise_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "entreprise_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_etudiant_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "etudiant_id", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_etudiant_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "etudiant_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [job] ([titre_job], [descriptif_job], [profil_job], [date_debut_job], [date_fin_job], [horaire_job], [remuneration_job], [permis_voiture_job], [remarque_job], [statut_job], [entreprise_id], [etudiant_id]) VALUES (@titre_job, @descriptif_job, @profil_job, @date_debut_job, @date_fin_job, @horaire_job, @remuneration_job, @permis_voiture_job, @remarque_job, @statut_job, @entreprise_id, @etudiant_id);
-SELECT job_id, titre_job, descriptif_job, profil_job, date_debut_job, date_fin_job, horaire_job, remuneration_job, permis_voiture_job, remarque_job, statut_job, entreprise_id, etudiant_id FROM job WHERE (job_id = SCOPE_IDENTITY())";
-            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@titre_job", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "titre_job", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@descriptif_job", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "descriptif_job", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@profil_job", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "profil_job", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@date_debut_job", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date_debut_job", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@date_fin_job", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date_fin_job", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@horaire_job", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "horaire_job", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@remuneration_job", global::System.Data.SqlDbType.Money, 0, global::System.Data.ParameterDirection.Input, 0, 0, "remuneration_job", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@permis_voiture_job", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "permis_voiture_job", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@remarque_job", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "remarque_job", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@statut_job", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "statut_job", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@entreprise_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "entreprise_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@etudiant_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "etudiant_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = "UPDATE [job] SET [titre_job] = @titre_job, [descriptif_job] = @descriptif_job, [p" +
-                "rofil_job] = @profil_job, [date_debut_job] = @date_debut_job, [date_fin_job] = @" +
-                "date_fin_job, [horaire_job] = @horaire_job, [remuneration_job] = @remuneration_j" +
-                "ob, [permis_voiture_job] = @permis_voiture_job, [remarque_job] = @remarque_job, " +
-                "[statut_job] = @statut_job, [entreprise_id] = @entreprise_id, [etudiant_id] = @e" +
-                "tudiant_id WHERE (([job_id] = @Original_job_id) AND ([titre_job] = @Original_tit" +
-                "re_job) AND ((@IsNull_descriptif_job = 1 AND [descriptif_job] IS NULL) OR ([desc" +
-                "riptif_job] = @Original_descriptif_job)) AND ((@IsNull_profil_job = 1 AND [profi" +
-                "l_job] IS NULL) OR ([profil_job] = @Original_profil_job)) AND ((@IsNull_date_deb" +
-                "ut_job = 1 AND [date_debut_job] IS NULL) OR ([date_debut_job] = @Original_date_d" +
-                "ebut_job)) AND ((@IsNull_date_fin_job = 1 AND [date_fin_job] IS NULL) OR ([date_" +
-                "fin_job] = @Original_date_fin_job)) AND ((@IsNull_horaire_job = 1 AND [horaire_j" +
-                "ob] IS NULL) OR ([horaire_job] = @Original_horaire_job)) AND ((@IsNull_remunerat" +
-                "ion_job = 1 AND [remuneration_job] IS NULL) OR ([remuneration_job] = @Original_r" +
-                "emuneration_job)) AND ((@IsNull_permis_voiture_job = 1 AND [permis_voiture_job] " +
-                "IS NULL) OR ([permis_voiture_job] = @Original_permis_voiture_job)) AND ((@IsNull" +
-                "_remarque_job = 1 AND [remarque_job] IS NULL) OR ([remarque_job] = @Original_rem" +
-                "arque_job)) AND ([statut_job] = @Original_statut_job) AND ((@IsNull_entreprise_i" +
-                "d = 1 AND [entreprise_id] IS NULL) OR ([entreprise_id] = @Original_entreprise_id" +
-                ")) AND ((@IsNull_etudiant_id = 1 AND [etudiant_id] IS NULL) OR ([etudiant_id] = " +
-                "@Original_etudiant_id)));\r\nSELECT job_id, titre_job, descriptif_job, profil_job," +
-                " date_debut_job, date_fin_job, horaire_job, remuneration_job, permis_voiture_job" +
-                ", remarque_job, statut_job, entreprise_id, etudiant_id FROM job WHERE (job_id = " +
-                "@job_id)";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@titre_job", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "titre_job", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@descriptif_job", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "descriptif_job", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@profil_job", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "profil_job", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@date_debut_job", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date_debut_job", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@date_fin_job", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date_fin_job", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@horaire_job", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "horaire_job", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@remuneration_job", global::System.Data.SqlDbType.Money, 0, global::System.Data.ParameterDirection.Input, 0, 0, "remuneration_job", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@permis_voiture_job", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "permis_voiture_job", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@remarque_job", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "remarque_job", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@statut_job", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "statut_job", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@entreprise_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "entreprise_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@etudiant_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "etudiant_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_job_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "job_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_titre_job", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "titre_job", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_descriptif_job", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "descriptif_job", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_descriptif_job", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "descriptif_job", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_profil_job", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "profil_job", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_profil_job", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "profil_job", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_date_debut_job", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date_debut_job", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_date_debut_job", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date_debut_job", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_date_fin_job", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date_fin_job", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_date_fin_job", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date_fin_job", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_horaire_job", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "horaire_job", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_horaire_job", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "horaire_job", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_remuneration_job", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "remuneration_job", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_remuneration_job", global::System.Data.SqlDbType.Money, 0, global::System.Data.ParameterDirection.Input, 0, 0, "remuneration_job", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_permis_voiture_job", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "permis_voiture_job", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_permis_voiture_job", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "permis_voiture_job", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_remarque_job", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "remarque_job", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_remarque_job", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "remarque_job", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_statut_job", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "statut_job", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_entreprise_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "entreprise_id", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_entreprise_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "entreprise_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_etudiant_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "etudiant_id", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_etudiant_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "etudiant_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@job_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "job_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private void InitConnection() {
-            this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::Connect.Properties.Settings.Default.ConnectConnectionString;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
-            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
-            this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT        job.*\r\nFROM            job";
-            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(Connectds.jobDataTable dataTable) {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((this.ClearBeforeFill == true)) {
-                dataTable.Clear();
-            }
-            int returnValue = this.Adapter.Fill(dataTable);
-            return returnValue;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual Connectds.jobDataTable GetData() {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            Connectds.jobDataTable dataTable = new Connectds.jobDataTable();
-            this.Adapter.Fill(dataTable);
-            return dataTable;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(Connectds.jobDataTable dataTable) {
-            return this.Adapter.Update(dataTable);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(Connectds dataSet) {
-            return this.Adapter.Update(dataSet, "job");
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow dataRow) {
-            return this.Adapter.Update(new global::System.Data.DataRow[] {
-                        dataRow});
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow[] dataRows) {
-            return this.Adapter.Update(dataRows);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_job_id, string Original_titre_job, string Original_descriptif_job, string Original_profil_job, global::System.Nullable<global::System.DateTime> Original_date_debut_job, global::System.Nullable<global::System.DateTime> Original_date_fin_job, string Original_horaire_job, global::System.Nullable<decimal> Original_remuneration_job, global::System.Nullable<bool> Original_permis_voiture_job, string Original_remarque_job, bool Original_statut_job, global::System.Nullable<int> Original_entreprise_id, global::System.Nullable<int> Original_etudiant_id) {
-            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_job_id));
-            if ((Original_titre_job == null)) {
-                throw new global::System.ArgumentNullException("Original_titre_job");
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((string)(Original_titre_job));
-            }
-            if ((Original_descriptif_job == null)) {
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((string)(Original_descriptif_job));
-            }
-            if ((Original_profil_job == null)) {
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((string)(Original_profil_job));
-            }
-            if ((Original_date_debut_job.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((System.DateTime)(Original_date_debut_job.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[7].Value = global::System.DBNull.Value;
-            }
-            if ((Original_date_fin_job.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[8].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((System.DateTime)(Original_date_fin_job.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[8].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[9].Value = global::System.DBNull.Value;
-            }
-            if ((Original_horaire_job == null)) {
-                this.Adapter.DeleteCommand.Parameters[10].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[11].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[10].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[11].Value = ((string)(Original_horaire_job));
-            }
-            if ((Original_remuneration_job.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[12].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[13].Value = ((decimal)(Original_remuneration_job.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[12].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[13].Value = global::System.DBNull.Value;
-            }
-            if ((Original_permis_voiture_job.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[14].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[15].Value = ((bool)(Original_permis_voiture_job.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[14].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[15].Value = global::System.DBNull.Value;
-            }
-            if ((Original_remarque_job == null)) {
-                this.Adapter.DeleteCommand.Parameters[16].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[17].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[16].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[17].Value = ((string)(Original_remarque_job));
-            }
-            this.Adapter.DeleteCommand.Parameters[18].Value = ((bool)(Original_statut_job));
-            if ((Original_entreprise_id.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[19].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[20].Value = ((int)(Original_entreprise_id.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[19].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[20].Value = global::System.DBNull.Value;
-            }
-            if ((Original_etudiant_id.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[21].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[22].Value = ((int)(Original_etudiant_id.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[21].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[22].Value = global::System.DBNull.Value;
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
-            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.DeleteCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.DeleteCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string titre_job, string descriptif_job, string profil_job, global::System.Nullable<global::System.DateTime> date_debut_job, global::System.Nullable<global::System.DateTime> date_fin_job, string horaire_job, global::System.Nullable<decimal> remuneration_job, global::System.Nullable<bool> permis_voiture_job, string remarque_job, bool statut_job, global::System.Nullable<int> entreprise_id, global::System.Nullable<int> etudiant_id) {
-            if ((titre_job == null)) {
-                throw new global::System.ArgumentNullException("titre_job");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(titre_job));
-            }
-            if ((descriptif_job == null)) {
-                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(descriptif_job));
-            }
-            if ((profil_job == null)) {
-                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(profil_job));
-            }
-            if ((date_debut_job.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((System.DateTime)(date_debut_job.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            if ((date_fin_job.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[4].Value = ((System.DateTime)(date_fin_job.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            if ((horaire_job == null)) {
-                this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[5].Value = ((string)(horaire_job));
-            }
-            if ((remuneration_job.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[6].Value = ((decimal)(remuneration_job.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            if ((permis_voiture_job.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[7].Value = ((bool)(permis_voiture_job.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[7].Value = global::System.DBNull.Value;
-            }
-            if ((remarque_job == null)) {
-                this.Adapter.InsertCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[8].Value = ((string)(remarque_job));
-            }
-            this.Adapter.InsertCommand.Parameters[9].Value = ((bool)(statut_job));
-            if ((entreprise_id.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[10].Value = ((int)(entreprise_id.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[10].Value = global::System.DBNull.Value;
-            }
-            if ((etudiant_id.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[11].Value = ((int)(etudiant_id.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[11].Value = global::System.DBNull.Value;
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(
-                    string titre_job, 
-                    string descriptif_job, 
-                    string profil_job, 
-                    global::System.Nullable<global::System.DateTime> date_debut_job, 
-                    global::System.Nullable<global::System.DateTime> date_fin_job, 
-                    string horaire_job, 
-                    global::System.Nullable<decimal> remuneration_job, 
-                    global::System.Nullable<bool> permis_voiture_job, 
-                    string remarque_job, 
-                    bool statut_job, 
-                    global::System.Nullable<int> entreprise_id, 
-                    global::System.Nullable<int> etudiant_id, 
-                    int Original_job_id, 
-                    string Original_titre_job, 
-                    string Original_descriptif_job, 
-                    string Original_profil_job, 
-                    global::System.Nullable<global::System.DateTime> Original_date_debut_job, 
-                    global::System.Nullable<global::System.DateTime> Original_date_fin_job, 
-                    string Original_horaire_job, 
-                    global::System.Nullable<decimal> Original_remuneration_job, 
-                    global::System.Nullable<bool> Original_permis_voiture_job, 
-                    string Original_remarque_job, 
-                    bool Original_statut_job, 
-                    global::System.Nullable<int> Original_entreprise_id, 
-                    global::System.Nullable<int> Original_etudiant_id, 
-                    int job_id) {
-            if ((titre_job == null)) {
-                throw new global::System.ArgumentNullException("titre_job");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(titre_job));
-            }
-            if ((descriptif_job == null)) {
-                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(descriptif_job));
-            }
-            if ((profil_job == null)) {
-                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(profil_job));
-            }
-            if ((date_debut_job.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((System.DateTime)(date_debut_job.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            if ((date_fin_job.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((System.DateTime)(date_fin_job.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            if ((horaire_job == null)) {
-                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(horaire_job));
-            }
-            if ((remuneration_job.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((decimal)(remuneration_job.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            if ((permis_voiture_job.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((bool)(permis_voiture_job.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
-            }
-            if ((remarque_job == null)) {
-                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((string)(remarque_job));
-            }
-            this.Adapter.UpdateCommand.Parameters[9].Value = ((bool)(statut_job));
-            if ((entreprise_id.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(entreprise_id.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
-            }
-            if ((etudiant_id.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(etudiant_id.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[12].Value = ((int)(Original_job_id));
-            if ((Original_titre_job == null)) {
-                throw new global::System.ArgumentNullException("Original_titre_job");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((string)(Original_titre_job));
-            }
-            if ((Original_descriptif_job == null)) {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[15].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((string)(Original_descriptif_job));
-            }
-            if ((Original_profil_job == null)) {
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[17].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[17].Value = ((string)(Original_profil_job));
-            }
-            if ((Original_date_debut_job.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[19].Value = ((System.DateTime)(Original_date_debut_job.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[19].Value = global::System.DBNull.Value;
-            }
-            if ((Original_date_fin_job.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[21].Value = ((System.DateTime)(Original_date_fin_job.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[21].Value = global::System.DBNull.Value;
-            }
-            if ((Original_horaire_job == null)) {
-                this.Adapter.UpdateCommand.Parameters[22].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[23].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[22].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[23].Value = ((string)(Original_horaire_job));
-            }
-            if ((Original_remuneration_job.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[24].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[25].Value = ((decimal)(Original_remuneration_job.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[24].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[25].Value = global::System.DBNull.Value;
-            }
-            if ((Original_permis_voiture_job.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[26].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[27].Value = ((bool)(Original_permis_voiture_job.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[26].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[27].Value = global::System.DBNull.Value;
-            }
-            if ((Original_remarque_job == null)) {
-                this.Adapter.UpdateCommand.Parameters[28].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[29].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[28].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[29].Value = ((string)(Original_remarque_job));
-            }
-            this.Adapter.UpdateCommand.Parameters[30].Value = ((bool)(Original_statut_job));
-            if ((Original_entreprise_id.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[31].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[32].Value = ((int)(Original_entreprise_id.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[31].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[32].Value = global::System.DBNull.Value;
-            }
-            if ((Original_etudiant_id.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[33].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[34].Value = ((int)(Original_etudiant_id.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[33].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[34].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[35].Value = ((int)(job_id));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
-            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.UpdateCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.UpdateCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(
-                    string titre_job, 
-                    string descriptif_job, 
-                    string profil_job, 
-                    global::System.Nullable<global::System.DateTime> date_debut_job, 
-                    global::System.Nullable<global::System.DateTime> date_fin_job, 
-                    string horaire_job, 
-                    global::System.Nullable<decimal> remuneration_job, 
-                    global::System.Nullable<bool> permis_voiture_job, 
-                    string remarque_job, 
-                    bool statut_job, 
-                    global::System.Nullable<int> entreprise_id, 
-                    global::System.Nullable<int> etudiant_id, 
-                    int Original_job_id, 
-                    string Original_titre_job, 
-                    string Original_descriptif_job, 
-                    string Original_profil_job, 
-                    global::System.Nullable<global::System.DateTime> Original_date_debut_job, 
-                    global::System.Nullable<global::System.DateTime> Original_date_fin_job, 
-                    string Original_horaire_job, 
-                    global::System.Nullable<decimal> Original_remuneration_job, 
-                    global::System.Nullable<bool> Original_permis_voiture_job, 
-                    string Original_remarque_job, 
-                    bool Original_statut_job, 
-                    global::System.Nullable<int> Original_entreprise_id, 
-                    global::System.Nullable<int> Original_etudiant_id) {
-            return this.Update(titre_job, descriptif_job, profil_job, date_debut_job, date_fin_job, horaire_job, remuneration_job, permis_voiture_job, remarque_job, statut_job, entreprise_id, etudiant_id, Original_job_id, Original_titre_job, Original_descriptif_job, Original_profil_job, Original_date_debut_job, Original_date_fin_job, Original_horaire_job, Original_remuneration_job, Original_permis_voiture_job, Original_remarque_job, Original_statut_job, Original_entreprise_id, Original_etudiant_id, Original_job_id);
-        }
-    }
-    
-    /// <summary>
-    ///Represents the connection and commands used to retrieve and save data.
-    ///</summary>
-    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
-    [global::System.ComponentModel.ToolboxItem(true)]
-    [global::System.ComponentModel.DataObjectAttribute(true)]
-    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
-        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
     public partial class periodeTableAdapter : global::System.ComponentModel.Component {
         
         private global::System.Data.SqlClient.SqlDataAdapter _adapter;
@@ -6168,6 +5593,768 @@ SELECT periode_id, debut_periode, fin_periode, etudiant_id FROM periode WHERE (p
     }
     
     /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class jobTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public jobTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "job";
+            tableMapping.ColumnMappings.Add("job_id", "job_id");
+            tableMapping.ColumnMappings.Add("titre_job", "titre_job");
+            tableMapping.ColumnMappings.Add("descriptif_job", "descriptif_job");
+            tableMapping.ColumnMappings.Add("profil_job", "profil_job");
+            tableMapping.ColumnMappings.Add("date_debut_job", "date_debut_job");
+            tableMapping.ColumnMappings.Add("date_fin_job", "date_fin_job");
+            tableMapping.ColumnMappings.Add("horaire_job", "horaire_job");
+            tableMapping.ColumnMappings.Add("remuneration_job", "remuneration_job");
+            tableMapping.ColumnMappings.Add("permis_voiture_job", "permis_voiture_job");
+            tableMapping.ColumnMappings.Add("remarque_job", "remarque_job");
+            tableMapping.ColumnMappings.Add("statut_job", "statut_job");
+            tableMapping.ColumnMappings.Add("date_publication_job", "date_publication_job");
+            tableMapping.ColumnMappings.Add("entreprise_id", "entreprise_id");
+            tableMapping.ColumnMappings.Add("etudiant_id", "etudiant_id");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [job] WHERE (([job_id] = @Original_job_id) AND ([titre_job] = @Original_titre_job) AND ((@IsNull_descriptif_job = 1 AND [descriptif_job] IS NULL) OR ([descriptif_job] = @Original_descriptif_job)) AND ((@IsNull_profil_job = 1 AND [profil_job] IS NULL) OR ([profil_job] = @Original_profil_job)) AND ((@IsNull_date_debut_job = 1 AND [date_debut_job] IS NULL) OR ([date_debut_job] = @Original_date_debut_job)) AND ((@IsNull_date_fin_job = 1 AND [date_fin_job] IS NULL) OR ([date_fin_job] = @Original_date_fin_job)) AND ((@IsNull_horaire_job = 1 AND [horaire_job] IS NULL) OR ([horaire_job] = @Original_horaire_job)) AND ((@IsNull_remuneration_job = 1 AND [remuneration_job] IS NULL) OR ([remuneration_job] = @Original_remuneration_job)) AND ((@IsNull_permis_voiture_job = 1 AND [permis_voiture_job] IS NULL) OR ([permis_voiture_job] = @Original_permis_voiture_job)) AND ((@IsNull_remarque_job = 1 AND [remarque_job] IS NULL) OR ([remarque_job] = @Original_remarque_job)) AND ([statut_job] = @Original_statut_job) AND ([date_publication_job] = @Original_date_publication_job) AND ((@IsNull_entreprise_id = 1 AND [entreprise_id] IS NULL) OR ([entreprise_id] = @Original_entreprise_id)) AND ((@IsNull_etudiant_id = 1 AND [etudiant_id] IS NULL) OR ([etudiant_id] = @Original_etudiant_id)))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_job_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "job_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_titre_job", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "titre_job", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_descriptif_job", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "descriptif_job", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_descriptif_job", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "descriptif_job", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_profil_job", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "profil_job", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_profil_job", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "profil_job", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_date_debut_job", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date_debut_job", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_date_debut_job", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date_debut_job", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_date_fin_job", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date_fin_job", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_date_fin_job", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date_fin_job", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_horaire_job", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "horaire_job", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_horaire_job", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "horaire_job", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_remuneration_job", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "remuneration_job", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_remuneration_job", global::System.Data.SqlDbType.Money, 0, global::System.Data.ParameterDirection.Input, 0, 0, "remuneration_job", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_permis_voiture_job", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "permis_voiture_job", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_permis_voiture_job", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "permis_voiture_job", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_remarque_job", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "remarque_job", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_remarque_job", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "remarque_job", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_statut_job", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "statut_job", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_date_publication_job", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date_publication_job", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_entreprise_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "entreprise_id", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_entreprise_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "entreprise_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_etudiant_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "etudiant_id", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_etudiant_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "etudiant_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [job] ([titre_job], [descriptif_job], [profil_job], [date_debut_job], [date_fin_job], [horaire_job], [remuneration_job], [permis_voiture_job], [remarque_job], [statut_job], [date_publication_job], [entreprise_id], [etudiant_id]) VALUES (@titre_job, @descriptif_job, @profil_job, @date_debut_job, @date_fin_job, @horaire_job, @remuneration_job, @permis_voiture_job, @remarque_job, @statut_job, @date_publication_job, @entreprise_id, @etudiant_id);
+SELECT job_id, titre_job, descriptif_job, profil_job, date_debut_job, date_fin_job, horaire_job, remuneration_job, permis_voiture_job, remarque_job, statut_job, date_publication_job, entreprise_id, etudiant_id FROM job WHERE (job_id = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@titre_job", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "titre_job", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@descriptif_job", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "descriptif_job", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@profil_job", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "profil_job", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@date_debut_job", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date_debut_job", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@date_fin_job", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date_fin_job", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@horaire_job", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "horaire_job", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@remuneration_job", global::System.Data.SqlDbType.Money, 0, global::System.Data.ParameterDirection.Input, 0, 0, "remuneration_job", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@permis_voiture_job", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "permis_voiture_job", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@remarque_job", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "remarque_job", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@statut_job", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "statut_job", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@date_publication_job", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date_publication_job", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@entreprise_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "entreprise_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@etudiant_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "etudiant_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = "UPDATE [job] SET [titre_job] = @titre_job, [descriptif_job] = @descriptif_job, [p" +
+                "rofil_job] = @profil_job, [date_debut_job] = @date_debut_job, [date_fin_job] = @" +
+                "date_fin_job, [horaire_job] = @horaire_job, [remuneration_job] = @remuneration_j" +
+                "ob, [permis_voiture_job] = @permis_voiture_job, [remarque_job] = @remarque_job, " +
+                "[statut_job] = @statut_job, [date_publication_job] = @date_publication_job, [ent" +
+                "reprise_id] = @entreprise_id, [etudiant_id] = @etudiant_id WHERE (([job_id] = @O" +
+                "riginal_job_id) AND ([titre_job] = @Original_titre_job) AND ((@IsNull_descriptif" +
+                "_job = 1 AND [descriptif_job] IS NULL) OR ([descriptif_job] = @Original_descript" +
+                "if_job)) AND ((@IsNull_profil_job = 1 AND [profil_job] IS NULL) OR ([profil_job]" +
+                " = @Original_profil_job)) AND ((@IsNull_date_debut_job = 1 AND [date_debut_job] " +
+                "IS NULL) OR ([date_debut_job] = @Original_date_debut_job)) AND ((@IsNull_date_fi" +
+                "n_job = 1 AND [date_fin_job] IS NULL) OR ([date_fin_job] = @Original_date_fin_jo" +
+                "b)) AND ((@IsNull_horaire_job = 1 AND [horaire_job] IS NULL) OR ([horaire_job] =" +
+                " @Original_horaire_job)) AND ((@IsNull_remuneration_job = 1 AND [remuneration_jo" +
+                "b] IS NULL) OR ([remuneration_job] = @Original_remuneration_job)) AND ((@IsNull_" +
+                "permis_voiture_job = 1 AND [permis_voiture_job] IS NULL) OR ([permis_voiture_job" +
+                "] = @Original_permis_voiture_job)) AND ((@IsNull_remarque_job = 1 AND [remarque_" +
+                "job] IS NULL) OR ([remarque_job] = @Original_remarque_job)) AND ([statut_job] = " +
+                "@Original_statut_job) AND ([date_publication_job] = @Original_date_publication_j" +
+                "ob) AND ((@IsNull_entreprise_id = 1 AND [entreprise_id] IS NULL) OR ([entreprise" +
+                "_id] = @Original_entreprise_id)) AND ((@IsNull_etudiant_id = 1 AND [etudiant_id]" +
+                " IS NULL) OR ([etudiant_id] = @Original_etudiant_id)));\r\nSELECT job_id, titre_jo" +
+                "b, descriptif_job, profil_job, date_debut_job, date_fin_job, horaire_job, remune" +
+                "ration_job, permis_voiture_job, remarque_job, statut_job, date_publication_job, " +
+                "entreprise_id, etudiant_id FROM job WHERE (job_id = @job_id)";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@titre_job", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "titre_job", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@descriptif_job", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "descriptif_job", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@profil_job", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "profil_job", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@date_debut_job", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date_debut_job", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@date_fin_job", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date_fin_job", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@horaire_job", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "horaire_job", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@remuneration_job", global::System.Data.SqlDbType.Money, 0, global::System.Data.ParameterDirection.Input, 0, 0, "remuneration_job", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@permis_voiture_job", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "permis_voiture_job", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@remarque_job", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "remarque_job", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@statut_job", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "statut_job", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@date_publication_job", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date_publication_job", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@entreprise_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "entreprise_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@etudiant_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "etudiant_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_job_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "job_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_titre_job", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "titre_job", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_descriptif_job", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "descriptif_job", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_descriptif_job", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "descriptif_job", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_profil_job", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "profil_job", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_profil_job", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "profil_job", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_date_debut_job", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date_debut_job", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_date_debut_job", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date_debut_job", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_date_fin_job", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date_fin_job", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_date_fin_job", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date_fin_job", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_horaire_job", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "horaire_job", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_horaire_job", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "horaire_job", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_remuneration_job", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "remuneration_job", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_remuneration_job", global::System.Data.SqlDbType.Money, 0, global::System.Data.ParameterDirection.Input, 0, 0, "remuneration_job", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_permis_voiture_job", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "permis_voiture_job", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_permis_voiture_job", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "permis_voiture_job", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_remarque_job", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "remarque_job", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_remarque_job", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "remarque_job", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_statut_job", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "statut_job", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_date_publication_job", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date_publication_job", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_entreprise_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "entreprise_id", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_entreprise_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "entreprise_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_etudiant_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "etudiant_id", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_etudiant_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "etudiant_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@job_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "job_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::Connect.Properties.Settings.Default.ConnectConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT        job.*\r\nFROM            job";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(Connectds.jobDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual Connectds.jobDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            Connectds.jobDataTable dataTable = new Connectds.jobDataTable(true);
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(Connectds.jobDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(Connectds dataSet) {
+            return this.Adapter.Update(dataSet, "job");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(int Original_job_id, string Original_titre_job, string Original_descriptif_job, string Original_profil_job, global::System.Nullable<global::System.DateTime> Original_date_debut_job, global::System.Nullable<global::System.DateTime> Original_date_fin_job, string Original_horaire_job, global::System.Nullable<decimal> Original_remuneration_job, global::System.Nullable<bool> Original_permis_voiture_job, string Original_remarque_job, bool Original_statut_job, System.DateTime Original_date_publication_job, global::System.Nullable<int> Original_entreprise_id, global::System.Nullable<int> Original_etudiant_id) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_job_id));
+            if ((Original_titre_job == null)) {
+                throw new global::System.ArgumentNullException("Original_titre_job");
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((string)(Original_titre_job));
+            }
+            if ((Original_descriptif_job == null)) {
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((string)(Original_descriptif_job));
+            }
+            if ((Original_profil_job == null)) {
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((string)(Original_profil_job));
+            }
+            if ((Original_date_debut_job.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((System.DateTime)(Original_date_debut_job.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
+            if ((Original_date_fin_job.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[8].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[9].Value = ((System.DateTime)(Original_date_fin_job.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[8].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[9].Value = global::System.DBNull.Value;
+            }
+            if ((Original_horaire_job == null)) {
+                this.Adapter.DeleteCommand.Parameters[10].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[11].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[10].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[11].Value = ((string)(Original_horaire_job));
+            }
+            if ((Original_remuneration_job.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[12].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[13].Value = ((decimal)(Original_remuneration_job.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[12].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[13].Value = global::System.DBNull.Value;
+            }
+            if ((Original_permis_voiture_job.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[14].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[15].Value = ((bool)(Original_permis_voiture_job.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[14].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[15].Value = global::System.DBNull.Value;
+            }
+            if ((Original_remarque_job == null)) {
+                this.Adapter.DeleteCommand.Parameters[16].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[17].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[16].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[17].Value = ((string)(Original_remarque_job));
+            }
+            this.Adapter.DeleteCommand.Parameters[18].Value = ((bool)(Original_statut_job));
+            this.Adapter.DeleteCommand.Parameters[19].Value = ((System.DateTime)(Original_date_publication_job));
+            if ((Original_entreprise_id.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[20].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[21].Value = ((int)(Original_entreprise_id.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[20].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[21].Value = global::System.DBNull.Value;
+            }
+            if ((Original_etudiant_id.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[22].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[23].Value = ((int)(Original_etudiant_id.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[22].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[23].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(string titre_job, string descriptif_job, string profil_job, global::System.Nullable<global::System.DateTime> date_debut_job, global::System.Nullable<global::System.DateTime> date_fin_job, string horaire_job, global::System.Nullable<decimal> remuneration_job, global::System.Nullable<bool> permis_voiture_job, string remarque_job, bool statut_job, System.DateTime date_publication_job, global::System.Nullable<int> entreprise_id, global::System.Nullable<int> etudiant_id) {
+            if ((titre_job == null)) {
+                throw new global::System.ArgumentNullException("titre_job");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(titre_job));
+            }
+            if ((descriptif_job == null)) {
+                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(descriptif_job));
+            }
+            if ((profil_job == null)) {
+                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(profil_job));
+            }
+            if ((date_debut_job.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((System.DateTime)(date_debut_job.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            if ((date_fin_job.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[4].Value = ((System.DateTime)(date_fin_job.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            if ((horaire_job == null)) {
+                this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[5].Value = ((string)(horaire_job));
+            }
+            if ((remuneration_job.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[6].Value = ((decimal)(remuneration_job.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            if ((permis_voiture_job.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[7].Value = ((bool)(permis_voiture_job.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
+            if ((remarque_job == null)) {
+                this.Adapter.InsertCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[8].Value = ((string)(remarque_job));
+            }
+            this.Adapter.InsertCommand.Parameters[9].Value = ((bool)(statut_job));
+            this.Adapter.InsertCommand.Parameters[10].Value = ((System.DateTime)(date_publication_job));
+            if ((entreprise_id.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[11].Value = ((int)(entreprise_id.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[11].Value = global::System.DBNull.Value;
+            }
+            if ((etudiant_id.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[12].Value = ((int)(etudiant_id.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[12].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(
+                    string titre_job, 
+                    string descriptif_job, 
+                    string profil_job, 
+                    global::System.Nullable<global::System.DateTime> date_debut_job, 
+                    global::System.Nullable<global::System.DateTime> date_fin_job, 
+                    string horaire_job, 
+                    global::System.Nullable<decimal> remuneration_job, 
+                    global::System.Nullable<bool> permis_voiture_job, 
+                    string remarque_job, 
+                    bool statut_job, 
+                    System.DateTime date_publication_job, 
+                    global::System.Nullable<int> entreprise_id, 
+                    global::System.Nullable<int> etudiant_id, 
+                    int Original_job_id, 
+                    string Original_titre_job, 
+                    string Original_descriptif_job, 
+                    string Original_profil_job, 
+                    global::System.Nullable<global::System.DateTime> Original_date_debut_job, 
+                    global::System.Nullable<global::System.DateTime> Original_date_fin_job, 
+                    string Original_horaire_job, 
+                    global::System.Nullable<decimal> Original_remuneration_job, 
+                    global::System.Nullable<bool> Original_permis_voiture_job, 
+                    string Original_remarque_job, 
+                    bool Original_statut_job, 
+                    System.DateTime Original_date_publication_job, 
+                    global::System.Nullable<int> Original_entreprise_id, 
+                    global::System.Nullable<int> Original_etudiant_id, 
+                    int job_id) {
+            if ((titre_job == null)) {
+                throw new global::System.ArgumentNullException("titre_job");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(titre_job));
+            }
+            if ((descriptif_job == null)) {
+                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(descriptif_job));
+            }
+            if ((profil_job == null)) {
+                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(profil_job));
+            }
+            if ((date_debut_job.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((System.DateTime)(date_debut_job.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            if ((date_fin_job.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((System.DateTime)(date_fin_job.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            if ((horaire_job == null)) {
+                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(horaire_job));
+            }
+            if ((remuneration_job.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((decimal)(remuneration_job.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            if ((permis_voiture_job.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((bool)(permis_voiture_job.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
+            if ((remarque_job == null)) {
+                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((string)(remarque_job));
+            }
+            this.Adapter.UpdateCommand.Parameters[9].Value = ((bool)(statut_job));
+            this.Adapter.UpdateCommand.Parameters[10].Value = ((System.DateTime)(date_publication_job));
+            if ((entreprise_id.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(entreprise_id.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
+            }
+            if ((etudiant_id.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((int)(etudiant_id.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[12].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[13].Value = ((int)(Original_job_id));
+            if ((Original_titre_job == null)) {
+                throw new global::System.ArgumentNullException("Original_titre_job");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((string)(Original_titre_job));
+            }
+            if ((Original_descriptif_job == null)) {
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[16].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((string)(Original_descriptif_job));
+            }
+            if ((Original_profil_job == null)) {
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[18].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((string)(Original_profil_job));
+            }
+            if ((Original_date_debut_job.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[19].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[20].Value = ((System.DateTime)(Original_date_debut_job.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[19].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[20].Value = global::System.DBNull.Value;
+            }
+            if ((Original_date_fin_job.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[22].Value = ((System.DateTime)(Original_date_fin_job.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[22].Value = global::System.DBNull.Value;
+            }
+            if ((Original_horaire_job == null)) {
+                this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[24].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[24].Value = ((string)(Original_horaire_job));
+            }
+            if ((Original_remuneration_job.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[26].Value = ((decimal)(Original_remuneration_job.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[26].Value = global::System.DBNull.Value;
+            }
+            if ((Original_permis_voiture_job.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[27].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[28].Value = ((bool)(Original_permis_voiture_job.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[27].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[28].Value = global::System.DBNull.Value;
+            }
+            if ((Original_remarque_job == null)) {
+                this.Adapter.UpdateCommand.Parameters[29].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[30].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[29].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[30].Value = ((string)(Original_remarque_job));
+            }
+            this.Adapter.UpdateCommand.Parameters[31].Value = ((bool)(Original_statut_job));
+            this.Adapter.UpdateCommand.Parameters[32].Value = ((System.DateTime)(Original_date_publication_job));
+            if ((Original_entreprise_id.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[33].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[34].Value = ((int)(Original_entreprise_id.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[33].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[34].Value = global::System.DBNull.Value;
+            }
+            if ((Original_etudiant_id.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[35].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[36].Value = ((int)(Original_etudiant_id.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[35].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[36].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[37].Value = ((int)(job_id));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(
+                    string titre_job, 
+                    string descriptif_job, 
+                    string profil_job, 
+                    global::System.Nullable<global::System.DateTime> date_debut_job, 
+                    global::System.Nullable<global::System.DateTime> date_fin_job, 
+                    string horaire_job, 
+                    global::System.Nullable<decimal> remuneration_job, 
+                    global::System.Nullable<bool> permis_voiture_job, 
+                    string remarque_job, 
+                    bool statut_job, 
+                    System.DateTime date_publication_job, 
+                    global::System.Nullable<int> entreprise_id, 
+                    global::System.Nullable<int> etudiant_id, 
+                    int Original_job_id, 
+                    string Original_titre_job, 
+                    string Original_descriptif_job, 
+                    string Original_profil_job, 
+                    global::System.Nullable<global::System.DateTime> Original_date_debut_job, 
+                    global::System.Nullable<global::System.DateTime> Original_date_fin_job, 
+                    string Original_horaire_job, 
+                    global::System.Nullable<decimal> Original_remuneration_job, 
+                    global::System.Nullable<bool> Original_permis_voiture_job, 
+                    string Original_remarque_job, 
+                    bool Original_statut_job, 
+                    System.DateTime Original_date_publication_job, 
+                    global::System.Nullable<int> Original_entreprise_id, 
+                    global::System.Nullable<int> Original_etudiant_id) {
+            return this.Update(titre_job, descriptif_job, profil_job, date_debut_job, date_fin_job, horaire_job, remuneration_job, permis_voiture_job, remarque_job, statut_job, date_publication_job, entreprise_id, etudiant_id, Original_job_id, Original_titre_job, Original_descriptif_job, Original_profil_job, Original_date_debut_job, Original_date_fin_job, Original_horaire_job, Original_remuneration_job, Original_permis_voiture_job, Original_remarque_job, Original_statut_job, Original_date_publication_job, Original_entreprise_id, Original_etudiant_id, Original_job_id);
+        }
+    }
+    
+    /// <summary>
     ///TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
     ///</summary>
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6183,9 +6370,9 @@ SELECT periode_id, debut_periode, fin_periode, etudiant_id FROM periode WHERE (p
         
         private etudiantTableAdapter _etudiantTableAdapter;
         
-        private jobTableAdapter _jobTableAdapter;
-        
         private periodeTableAdapter _periodeTableAdapter;
+        
+        private jobTableAdapter _jobTableAdapter;
         
         private bool _backupDataSetBeforeUpdate;
         
@@ -6235,12 +6422,12 @@ SELECT periode_id, debut_periode, fin_periode, etudiant_id FROM periode WHERE (p
         [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
             "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
             "a", "System.Drawing.Design.UITypeEditor")]
-        public jobTableAdapter jobTableAdapter {
+        public periodeTableAdapter periodeTableAdapter {
             get {
-                return this._jobTableAdapter;
+                return this._periodeTableAdapter;
             }
             set {
-                this._jobTableAdapter = value;
+                this._periodeTableAdapter = value;
             }
         }
         
@@ -6249,12 +6436,12 @@ SELECT periode_id, debut_periode, fin_periode, etudiant_id FROM periode WHERE (p
         [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
             "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
             "a", "System.Drawing.Design.UITypeEditor")]
-        public periodeTableAdapter periodeTableAdapter {
+        public jobTableAdapter jobTableAdapter {
             get {
-                return this._periodeTableAdapter;
+                return this._jobTableAdapter;
             }
             set {
-                this._periodeTableAdapter = value;
+                this._jobTableAdapter = value;
             }
         }
         
@@ -6285,13 +6472,13 @@ SELECT periode_id, debut_periode, fin_periode, etudiant_id FROM periode WHERE (p
                             && (this._etudiantTableAdapter.Connection != null))) {
                     return this._etudiantTableAdapter.Connection;
                 }
-                if (((this._jobTableAdapter != null) 
-                            && (this._jobTableAdapter.Connection != null))) {
-                    return this._jobTableAdapter.Connection;
-                }
                 if (((this._periodeTableAdapter != null) 
                             && (this._periodeTableAdapter.Connection != null))) {
                     return this._periodeTableAdapter.Connection;
+                }
+                if (((this._jobTableAdapter != null) 
+                            && (this._jobTableAdapter.Connection != null))) {
+                    return this._jobTableAdapter.Connection;
                 }
                 return null;
             }
@@ -6312,10 +6499,10 @@ SELECT periode_id, debut_periode, fin_periode, etudiant_id FROM periode WHERE (p
                 if ((this._etudiantTableAdapter != null)) {
                     count = (count + 1);
                 }
-                if ((this._jobTableAdapter != null)) {
+                if ((this._periodeTableAdapter != null)) {
                     count = (count + 1);
                 }
-                if ((this._periodeTableAdapter != null)) {
+                if ((this._jobTableAdapter != null)) {
                     count = (count + 1);
                 }
                 return count;
@@ -6347,21 +6534,21 @@ SELECT periode_id, debut_periode, fin_periode, etudiant_id FROM periode WHERE (p
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._jobTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.job.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._jobTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             if ((this._periodeTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.periode.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._periodeTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._jobTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.job.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._jobTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -6391,19 +6578,19 @@ SELECT periode_id, debut_periode, fin_periode, etudiant_id FROM periode WHERE (p
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._jobTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.job.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._jobTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             if ((this._periodeTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.periode.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._periodeTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._jobTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.job.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._jobTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -6417,19 +6604,19 @@ SELECT periode_id, debut_periode, fin_periode, etudiant_id FROM periode WHERE (p
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private int UpdateDeletedRows(Connectds dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
-            if ((this._periodeTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.periode.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._periodeTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
             if ((this._jobTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.job.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._jobTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._periodeTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.periode.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._periodeTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -6498,13 +6685,13 @@ SELECT periode_id, debut_periode, fin_periode, etudiant_id FROM periode WHERE (p
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
-            if (((this._jobTableAdapter != null) 
-                        && (this.MatchTableAdapterConnection(this._jobTableAdapter.Connection) == false))) {
+            if (((this._periodeTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._periodeTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
-            if (((this._periodeTableAdapter != null) 
-                        && (this.MatchTableAdapterConnection(this._periodeTableAdapter.Connection) == false))) {
+            if (((this._jobTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._jobTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
@@ -6558,15 +6745,6 @@ SELECT periode_id, debut_periode, fin_periode, etudiant_id FROM periode WHERE (p
                         adaptersWithAcceptChangesDuringUpdate.Add(this._etudiantTableAdapter.Adapter);
                     }
                 }
-                if ((this._jobTableAdapter != null)) {
-                    revertConnections.Add(this._jobTableAdapter, this._jobTableAdapter.Connection);
-                    this._jobTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
-                    this._jobTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
-                    if (this._jobTableAdapter.Adapter.AcceptChangesDuringUpdate) {
-                        this._jobTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
-                        adaptersWithAcceptChangesDuringUpdate.Add(this._jobTableAdapter.Adapter);
-                    }
-                }
                 if ((this._periodeTableAdapter != null)) {
                     revertConnections.Add(this._periodeTableAdapter, this._periodeTableAdapter.Connection);
                     this._periodeTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
@@ -6574,6 +6752,15 @@ SELECT periode_id, debut_periode, fin_periode, etudiant_id FROM periode WHERE (p
                     if (this._periodeTableAdapter.Adapter.AcceptChangesDuringUpdate) {
                         this._periodeTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
                         adaptersWithAcceptChangesDuringUpdate.Add(this._periodeTableAdapter.Adapter);
+                    }
+                }
+                if ((this._jobTableAdapter != null)) {
+                    revertConnections.Add(this._jobTableAdapter, this._jobTableAdapter.Connection);
+                    this._jobTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._jobTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._jobTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._jobTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._jobTableAdapter.Adapter);
                     }
                 }
                 // 
@@ -6642,13 +6829,13 @@ SELECT periode_id, debut_periode, fin_periode, etudiant_id FROM periode WHERE (p
                     this._etudiantTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._etudiantTableAdapter]));
                     this._etudiantTableAdapter.Transaction = null;
                 }
-                if ((this._jobTableAdapter != null)) {
-                    this._jobTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._jobTableAdapter]));
-                    this._jobTableAdapter.Transaction = null;
-                }
                 if ((this._periodeTableAdapter != null)) {
                     this._periodeTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._periodeTableAdapter]));
                     this._periodeTableAdapter.Transaction = null;
+                }
+                if ((this._jobTableAdapter != null)) {
+                    this._jobTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._jobTableAdapter]));
+                    this._jobTableAdapter.Transaction = null;
                 }
                 if ((0 < adaptersWithAcceptChangesDuringUpdate.Count)) {
                     global::System.Data.Common.DataAdapter[] adapters = new System.Data.Common.DataAdapter[adaptersWithAcceptChangesDuringUpdate.Count];

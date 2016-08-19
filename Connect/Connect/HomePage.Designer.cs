@@ -87,13 +87,14 @@
             this.ToolStripMenuItemNewJob.Name = "ToolStripMenuItemNewJob";
             this.ToolStripMenuItemNewJob.Size = new System.Drawing.Size(176, 22);
             this.ToolStripMenuItemNewJob.Text = "Nouveau Job";
+            this.ToolStripMenuItemNewJob.Click += new System.EventHandler(this.ToolStripMenuItemNewJob_Click);
             // 
             // ToolStripMenuItemNewEtu
             // 
             this.ToolStripMenuItemNewEtu.Name = "ToolStripMenuItemNewEtu";
             this.ToolStripMenuItemNewEtu.Size = new System.Drawing.Size(176, 22);
             this.ToolStripMenuItemNewEtu.Text = "Nouvel Etudiant";
-            this.ToolStripMenuItemNewEtu.Click += new System.EventHandler(this.ToolStripMenuItemNewEtu2_Click);
+            this.ToolStripMenuItemNewEtu.Click += new System.EventHandler(this.ToolStripMenuItemNewEtu_Click);
             // 
             // ToolStripMenuItemFermer
             // 
@@ -140,12 +141,14 @@
             this.ToolStripMenuItemNewJob2.Name = "ToolStripMenuItemNewJob2";
             this.ToolStripMenuItemNewJob2.Size = new System.Drawing.Size(184, 22);
             this.ToolStripMenuItemNewJob2.Text = "Nouveau Job";
+            this.ToolStripMenuItemNewJob2.Click += new System.EventHandler(this.ToolStripMenuItemNewJob_Click);
             // 
             // ToolStripMenuItemShowJob
             // 
             this.ToolStripMenuItemShowJob.Name = "ToolStripMenuItemShowJob";
             this.ToolStripMenuItemShowJob.Size = new System.Drawing.Size(184, 22);
             this.ToolStripMenuItemShowJob.Text = "Consulter Job";
+            this.ToolStripMenuItemShowJob.Click += new System.EventHandler(this.ToolStripMenuItemShowJob_Click);
             // 
             // etudiantToolStripMenuItem
             // 
@@ -169,13 +172,14 @@
             this.ToolStripMenuItemNewEtu2.Name = "ToolStripMenuItemNewEtu2";
             this.ToolStripMenuItemNewEtu2.Size = new System.Drawing.Size(176, 22);
             this.ToolStripMenuItemNewEtu2.Text = "Nouvel Etudiant";
-            this.ToolStripMenuItemNewEtu2.Click += new System.EventHandler(this.ToolStripMenuItemNewEtu2_Click);
+            this.ToolStripMenuItemNewEtu2.Click += new System.EventHandler(this.ToolStripMenuItemNewEtu_Click);
             // 
             // ToolStripMenuItemRechercheEtu
             // 
             this.ToolStripMenuItemRechercheEtu.Name = "ToolStripMenuItemRechercheEtu";
             this.ToolStripMenuItemRechercheEtu.Size = new System.Drawing.Size(176, 22);
             this.ToolStripMenuItemRechercheEtu.Text = "Recherche Etudiant";
+            this.ToolStripMenuItemRechercheEtu.Click += new System.EventHandler(this.ToolStripMenuItemListEtu_Click);
             // 
             // statusStrip
             // 
