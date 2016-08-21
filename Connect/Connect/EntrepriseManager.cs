@@ -62,6 +62,22 @@ namespace Connect
             }
         }
 
+        public static bool GetStatusJob(string statut)
+        {
+            switch (statut)
+            {
+                case "Disponible":
+                    return true;
+
+                case "Attribué":
+                    return false;
+
+                default:
+                    return true;
+
+            }
+        }
+
         public static string GetTaille(string taille)
         {
             string codeTaille;
@@ -124,6 +140,36 @@ namespace Connect
 
                 entrepriseAdpt.Update(entrepriseDT);
 
+            }
+        }
+
+        public static Connectds.jobRow GetJob(int job_id)
+        {
+            Connectds.jobDataTable jobDT = new Connectds.jobDataTable();
+
+            using (ConnectdsTableAdapters.jobTableAdapter jobAdpt = new ConnectdsTableAdapters.jobTableAdapter())
+            {
+                jobAdpt.Fill(jobDT);
+            }
+            Connectds.jobRow jobRow = jobDT.FindByjob_id(job_id);
+
+            return jobRow;
+        }
+
+        public static void SaveJob(DataRow jobRow)
+        {
+            using (ConnectdsTableAdapters.jobTableAdapter jobAdpt = new ConnectdsTableAdapters.jobTableAdapter())
+            {
+                jobAdpt.Update(jobRow);
+            }
+        }
+
+        public static void AddJob(Connectds.jobRow jobRow)
+        {
+            using (ConnectdsTableAdapters.jobTableAdapter jobAdpt = new ConnectdsTableAdapters.jobTableAdapter())
+            {
+                jobAdpt.Insert(jobRow.titre_job, jobRow.descriptif_job, jobRow.profil_job, jobRow.date_debut_job, jobRow.date_fin_job, jobRow.horaire_job, jobRow.remuneration_job,
+                    jobRow.permis_voiture_job, jobRow.remarque_job, jobRow.statut_job,jobRow.date_publication_job,jobRow.entreprise_id,jobRow.etudiant_id);
             }
         }
 

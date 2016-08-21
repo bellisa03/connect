@@ -47,7 +47,6 @@
             this.labelHoraireJob = new System.Windows.Forms.Label();
             this.labelSalaireJob = new System.Windows.Forms.Label();
             this.labelEuros = new System.Windows.Forms.Label();
-            this.textBoxSalaireJob = new System.Windows.Forms.TextBox();
             this.radioButtonPermisNonJob = new System.Windows.Forms.RadioButton();
             this.radioButtonPermisOuiJob = new System.Windows.Forms.RadioButton();
             this.labelPermisJob = new System.Windows.Forms.Label();
@@ -56,13 +55,14 @@
             this.datePickerPublicationJob = new System.Windows.Forms.DateTimePicker();
             this.labelDatePublication = new System.Windows.Forms.Label();
             this.labelEtudiantJob = new System.Windows.Forms.Label();
-            this.textBoxEtudiantJob = new System.Windows.Forms.TextBox();
             this.buttonRechercheEtudiant = new System.Windows.Forms.Button();
-            this.comboBoxStatutJob = new System.Windows.Forms.ComboBox();
-            this.labelStatutJob = new System.Windows.Forms.Label();
             this.buttonDeleteJob = new System.Windows.Forms.Button();
             this.buttonValiderJob = new System.Windows.Forms.Button();
-            this.buttonAnnulerJob = new System.Windows.Forms.Button();
+            this.buttonFermerJob = new System.Windows.Forms.Button();
+            this.textBoxEtudiantJob = new System.Windows.Forms.TextBox();
+            this.numericUpDownSalaireJob = new System.Windows.Forms.NumericUpDown();
+            this.buttonEffacerSelectionEtudiant = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSalaireJob)).BeginInit();
             this.SuspendLayout();
             // 
             // labelEntreprise
@@ -85,6 +85,7 @@
             // 
             // comboBoxEntreprise
             // 
+            this.comboBoxEntreprise.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
             this.comboBoxEntreprise.FormattingEnabled = true;
             this.comboBoxEntreprise.Location = new System.Drawing.Point(101, 12);
             this.comboBoxEntreprise.Name = "comboBoxEntreprise";
@@ -93,6 +94,7 @@
             // 
             // textBoxJobID
             // 
+            this.textBoxJobID.Enabled = false;
             this.textBoxJobID.Location = new System.Drawing.Point(309, 12);
             this.textBoxJobID.Name = "textBoxJobID";
             this.textBoxJobID.ReadOnly = true;
@@ -220,18 +222,11 @@
             // labelEuros
             // 
             this.labelEuros.AutoSize = true;
-            this.labelEuros.Location = new System.Drawing.Point(182, 432);
+            this.labelEuros.Location = new System.Drawing.Point(199, 432);
             this.labelEuros.Name = "labelEuros";
             this.labelEuros.Size = new System.Drawing.Size(34, 13);
             this.labelEuros.TabIndex = 42;
             this.labelEuros.Text = "Euros";
-            // 
-            // textBoxSalaireJob
-            // 
-            this.textBoxSalaireJob.Location = new System.Drawing.Point(101, 429);
-            this.textBoxSalaireJob.Name = "textBoxSalaireJob";
-            this.textBoxSalaireJob.Size = new System.Drawing.Size(75, 20);
-            this.textBoxSalaireJob.TabIndex = 43;
             // 
             // radioButtonPermisNonJob
             // 
@@ -285,7 +280,8 @@
             // 
             this.datePickerPublicationJob.Enabled = false;
             this.datePickerPublicationJob.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.datePickerPublicationJob.Location = new System.Drawing.Point(327, 616);
+            this.datePickerPublicationJob.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.datePickerPublicationJob.Location = new System.Drawing.Point(323, 616);
             this.datePickerPublicationJob.Name = "datePickerPublicationJob";
             this.datePickerPublicationJob.Size = new System.Drawing.Size(86, 20);
             this.datePickerPublicationJob.TabIndex = 50;
@@ -308,39 +304,15 @@
             this.labelEtudiantJob.TabIndex = 51;
             this.labelEtudiantJob.Text = "Etudiant";
             // 
-            // textBoxEtudiantJob
-            // 
-            this.textBoxEtudiantJob.Location = new System.Drawing.Point(101, 583);
-            this.textBoxEtudiantJob.Name = "textBoxEtudiantJob";
-            this.textBoxEtudiantJob.ReadOnly = true;
-            this.textBoxEtudiantJob.Size = new System.Drawing.Size(127, 20);
-            this.textBoxEtudiantJob.TabIndex = 52;
-            // 
             // buttonRechercheEtudiant
             // 
-            this.buttonRechercheEtudiant.Location = new System.Drawing.Point(234, 580);
+            this.buttonRechercheEtudiant.Location = new System.Drawing.Point(259, 582);
             this.buttonRechercheEtudiant.Name = "buttonRechercheEtudiant";
-            this.buttonRechercheEtudiant.Size = new System.Drawing.Size(122, 23);
+            this.buttonRechercheEtudiant.Size = new System.Drawing.Size(150, 23);
             this.buttonRechercheEtudiant.TabIndex = 53;
-            this.buttonRechercheEtudiant.Text = "Sélectionner Etudiant";
+            this.buttonRechercheEtudiant.Text = "Etudiant(s) Disponible(s)";
             this.buttonRechercheEtudiant.UseVisualStyleBackColor = true;
-            // 
-            // comboBoxStatutJob
-            // 
-            this.comboBoxStatutJob.FormattingEnabled = true;
-            this.comboBoxStatutJob.Location = new System.Drawing.Point(101, 616);
-            this.comboBoxStatutJob.Name = "comboBoxStatutJob";
-            this.comboBoxStatutJob.Size = new System.Drawing.Size(127, 21);
-            this.comboBoxStatutJob.TabIndex = 55;
-            // 
-            // labelStatutJob
-            // 
-            this.labelStatutJob.AutoSize = true;
-            this.labelStatutJob.Location = new System.Drawing.Point(15, 619);
-            this.labelStatutJob.Name = "labelStatutJob";
-            this.labelStatutJob.Size = new System.Drawing.Size(39, 13);
-            this.labelStatutJob.TabIndex = 54;
-            this.labelStatutJob.Text = "Statut*";
+            this.buttonRechercheEtudiant.Click += new System.EventHandler(this.buttonRechercheEtudiant_Click);
             // 
             // buttonDeleteJob
             // 
@@ -351,6 +323,7 @@
             this.buttonDeleteJob.TabIndex = 57;
             this.buttonDeleteJob.Text = "Supprimer";
             this.buttonDeleteJob.UseVisualStyleBackColor = true;
+            this.buttonDeleteJob.Click += new System.EventHandler(this.buttonDeleteJob_Click);
             // 
             // buttonValiderJob
             // 
@@ -361,27 +334,59 @@
             this.buttonValiderJob.TabIndex = 56;
             this.buttonValiderJob.Text = "Ajouter";
             this.buttonValiderJob.UseVisualStyleBackColor = true;
+            this.buttonValiderJob.Click += new System.EventHandler(this.buttonValiderJob_Click);
             // 
-            // buttonAnnulerJob
+            // buttonFermerJob
             // 
-            this.buttonAnnulerJob.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.buttonAnnulerJob.Location = new System.Drawing.Point(309, 659);
-            this.buttonAnnulerJob.Name = "buttonAnnulerJob";
-            this.buttonAnnulerJob.Size = new System.Drawing.Size(75, 23);
-            this.buttonAnnulerJob.TabIndex = 58;
-            this.buttonAnnulerJob.Text = "Annuler";
-            this.buttonAnnulerJob.UseVisualStyleBackColor = true;
+            this.buttonFermerJob.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.buttonFermerJob.Location = new System.Drawing.Point(309, 659);
+            this.buttonFermerJob.Name = "buttonFermerJob";
+            this.buttonFermerJob.Size = new System.Drawing.Size(75, 23);
+            this.buttonFermerJob.TabIndex = 58;
+            this.buttonFermerJob.Text = "Fermer";
+            this.buttonFermerJob.UseVisualStyleBackColor = true;
+            // 
+            // textBoxEtudiantJob
+            // 
+            this.textBoxEtudiantJob.Location = new System.Drawing.Point(101, 584);
+            this.textBoxEtudiantJob.Name = "textBoxEtudiantJob";
+            this.textBoxEtudiantJob.ReadOnly = true;
+            this.textBoxEtudiantJob.Size = new System.Drawing.Size(127, 20);
+            this.textBoxEtudiantJob.TabIndex = 52;
+            // 
+            // numericUpDownSalaireJob
+            // 
+            this.numericUpDownSalaireJob.DecimalPlaces = 2;
+            this.numericUpDownSalaireJob.Location = new System.Drawing.Point(108, 430);
+            this.numericUpDownSalaireJob.Maximum = new decimal(new int[] {
+            5000,
+            0,
+            0,
+            0});
+            this.numericUpDownSalaireJob.Name = "numericUpDownSalaireJob";
+            this.numericUpDownSalaireJob.Size = new System.Drawing.Size(85, 20);
+            this.numericUpDownSalaireJob.TabIndex = 60;
+            // 
+            // buttonEffacerSelectionEtudiant
+            // 
+            this.buttonEffacerSelectionEtudiant.Location = new System.Drawing.Point(101, 613);
+            this.buttonEffacerSelectionEtudiant.Name = "buttonEffacerSelectionEtudiant";
+            this.buttonEffacerSelectionEtudiant.Size = new System.Drawing.Size(127, 23);
+            this.buttonEffacerSelectionEtudiant.TabIndex = 61;
+            this.buttonEffacerSelectionEtudiant.Text = "Effacer Sélection";
+            this.buttonEffacerSelectionEtudiant.UseVisualStyleBackColor = true;
+            this.buttonEffacerSelectionEtudiant.Click += new System.EventHandler(this.buttonEffacerSelectionEtudiant_Click);
             // 
             // Job
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(441, 711);
-            this.Controls.Add(this.buttonAnnulerJob);
+            this.Controls.Add(this.buttonEffacerSelectionEtudiant);
+            this.Controls.Add(this.numericUpDownSalaireJob);
+            this.Controls.Add(this.buttonFermerJob);
             this.Controls.Add(this.buttonDeleteJob);
             this.Controls.Add(this.buttonValiderJob);
-            this.Controls.Add(this.comboBoxStatutJob);
-            this.Controls.Add(this.labelStatutJob);
             this.Controls.Add(this.buttonRechercheEtudiant);
             this.Controls.Add(this.textBoxEtudiantJob);
             this.Controls.Add(this.labelEtudiantJob);
@@ -392,7 +397,6 @@
             this.Controls.Add(this.radioButtonPermisNonJob);
             this.Controls.Add(this.radioButtonPermisOuiJob);
             this.Controls.Add(this.labelPermisJob);
-            this.Controls.Add(this.textBoxSalaireJob);
             this.Controls.Add(this.labelEuros);
             this.Controls.Add(this.labelSalaireJob);
             this.Controls.Add(this.textBoxHoraireJob);
@@ -414,6 +418,7 @@
             this.Controls.Add(this.labelEntreprise);
             this.Name = "Job";
             this.Text = "Formulaire Job";
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSalaireJob)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -440,7 +445,6 @@
         private System.Windows.Forms.Label labelHoraireJob;
         private System.Windows.Forms.Label labelSalaireJob;
         private System.Windows.Forms.Label labelEuros;
-        private System.Windows.Forms.TextBox textBoxSalaireJob;
         private System.Windows.Forms.RadioButton radioButtonPermisNonJob;
         private System.Windows.Forms.RadioButton radioButtonPermisOuiJob;
         private System.Windows.Forms.Label labelPermisJob;
@@ -449,12 +453,12 @@
         private System.Windows.Forms.DateTimePicker datePickerPublicationJob;
         private System.Windows.Forms.Label labelDatePublication;
         private System.Windows.Forms.Label labelEtudiantJob;
-        private System.Windows.Forms.TextBox textBoxEtudiantJob;
         private System.Windows.Forms.Button buttonRechercheEtudiant;
-        private System.Windows.Forms.ComboBox comboBoxStatutJob;
-        private System.Windows.Forms.Label labelStatutJob;
         private System.Windows.Forms.Button buttonDeleteJob;
         private System.Windows.Forms.Button buttonValiderJob;
-        private System.Windows.Forms.Button buttonAnnulerJob;
+        private System.Windows.Forms.Button buttonFermerJob;
+        private System.Windows.Forms.TextBox textBoxEtudiantJob;
+        private System.Windows.Forms.NumericUpDown numericUpDownSalaireJob;
+        private System.Windows.Forms.Button buttonEffacerSelectionEtudiant;
     }
 }

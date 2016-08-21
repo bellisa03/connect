@@ -52,6 +52,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Connectds.xsd</DependentUpon>
     </Compile>
+    <Compile Include="ConnectGlobalErrorHandler.cs" />
     <Compile Include="Disponibilite.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -105,6 +106,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RechercheEtudiant.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RechercheEtudiant.Designer.cs">
+      <DependentUpon>RechercheEtudiant.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Disponibilite.resx">
       <DependentUpon>Disponibilite.cs</DependentUpon>
     </EmbeddedResource>
@@ -138,6 +145,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="RechercheEtudiant.resx">
+      <DependentUpon>RechercheEtudiant.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Connectds.xsc">
       <DependentUpon>Connectds.xsd</DependentUpon>
     </None>

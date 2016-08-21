@@ -80,7 +80,7 @@ namespace Connect
 
         private void buttonUpdateDisponibilite_Click(object sender, EventArgs e)
         {
-            if (dataGridViewPeriode.SelectedRows.Count == 1)
+            if (periodeRow!= null)
             {
                 if (periodeRow.debut_periode <= periodeRow.fin_periode)
                 {

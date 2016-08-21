@@ -2088,7 +2088,9 @@ namespace Connect {
                 this.columnremarque_job.MaxLength = 100;
                 this.columnstatut_job.AllowDBNull = false;
                 this.columndate_publication_job.AllowDBNull = false;
+                this.columnentreprise_id.DefaultValue = ((int)(-1));
                 this.columnnom_etudiant_job.ReadOnly = true;
+                this.columnnom_etudiant_job.DefaultValue = ((string)("-1"));
                 this.columnnom_entreprise_job.ReadOnly = true;
             }
             
@@ -3265,11 +3267,11 @@ namespace Connect {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string nom_etudiant_job {
                 get {
-                    try {
-                        return ((string)(this[this.tablejob.nom_etudiant_jobColumn]));
+                    if (this.Isnom_etudiant_jobNull()) {
+                        return null;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'nom_etudiant_job\' in table \'job\' is DBNull.", e);
+                    else {
+                        return ((string)(this[this.tablejob.nom_etudiant_jobColumn]));
                     }
                 }
                 set {
@@ -3281,11 +3283,11 @@ namespace Connect {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string nom_entreprise_job {
                 get {
-                    try {
-                        return ((string)(this[this.tablejob.nom_entreprise_jobColumn]));
+                    if (this.Isnom_entreprise_jobNull()) {
+                        return null;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'nom_entreprise_job\' in table \'job\' is DBNull.", e);
+                    else {
+                        return ((string)(this[this.tablejob.nom_entreprise_jobColumn]));
                     }
                 }
                 set {

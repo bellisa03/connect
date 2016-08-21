@@ -48,7 +48,7 @@ namespace Connect
             dataGridViewListingJob.Columns[13].DisplayIndex = 11;
             dataGridViewListingJob.Columns[14].HeaderText = "Etudiant";
             dataGridViewListingJob.Columns[14].DisplayIndex = 12;
-            dataGridViewListingJob.Columns[10].HeaderText = "Statut";
+            dataGridViewListingJob.Columns[10].HeaderText = "Attribué";
 
         }
 
@@ -77,12 +77,25 @@ namespace Connect
 
         private void buttonAfficherJob_Click(object sender, EventArgs e)
         {
-
+            if (dataGridViewListingJob.SelectedRows.Count == 1)
+            {
+                int value;
+                Int32.TryParse(dataGridViewListingJob.SelectedCells[0].Value.ToString(), out value);
+                Connectds.jobRow jobSelectionne;
+                jobSelectionne = EntrepriseManager.GetJob(value);
+                Job jobDetail = new Job(jobSelectionne);
+                jobDetail.MdiParent = HomePage.ActiveForm;
+                jobDetail.Show();
+                this.Close();
+            }
         }
 
         private void buttonAjouterJob_Click(object sender, EventArgs e)
         {
-
+            Job job = new Job();
+            job.MdiParent = HomePage.ActiveForm;
+            job.Show();
+            this.Close();
         }
 
         private void buttonDeleteJob_Click(object sender, EventArgs e)

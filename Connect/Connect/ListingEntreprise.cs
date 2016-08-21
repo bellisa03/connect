@@ -41,11 +41,11 @@ namespace Connect
         {
             Connectds ds = new Connectds();
 
-            using (ConnectdsTableAdapters.entrepriseTableAdapter entrepriseAdpt = new ConnectdsTableAdapters.entrepriseTableAdapter())
-            {
-                entrepriseAdpt.Fill(ds.entreprise);
-            }
-
+            //using (ConnectdsTableAdapters.entrepriseTableAdapter entrepriseAdpt = new ConnectdsTableAdapters.entrepriseTableAdapter())
+            //{
+            //    entrepriseAdpt.Fill(ds.entreprise);
+            //}
+            ds = EntrepriseManager.GetEntrepriseDS();
             comboBoxListEntreprise.DataSource = ds;
             comboBoxListEntreprise.ValueMember = "entreprise.entreprise_id";
             comboBoxListEntreprise.DisplayMember = "entreprise.nom_entreprise";
