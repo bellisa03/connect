@@ -12,7 +12,6 @@ namespace Connect
 {
     public partial class FormEtudiant : Form
     {
-        Connectds ds;
         Connectds.etudiantRow etudiantRow;
         int id = -1;
 
@@ -39,16 +38,7 @@ namespace Connect
             PopulateAndBind(id);
         }
 
-        /// <summary>
-        /// Au chargement du formulaire, on charge les données du data set dans la variable ds, par le biais de la méthode GetEtudiantDS() 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void FormEtudiant_Load(object sender, EventArgs e)
-        {
-            ds = EtudiantManager.GetEtudiantDS();
-        }
-
+        
         private void PopulateAndBind(int id)
         {
             comboBoxSexeEtudiant.Items.Add(Enums.Sexe.Féminin.ToString());
@@ -172,23 +162,33 @@ namespace Connect
 
         private void buttonValiderEtudiant_Click(object sender, EventArgs e)
         {
-            Valider();
-            refreshDataGrid();
+            if (etudiantRow.nom_etudiant != string.Empty && etudiantRow.prenom_etudiant != string.Empty)
+            {
+                Valider();
+                refreshDataGrid();
+            }
+            else
+                MessageBox.Show("Veuillez remplir le nom et le prénom de l'étudiant", "Attention", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         private void buttonValiderDispoEtudiant_Click(object sender, EventArgs e)
         {
-            Valider();
-            refreshDataGrid();
-            Disponibilite disponibilite = new Disponibilite(id);
-            disponibilite.MdiParent = HomePage.ActiveForm;
-            disponibilite.Show();
+            if (etudiantRow.nom_etudiant != string.Empty && etudiantRow.prenom_etudiant != string.Empty)
+            {
+                Valider();
+                refreshDataGrid();
+                Disponibilite disponibilite = new Disponibilite(id);
+                disponibilite.MdiParent = HomePage.ActiveForm;
+                disponibilite.Show();
+            }
+            else
+                MessageBox.Show("Veuillez remplir le nom et le prénom de l'étudiant", "Attention", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         private void Valider()
         {
             etudiantRow.sexe_etudiant = EtudiantManager.GetSexe(comboBoxSexeEtudiant.Text);
-            
+
             if (id == -1)
                 EtudiantManager.AddEtudiant(etudiantRow);
             else

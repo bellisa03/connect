@@ -14,6 +14,9 @@ namespace Connect
         [STAThread]
         static void Main()
         {
+            ConnectGlobalErrorHandler errorHandler = new ConnectGlobalErrorHandler();
+            Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(errorHandler.OnThreadException);
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new HomePage());

@@ -31,9 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridViewRechercheEtudiant = new System.Windows.Forms.DataGridView();
-            this.connectds = new Connect.Connectds();
-            this.etudiantBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.etudiantTableAdapter = new Connect.ConnectdsTableAdapters.etudiantTableAdapter();
             this.etudiantidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nometudiantDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.prenometudiantDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -41,17 +38,22 @@
             this.languesetudiantDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.domainerechercheetudiantDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.permisvoitureetudiantDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.etudiantBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.connectds = new Connect.Connectds();
+            this.etudiantTableAdapter = new Connect.ConnectdsTableAdapters.etudiantTableAdapter();
             this.buttonSelectionRechercheEtudiant = new System.Windows.Forms.Button();
             this.buttonFermerRechercheEtudiant = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRechercheEtudiant)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.connectds)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.etudiantBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.connectds)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridViewRechercheEtudiant
             // 
             this.dataGridViewRechercheEtudiant.AllowUserToAddRows = false;
             this.dataGridViewRechercheEtudiant.AllowUserToDeleteRows = false;
+            this.dataGridViewRechercheEtudiant.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewRechercheEtudiant.AutoGenerateColumns = false;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
@@ -71,25 +73,11 @@
             this.domainerechercheetudiantDataGridViewTextBoxColumn,
             this.permisvoitureetudiantDataGridViewCheckBoxColumn});
             this.dataGridViewRechercheEtudiant.DataSource = this.etudiantBindingSource;
-            this.dataGridViewRechercheEtudiant.Location = new System.Drawing.Point(53, 37);
+            this.dataGridViewRechercheEtudiant.Location = new System.Drawing.Point(31, 31);
             this.dataGridViewRechercheEtudiant.Name = "dataGridViewRechercheEtudiant";
             this.dataGridViewRechercheEtudiant.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewRechercheEtudiant.Size = new System.Drawing.Size(961, 188);
+            this.dataGridViewRechercheEtudiant.Size = new System.Drawing.Size(935, 188);
             this.dataGridViewRechercheEtudiant.TabIndex = 0;
-            // 
-            // connectds
-            // 
-            this.connectds.DataSetName = "Connectds";
-            this.connectds.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // etudiantBindingSource
-            // 
-            this.etudiantBindingSource.DataMember = "etudiant";
-            this.etudiantBindingSource.DataSource = this.connectds;
-            // 
-            // etudiantTableAdapter
-            // 
-            this.etudiantTableAdapter.ClearBeforeFill = true;
             // 
             // etudiantidDataGridViewTextBoxColumn
             // 
@@ -140,9 +128,24 @@
             this.permisvoitureetudiantDataGridViewCheckBoxColumn.Name = "permisvoitureetudiantDataGridViewCheckBoxColumn";
             this.permisvoitureetudiantDataGridViewCheckBoxColumn.Width = 50;
             // 
+            // etudiantBindingSource
+            // 
+            this.etudiantBindingSource.DataMember = "etudiant";
+            this.etudiantBindingSource.DataSource = this.connectds;
+            // 
+            // connectds
+            // 
+            this.connectds.DataSetName = "Connectds";
+            this.connectds.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // etudiantTableAdapter
+            // 
+            this.etudiantTableAdapter.ClearBeforeFill = true;
+            // 
             // buttonSelectionRechercheEtudiant
             // 
-            this.buttonSelectionRechercheEtudiant.Location = new System.Drawing.Point(134, 265);
+            this.buttonSelectionRechercheEtudiant.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.buttonSelectionRechercheEtudiant.Location = new System.Drawing.Point(114, 263);
             this.buttonSelectionRechercheEtudiant.Name = "buttonSelectionRechercheEtudiant";
             this.buttonSelectionRechercheEtudiant.Size = new System.Drawing.Size(126, 23);
             this.buttonSelectionRechercheEtudiant.TabIndex = 1;
@@ -152,7 +155,8 @@
             // 
             // buttonFermerRechercheEtudiant
             // 
-            this.buttonFermerRechercheEtudiant.Location = new System.Drawing.Point(804, 265);
+            this.buttonFermerRechercheEtudiant.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.buttonFermerRechercheEtudiant.Location = new System.Drawing.Point(784, 263);
             this.buttonFermerRechercheEtudiant.Name = "buttonFermerRechercheEtudiant";
             this.buttonFermerRechercheEtudiant.Size = new System.Drawing.Size(126, 23);
             this.buttonFermerRechercheEtudiant.TabIndex = 2;
@@ -164,7 +168,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1070, 333);
+            this.ClientSize = new System.Drawing.Size(996, 327);
             this.Controls.Add(this.buttonFermerRechercheEtudiant);
             this.Controls.Add(this.buttonSelectionRechercheEtudiant);
             this.Controls.Add(this.dataGridViewRechercheEtudiant);
@@ -172,8 +176,8 @@
             this.Text = "Etudiant(s) Disponible(s)";
             this.Load += new System.EventHandler(this.RechercheEtudiant_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRechercheEtudiant)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.connectds)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.etudiantBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.connectds)).EndInit();
             this.ResumeLayout(false);
 
         }

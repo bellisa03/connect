@@ -13,12 +13,29 @@ namespace Connect
     public partial class ListingJobs : Form
     {
         Connectds ds = new Connectds();
-        
+
 
         public ListingJobs()
         {
             InitializeComponent();
             PopulateAndBind();
+        }
+
+        public ListingJobs(int entreprise_id)
+        {
+            InitializeComponent();
+            PopulateAndBind();
+            labelEntrepriseListingJob.Visible = true;
+            comboBoxEntrepriseListingJob.Visible = true;
+            comboBoxEntrepriseListingJob.DataSource = ds;
+            comboBoxEntrepriseListingJob.DisplayMember = "entreprise.nom_entreprise";
+            comboBoxEntrepriseListingJob.ValueMember = "entreprise.entreprise_id";
+            comboBoxEntrepriseListingJob.SelectedValue = entreprise_id;
+
+            dataGridViewListingJob.DataSource = ds;
+            dataGridViewListingJob.DataMember = "entreprise.FK_job_entreprise";
+
+            buttonSelectEntrepriseJob.Text = "Voir tous les Jobs";
         }
 
         private void PopulateAndBind()
@@ -92,9 +109,21 @@ namespace Connect
 
         private void buttonAjouterJob_Click(object sender, EventArgs e)
         {
-            Job job = new Job();
-            job.MdiParent = HomePage.ActiveForm;
-            job.Show();
+            if (comboBoxEntrepriseListingJob.Visible) // pour placer l'entreprise directement sur le nouveau formulaire
+            {
+                int value;
+                Int32.TryParse(comboBoxEntrepriseListingJob.SelectedValue.ToString(), out value);
+                Job jobEntreprise = new Job(value);
+                jobEntreprise.MdiParent = HomePage.ActiveForm;
+                jobEntreprise.Show();
+            }
+            else
+            {
+                Job job = new Job();
+                job.MdiParent = HomePage.ActiveForm;
+                job.Show();
+            }
+            
             this.Close();
         }
 

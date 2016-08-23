@@ -58,13 +58,13 @@
             this.dataGridViewListEntreprise.MultiSelect = false;
             this.dataGridViewListEntreprise.Name = "dataGridViewListEntreprise";
             this.dataGridViewListEntreprise.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewListEntreprise.Size = new System.Drawing.Size(1032, 408);
+            this.dataGridViewListEntreprise.Size = new System.Drawing.Size(963, 327);
             this.dataGridViewListEntreprise.TabIndex = 0;
             // 
             // buttonListEntrepriseAfficher
             // 
             this.buttonListEntrepriseAfficher.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.buttonListEntrepriseAfficher.Location = new System.Drawing.Point(89, 537);
+            this.buttonListEntrepriseAfficher.Location = new System.Drawing.Point(55, 456);
             this.buttonListEntrepriseAfficher.Name = "buttonListEntrepriseAfficher";
             this.buttonListEntrepriseAfficher.Size = new System.Drawing.Size(194, 23);
             this.buttonListEntrepriseAfficher.TabIndex = 3;
@@ -75,7 +75,7 @@
             // buttonListEntrepriseFermer
             // 
             this.buttonListEntrepriseFermer.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.buttonListEntrepriseFermer.Location = new System.Drawing.Point(797, 537);
+            this.buttonListEntrepriseFermer.Location = new System.Drawing.Point(763, 456);
             this.buttonListEntrepriseFermer.Name = "buttonListEntrepriseFermer";
             this.buttonListEntrepriseFermer.Size = new System.Drawing.Size(75, 23);
             this.buttonListEntrepriseFermer.TabIndex = 4;
@@ -95,7 +95,7 @@
             // buttonDeleteEnt
             // 
             this.buttonDeleteEnt.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.buttonDeleteEnt.Location = new System.Drawing.Point(429, 537);
+            this.buttonDeleteEnt.Location = new System.Drawing.Point(395, 456);
             this.buttonDeleteEnt.Name = "buttonDeleteEnt";
             this.buttonDeleteEnt.Size = new System.Drawing.Size(194, 23);
             this.buttonDeleteEnt.TabIndex = 6;
@@ -107,7 +107,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1057, 596);
+            this.ClientSize = new System.Drawing.Size(988, 515);
             this.Controls.Add(this.buttonDeleteEnt);
             this.Controls.Add(this.comboBoxListEntreprise);
             this.Controls.Add(this.buttonListEntrepriseFermer);

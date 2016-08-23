@@ -72,6 +72,8 @@
             // 
             // textBoxNomEnt
             // 
+            this.textBoxNomEnt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxNomEnt.Location = new System.Drawing.Point(107, 42);
             this.textBoxNomEnt.Name = "textBoxNomEnt";
             this.textBoxNomEnt.Size = new System.Drawing.Size(190, 20);
@@ -97,6 +99,8 @@
             // 
             // textBoxAdresseEnt
             // 
+            this.textBoxAdresseEnt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxAdresseEnt.Location = new System.Drawing.Point(107, 84);
             this.textBoxAdresseEnt.Name = "textBoxAdresseEnt";
             this.textBoxAdresseEnt.Size = new System.Drawing.Size(342, 20);
@@ -145,6 +149,8 @@
             // 
             // textBoxSecteurEnt
             // 
+            this.textBoxSecteurEnt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxSecteurEnt.ForeColor = System.Drawing.SystemColors.WindowText;
             this.textBoxSecteurEnt.Location = new System.Drawing.Point(107, 218);
             this.textBoxSecteurEnt.Name = "textBoxSecteurEnt";
@@ -162,6 +168,8 @@
             // 
             // textBoxTypeEnt
             // 
+            this.textBoxTypeEnt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxTypeEnt.Location = new System.Drawing.Point(107, 264);
             this.textBoxTypeEnt.Name = "textBoxTypeEnt";
             this.textBoxTypeEnt.Size = new System.Drawing.Size(229, 20);
@@ -187,6 +195,8 @@
             // 
             // textBoxDescripEnt
             // 
+            this.textBoxDescripEnt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxDescripEnt.Location = new System.Drawing.Point(107, 350);
             this.textBoxDescripEnt.Multiline = true;
             this.textBoxDescripEnt.Name = "textBoxDescripEnt";
@@ -229,7 +239,6 @@
             // 
             // buttonValiderEnt
             // 
-            this.buttonValiderEnt.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.buttonValiderEnt.Location = new System.Drawing.Point(71, 502);
             this.buttonValiderEnt.Name = "buttonValiderEnt";
             this.buttonValiderEnt.Size = new System.Drawing.Size(75, 23);
@@ -240,7 +249,6 @@
             // 
             // buttonAnnulerEnt
             // 
-            this.buttonAnnulerEnt.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.buttonAnnulerEnt.Location = new System.Drawing.Point(175, 502);
             this.buttonAnnulerEnt.Name = "buttonAnnulerEnt";
             this.buttonAnnulerEnt.Size = new System.Drawing.Size(75, 23);
@@ -251,17 +259,16 @@
             // 
             // buttonJobsEnt
             // 
-            this.buttonJobsEnt.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.buttonJobsEnt.Location = new System.Drawing.Point(382, 502);
             this.buttonJobsEnt.Name = "buttonJobsEnt";
             this.buttonJobsEnt.Size = new System.Drawing.Size(75, 56);
             this.buttonJobsEnt.TabIndex = 22;
             this.buttonJobsEnt.Text = "Voir Jobs";
             this.buttonJobsEnt.UseVisualStyleBackColor = true;
+            this.buttonJobsEnt.Click += new System.EventHandler(this.buttonJobsEnt_Click);
             // 
             // buttonDeleteEnt
             // 
-            this.buttonDeleteEnt.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.buttonDeleteEnt.Location = new System.Drawing.Point(280, 502);
             this.buttonDeleteEnt.Name = "buttonDeleteEnt";
             this.buttonDeleteEnt.Size = new System.Drawing.Size(75, 56);
@@ -302,6 +309,7 @@
             // 
             // labelChamps
             // 
+            this.labelChamps.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.labelChamps.AutoSize = true;
             this.labelChamps.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelChamps.Location = new System.Drawing.Point(12, 560);
@@ -345,7 +353,6 @@
             this.Controls.Add(this.datePickerCreationEnt);
             this.Name = "FormEntreprise";
             this.Text = "Formulaire Entreprise";
-            this.Load += new System.EventHandler(this.FormEntreprise_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

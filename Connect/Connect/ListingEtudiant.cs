@@ -12,6 +12,8 @@ namespace Connect
 {
     public partial class ListingEtudiant : Form
     {
+        Connectds.etudiantRow etudiantSelectionne;
+
         public ListingEtudiant()
         {
             InitializeComponent();
@@ -30,7 +32,7 @@ namespace Connect
         private void buttonListEtudiantAfficher_Click(object sender, EventArgs e)
         {
             int value;
-            Connectds.etudiantRow etudiantSelectionne;
+            
             Int32.TryParse(comboBoxListEtudiant.SelectedValue.ToString(), out value);
             etudiantSelectionne = EtudiantManager.GetEtudiant(value);
             if (value != -1)
@@ -54,17 +56,39 @@ namespace Connect
             var Result = MessageBox.Show("Etes-vous sûr de vouloir supprimer l'étudiant n°" + value.ToString() + "?", "Veuillez confirmer:", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
             if (Result == DialogResult.OK)
             {
-                List<Connectds.periodeRow> periodeList = new List<Connectds.periodeRow>();
-                periodeList = EtudiantManager.GetDisponibiliteList(value);
-                if (periodeList != null)
+                // la variable checkJob va permettre de conserver l'information booléenne quant aux attributions de job de l'étudiant en dehors de la boucle foreach
+                bool checkJob = false;
+                Connectds.jobDataTable jobDT = EntrepriseManager.GetJobDT();
+                foreach (Connectds.jobRow jobRow in jobDT)
                 {
-                    foreach (var periode in periodeList)
+                    if (value == jobRow.etudiant_id)
                     {
-                        EtudiantManager.DeletePeriode(periode.periode_id);
+                        var Result2 = MessageBox.Show("L'étudiant n°" + value.ToString() + " a des attributions de jobs actives. Vous ne pouvez le supprimer. Souhaitez-vous rendre son profil inactif?", "Veuillez préciser:", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        if (Result2 == DialogResult.Yes)
+                        {
+                            etudiantSelectionne = EtudiantManager.GetEtudiant(value);
+                            etudiantSelectionne.statut_etudiant = false; // le statut devient inactif
+                            EtudiantManager.SaveEtudiant(etudiantSelectionne);
+                            PopulateAndBind();
+                        }
+                        checkJob = true;
+                        break;
                     }
                 }
-                EtudiantManager.DeleteEtudiant(value);
-                PopulateAndBind();
+                if (!checkJob)
+                {
+                    List<Connectds.periodeRow> periodeList = new List<Connectds.periodeRow>();
+                    periodeList = EtudiantManager.GetDisponibiliteList(value);
+                    if (periodeList != null)
+                    {
+                        foreach (var periode in periodeList)
+                        {
+                            EtudiantManager.DeletePeriode(periode.periode_id);
+                        }
+                    }
+                    EtudiantManager.DeleteEtudiant(value);
+                    PopulateAndBind();
+                }
             }
         }
 

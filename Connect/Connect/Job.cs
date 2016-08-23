@@ -12,21 +12,40 @@ namespace Connect
 {
     public partial class Job : Form
     {
+        DataSet DsNonType;
         Connectds ds = new Connectds();
         Connectds.jobRow jobRow;
         Connectds.etudiantRow etudiantRow;
+        Connectds.entrepriseRow entrepriseRow;
         int id = -1;
+        int entrepriseID = -1;
 
+        /// <summary>
+        /// Constructeur pour un job vierge
+        /// </summary>
         public Job()
         {
             InitializeComponent();
             PopulateAndBind(id);
         }
-
+        /// <summary>
+        /// Constructeur qui permet d'afficher les détails d'un job passé en paramètre
+        /// </summary>
+        /// <param name="jobRow"></param>
         public Job(Connectds.jobRow jobRow)
         {
             InitializeComponent();
             this.id = jobRow.job_id;
+            PopulateAndBind(id);
+        }
+        /// <summary>
+        /// Constructeur pour un job vierge qui prend en paramètre l'id de l'entreprise pour pouvoir afficher celle-ci directement dans le comboBox
+        /// </summary>
+        /// <param name="entrepriseID"></param>
+        public Job(int entrepriseID)
+        {
+            InitializeComponent();
+            this.entrepriseID = entrepriseID;
             PopulateAndBind(id);
 
         }
@@ -38,6 +57,8 @@ namespace Connect
             comboBoxEntreprise.DataSource = ds;
             comboBoxEntreprise.ValueMember = "entreprise.entreprise_id";
             comboBoxEntreprise.DisplayMember = "entreprise.nom_entreprise";
+
+            
 
             if (id != -1)
             {
@@ -57,11 +78,17 @@ namespace Connect
             }
             else
             {
-                Connectds.jobDataTable jobDT = new Connectds.jobDataTable();
-                jobRow = jobDT.NewjobRow();
-                             
-                comboBoxEntreprise.DropDownStyle = ComboBoxStyle.DropDownList;
+                if (entrepriseID != -1)
+                    comboBoxEntreprise.SelectedValue = entrepriseID;
 
+                Connectds.jobDataTable jobDT = new Connectds.jobDataTable();
+                jobRow = (Connectds.jobRow)jobDT.NewjobRow();
+                //jobRow = jobDT.NewjobRow();
+                //DsNonType = (DataSet)ds;
+                //DsNonType.EnforceConstraints = false;
+
+                comboBoxEntreprise.DropDownStyle = ComboBoxStyle.DropDownList;
+                jobRow.titre_job = string.Empty;
                 jobRow.descriptif_job = string.Empty;
                 jobRow.profil_job = string.Empty;
                 jobRow.date_debut_job = DateTime.Now;
@@ -75,7 +102,7 @@ namespace Connect
                 jobRow.etudiant_id = 1; // A MODIFIER!!!
                 labelJob.Visible = false;
                 textBoxJobID.Visible = false;
-
+                
             }
             textBoxIntituleJob.DataBindings.Add("Text", jobRow, "titre_job");
             textBoxDescriptif.DataBindings.Add("Text", jobRow, "descriptif_job");
@@ -129,23 +156,40 @@ namespace Connect
                 jobRow.Setetudiant_idNull();
                 jobRow.statut_job = false;
             }
-            Valider();
-            refreshDataGrid();
+            if (jobRow.titre_job != string.Empty)
+            {
+                Valider();
+                refreshDataGrid();
+            }
+            else
+                MessageBox.Show("Veuillez remplir l'intitulé du job", "Attention", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         private void Valider()
         {
-            if (id == -1)
+            
+            if (jobRow.date_debut_job <= jobRow.date_fin_job)
             {
-                int idEntreprise;
-                Int32.TryParse(comboBoxEntreprise.SelectedValue.ToString(), out idEntreprise);
-                jobRow.entreprise_id = idEntreprise;
-                EntrepriseManager.AddJob(jobRow);
+                if (id == -1)
+                {
+                    int idEntreprise;
+                    Int32.TryParse(comboBoxEntreprise.SelectedValue.ToString(), out idEntreprise);
+                    entrepriseRow = EntrepriseManager.GetEntreprise(idEntreprise);
+                    if (entrepriseRow.statut_entreprise) //si l'entreprise est active, on peut ajouter un nouveau job
+                    {
+                        jobRow.entreprise_id = idEntreprise;
+                        EntrepriseManager.AddJob(jobRow);
+                    }
+                    else
+                        MessageBox.Show("Le statut de l'entreprise n°" + entrepriseRow.entreprise_id + " est inactif. Vous ne pouvez pas lui créer de nouveaux jobs",
+                            "Attention", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                    EntrepriseManager.SaveJob(jobRow);
             }
             else
-            {
-                EntrepriseManager.SaveJob(jobRow);
-            }
+                MessageBox.Show("La date de début doit se situer avant la date de fin", "Attention", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            
         }
 
         /// <summary>
@@ -171,17 +215,22 @@ namespace Connect
             }
         }
 
-        private void buttonAnnulerJob_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
         private void buttonRechercheEtudiant_Click(object sender, EventArgs e)
         {
-            Valider();
-            RechercheEtudiant recherche = new RechercheEtudiant(jobRow);
-            recherche.MdiParent = HomePage.ActiveForm;
-            recherche.Show();
+            if (jobRow.titre_job != string.Empty)
+            {
+                Valider();
+                RechercheEtudiant recherche = new RechercheEtudiant(jobRow);
+                recherche.MdiParent = HomePage.ActiveForm;
+                recherche.Show();
+                this.Close();
+            }
+            else
+                MessageBox.Show("Veuillez remplir l'intitulé du job avant de consulter la liste d'étudiants", "Attention", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+
+        private void buttonFermerJob_Click(object sender, EventArgs e)
+        {
             this.Close();
         }
     }

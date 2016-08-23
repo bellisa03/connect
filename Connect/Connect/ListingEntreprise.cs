@@ -12,6 +12,8 @@ namespace Connect
 {
     public partial class ListingEntreprise : Form
     {
+        Connectds.entrepriseRow entrepriseSelectionnee;
+
         public ListingEntreprise()
         {
             InitializeComponent();
@@ -25,7 +27,6 @@ namespace Connect
         private void buttonListEntrepriseAfficher_Click(object sender, EventArgs e)
         {
             int value;
-            Connectds.entrepriseRow entrepriseSelectionnee;
             Int32.TryParse(comboBoxListEntreprise.SelectedValue.ToString(), out value);
             entrepriseSelectionnee = EntrepriseManager.GetEntreprise(value);
             if (value != -1)
@@ -39,19 +40,17 @@ namespace Connect
 
         private void PopulateAndBind()
         {
-            Connectds ds = new Connectds();
+            //Connectds ds = new Connectds();
 
-            //using (ConnectdsTableAdapters.entrepriseTableAdapter entrepriseAdpt = new ConnectdsTableAdapters.entrepriseTableAdapter())
-            //{
-            //    entrepriseAdpt.Fill(ds.entreprise);
-            //}
-            ds = EntrepriseManager.GetEntrepriseDS();
-            comboBoxListEntreprise.DataSource = ds;
-            comboBoxListEntreprise.ValueMember = "entreprise.entreprise_id";
-            comboBoxListEntreprise.DisplayMember = "entreprise.nom_entreprise";
+            //ds = EntrepriseManager.GetEntrepriseDS();
+            Connectds.entrepriseDataTable entrepriseDT = new Connectds.entrepriseDataTable();
+            entrepriseDT = EntrepriseManager.GetEntrepriseDT();
 
-            dataGridViewListEntreprise.DataSource = ds;
-            dataGridViewListEntreprise.DataMember = "entreprise";
+            comboBoxListEntreprise.DataSource = entrepriseDT;
+            comboBoxListEntreprise.ValueMember = "entreprise_id";
+            comboBoxListEntreprise.DisplayMember = "nom_entreprise";
+
+            dataGridViewListEntreprise.DataSource = entrepriseDT;
             dataGridViewListEntreprise.ReadOnly = true;
             dataGridViewListEntreprise.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewListEntreprise.Columns[8].Visible = false; //descriptif de l'entreprise caché -> trop verbeux pour un DataGridView
@@ -74,7 +73,28 @@ namespace Connect
             var Result = MessageBox.Show("Etes-vous sûr de vouloir supprimer l'entreprise n°" + value.ToString() + "?", "Veuillez confirmer:", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
             if (Result == DialogResult.OK)
             {
-                EntrepriseManager.DeleteEntreprise(value);
+                // la variable checkJob va permettre de conserver l'information booléenne quant aux attributions de job de l'étudiant en dehors de la boucle foreach
+                bool checkJob = false;
+                Connectds.jobDataTable jobDT = EntrepriseManager.GetJobDT();
+                foreach (Connectds.jobRow jobRow in jobDT)
+                {
+                    if (value == jobRow.entreprise_id)
+                    {
+                        var Result2 = MessageBox.Show("L'entreprise n°" + value.ToString() + " a déjà publié des annonces. Vous ne pouvez la supprimer. Souhaitez-vous rendre son profil inactif?", "Veuillez préciser:", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        if (Result2 == DialogResult.Yes)
+                        {
+                            entrepriseSelectionnee = EntrepriseManager.GetEntreprise(value);
+                            entrepriseSelectionnee.statut_entreprise = false; // le statut devient inactif
+                            EntrepriseManager.SaveEntreprise(entrepriseSelectionnee);
+                        }
+                        checkJob = true;
+                        break;
+                    }
+                }
+                if (!checkJob)
+                {
+                    EntrepriseManager.DeleteEntreprise(value);
+                }
                 PopulateAndBind();
             }
         }

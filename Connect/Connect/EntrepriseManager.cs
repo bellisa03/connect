@@ -9,7 +9,10 @@ namespace Connect
 {
     class EntrepriseManager
     {
-
+        /// <summary>
+        /// Remplit un dataset de toutes les tables de la Base de données
+        /// </summary>
+        /// <returns></returns>
         public static Connectds GetDS()
         {
             Connectds ds = new Connectds();
@@ -33,6 +36,7 @@ namespace Connect
 
             return ds;
         }
+
         public static Connectds.entrepriseRow GetEntreprise(int entreprise_id)
         {
             Connectds.entrepriseDataTable entrepriseDT = new Connectds.entrepriseDataTable();
@@ -111,7 +115,27 @@ namespace Connect
             }
             return ds;
         }
-        
+
+        public static Connectds.entrepriseDataTable GetEntrepriseDT()
+        {
+            Connectds.entrepriseDataTable dt = new Connectds.entrepriseDataTable();
+            using (ConnectdsTableAdapters.entrepriseTableAdapter entrepriseAdpt = new ConnectdsTableAdapters.entrepriseTableAdapter())
+            {
+                entrepriseAdpt.Fill(dt);
+            }
+            return dt;
+        }
+
+        public static Connectds.jobDataTable GetJobDT()
+        {
+            Connectds.jobDataTable dt = new Connectds.jobDataTable();
+            using (ConnectdsTableAdapters.jobTableAdapter jobAdpt = new ConnectdsTableAdapters.jobTableAdapter())
+            {
+                jobAdpt.Fill(dt);
+            }
+            return dt;
+        }
+
         public static void SaveEntreprise(DataRow entrepriseRow)
         {
             using (ConnectdsTableAdapters.entrepriseTableAdapter entrepriseAdpt = new ConnectdsTableAdapters.entrepriseTableAdapter())
@@ -120,8 +144,9 @@ namespace Connect
             }
         }
 
-        public static void AddEntreprise(Connectds.entrepriseRow entrepriseRow)
+        public static void AddEntreprise(DataRow dataRow)
         {
+            Connectds.entrepriseRow entrepriseRow = (Connectds.entrepriseRow)dataRow;
             using (ConnectdsTableAdapters.entrepriseTableAdapter entrepriseAdpt = new ConnectdsTableAdapters.entrepriseTableAdapter())
             {
                 entrepriseAdpt.Insert(entrepriseRow.nom_entreprise, entrepriseRow.adresse_entreprise, entrepriseRow.contact_entreprise, entrepriseRow.telephone_entreprise, entrepriseRow.secteur_entreprise, entrepriseRow.type_entreprise, entrepriseRow.taille_entreprise, entrepriseRow.descriptif_entreprise, entrepriseRow.statut_entreprise, entrepriseRow.date_creation_entreprise);

@@ -12,7 +12,7 @@ namespace Connect
 {
     public partial class FormEntreprise : Form
     {
-        Connectds ds;
+        //Connectds ds;
         Connectds.entrepriseRow entrepriseRow;
         int id = -1;
 
@@ -37,17 +37,6 @@ namespace Connect
             InitializeComponent();
             this.id = entrepriseRow.entreprise_id;
             PopulateAndBind(id);
-        }
-
-        /// <summary>
-        /// Au chargement du formulaire, on charge les données du data set dans la variable ds, par le biais de la méthode GetEntrepriseDS()
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void FormEntreprise_Load(object sender, EventArgs e)
-        {
-            ds = EntrepriseManager.GetEntrepriseDS();
-
         }
 
         private void PopulateAndBind(int id)
@@ -133,14 +122,25 @@ namespace Connect
 
         private void buttonValiderEnt_Click(object sender, EventArgs e)
         {
-            entrepriseRow.statut_entreprise = EntrepriseManager.GetStatus(comboBoxStatutEnt.Text);
-            entrepriseRow.taille_entreprise = EntrepriseManager.GetTaille(comboBoxTailleEnt.Text);
-
-            if (id == -1)
-                EntrepriseManager.AddEntreprise(entrepriseRow);
+            if(entrepriseRow.nom_entreprise != string.Empty)
+            {
+                entrepriseRow.statut_entreprise = EntrepriseManager.GetStatus(comboBoxStatutEnt.Text);
+                entrepriseRow.taille_entreprise = EntrepriseManager.GetTaille(comboBoxTailleEnt.Text);
+                if (id == -1)
+                    EntrepriseManager.AddEntreprise(entrepriseRow);
+                else
+                    EntrepriseManager.SaveEntreprise(entrepriseRow);
+                refreshDataGrid();
+            }
             else
-                EntrepriseManager.SaveEntreprise(entrepriseRow);
-            refreshDataGrid();
+                MessageBox.Show("Veuillez remplir le nom de l'entreprise", "Attention", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+
+        private void buttonJobsEnt_Click(object sender, EventArgs e)
+        {
+            ListingJobs jobs = new ListingJobs(entrepriseRow.entreprise_id);
+            jobs.MdiParent = HomePage.ActiveForm;
+            jobs.Show();
         }
 
         private void buttonDeleteEnt_Click(object sender, EventArgs e)
@@ -148,8 +148,24 @@ namespace Connect
             var Result = MessageBox.Show("Etes-vous sûr de vouloir supprimer l'entreprise n°" + entrepriseRow.entreprise_id + "?", "Veuillez confirmer:", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
             if (Result == DialogResult.OK)
             {
-                EntrepriseManager.DeleteEntreprise(entrepriseRow.entreprise_id);
-                refreshDataGrid();                
+                // la variable checkJob va permettre de conserver l'information booléenne quant aux attributions de job de l'étudiant en dehors de la boucle foreach
+                bool checkJob = false;
+                Connectds.jobDataTable jobDT = EntrepriseManager.GetJobDT();
+                foreach (Connectds.jobRow jobRow in jobDT)
+                {
+                    if (entrepriseRow.entreprise_id == jobRow.entreprise_id)
+                    {
+                        var Result2 = MessageBox.Show("L'entreprise n°" + entrepriseRow.entreprise_id + " a déjà publié des annonces. Vous ne pouvez la supprimer. Vous pouvez uniquement rendre son profil inactif", "Attention", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        checkJob = true;
+                        break;
+                    }
+                }
+                if (!checkJob)
+                {
+                    EntrepriseManager.DeleteEntreprise(entrepriseRow.entreprise_id);
+                    refreshDataGrid();
+                }
+                           
             }
         }
 

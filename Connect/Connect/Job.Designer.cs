@@ -100,6 +100,7 @@
             this.textBoxJobID.ReadOnly = true;
             this.textBoxJobID.Size = new System.Drawing.Size(100, 20);
             this.textBoxJobID.TabIndex = 3;
+            this.textBoxJobID.TabStop = false;
             // 
             // labelIntituleJob
             // 
@@ -125,7 +126,7 @@
             this.textBoxIntituleJob.Location = new System.Drawing.Point(101, 46);
             this.textBoxIntituleJob.Name = "textBoxIntituleJob";
             this.textBoxIntituleJob.Size = new System.Drawing.Size(186, 20);
-            this.textBoxIntituleJob.TabIndex = 30;
+            this.textBoxIntituleJob.TabIndex = 4;
             // 
             // labelDescriptifJob
             // 
@@ -142,7 +143,7 @@
             this.textBoxDescriptif.Multiline = true;
             this.textBoxDescriptif.Name = "textBoxDescriptif";
             this.textBoxDescriptif.Size = new System.Drawing.Size(308, 75);
-            this.textBoxDescriptif.TabIndex = 32;
+            this.textBoxDescriptif.TabIndex = 5;
             // 
             // textBoxProfilJob
             // 
@@ -150,7 +151,7 @@
             this.textBoxProfilJob.Multiline = true;
             this.textBoxProfilJob.Name = "textBoxProfilJob";
             this.textBoxProfilJob.Size = new System.Drawing.Size(308, 75);
-            this.textBoxProfilJob.TabIndex = 34;
+            this.textBoxProfilJob.TabIndex = 6;
             // 
             // labelProfilJob
             // 
@@ -166,14 +167,14 @@
             this.datePickerDebutJob.Location = new System.Drawing.Point(185, 265);
             this.datePickerDebutJob.Name = "datePickerDebutJob";
             this.datePickerDebutJob.Size = new System.Drawing.Size(200, 20);
-            this.datePickerDebutJob.TabIndex = 35;
+            this.datePickerDebutJob.TabIndex = 7;
             // 
             // datePickerFinJob
             // 
             this.datePickerFinJob.Location = new System.Drawing.Point(185, 300);
             this.datePickerFinJob.Name = "datePickerFinJob";
             this.datePickerFinJob.Size = new System.Drawing.Size(200, 20);
-            this.datePickerFinJob.TabIndex = 36;
+            this.datePickerFinJob.TabIndex = 8;
             // 
             // labelFinJob
             // 
@@ -199,7 +200,7 @@
             this.textBoxHoraireJob.Multiline = true;
             this.textBoxHoraireJob.Name = "textBoxHoraireJob";
             this.textBoxHoraireJob.Size = new System.Drawing.Size(308, 75);
-            this.textBoxHoraireJob.TabIndex = 40;
+            this.textBoxHoraireJob.TabIndex = 9;
             // 
             // labelHoraireJob
             // 
@@ -234,7 +235,7 @@
             this.radioButtonPermisNonJob.Location = new System.Drawing.Point(171, 460);
             this.radioButtonPermisNonJob.Name = "radioButtonPermisNonJob";
             this.radioButtonPermisNonJob.Size = new System.Drawing.Size(45, 17);
-            this.radioButtonPermisNonJob.TabIndex = 46;
+            this.radioButtonPermisNonJob.TabIndex = 12;
             this.radioButtonPermisNonJob.TabStop = true;
             this.radioButtonPermisNonJob.Text = "Non";
             this.radioButtonPermisNonJob.UseVisualStyleBackColor = true;
@@ -245,7 +246,7 @@
             this.radioButtonPermisOuiJob.Location = new System.Drawing.Point(101, 460);
             this.radioButtonPermisOuiJob.Name = "radioButtonPermisOuiJob";
             this.radioButtonPermisOuiJob.Size = new System.Drawing.Size(41, 17);
-            this.radioButtonPermisOuiJob.TabIndex = 45;
+            this.radioButtonPermisOuiJob.TabIndex = 11;
             this.radioButtonPermisOuiJob.TabStop = true;
             this.radioButtonPermisOuiJob.Text = "Oui";
             this.radioButtonPermisOuiJob.UseVisualStyleBackColor = true;
@@ -265,7 +266,7 @@
             this.textBoxRmqJob.Multiline = true;
             this.textBoxRmqJob.Name = "textBoxRmqJob";
             this.textBoxRmqJob.Size = new System.Drawing.Size(308, 75);
-            this.textBoxRmqJob.TabIndex = 48;
+            this.textBoxRmqJob.TabIndex = 13;
             // 
             // labelRmqJob
             // 
@@ -284,7 +285,7 @@
             this.datePickerPublicationJob.Location = new System.Drawing.Point(323, 616);
             this.datePickerPublicationJob.Name = "datePickerPublicationJob";
             this.datePickerPublicationJob.Size = new System.Drawing.Size(86, 20);
-            this.datePickerPublicationJob.TabIndex = 50;
+            this.datePickerPublicationJob.TabIndex = 14;
             // 
             // labelDatePublication
             // 
@@ -309,42 +310,40 @@
             this.buttonRechercheEtudiant.Location = new System.Drawing.Point(259, 582);
             this.buttonRechercheEtudiant.Name = "buttonRechercheEtudiant";
             this.buttonRechercheEtudiant.Size = new System.Drawing.Size(150, 23);
-            this.buttonRechercheEtudiant.TabIndex = 53;
+            this.buttonRechercheEtudiant.TabIndex = 18;
             this.buttonRechercheEtudiant.Text = "Etudiant(s) Disponible(s)";
             this.buttonRechercheEtudiant.UseVisualStyleBackColor = true;
             this.buttonRechercheEtudiant.Click += new System.EventHandler(this.buttonRechercheEtudiant_Click);
             // 
             // buttonDeleteJob
             // 
-            this.buttonDeleteJob.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.buttonDeleteJob.Location = new System.Drawing.Point(212, 659);
+            this.buttonDeleteJob.Location = new System.Drawing.Point(244, 647);
             this.buttonDeleteJob.Name = "buttonDeleteJob";
             this.buttonDeleteJob.Size = new System.Drawing.Size(75, 23);
-            this.buttonDeleteJob.TabIndex = 57;
+            this.buttonDeleteJob.TabIndex = 16;
             this.buttonDeleteJob.Text = "Supprimer";
             this.buttonDeleteJob.UseVisualStyleBackColor = true;
             this.buttonDeleteJob.Click += new System.EventHandler(this.buttonDeleteJob_Click);
             // 
             // buttonValiderJob
             // 
-            this.buttonValiderJob.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.buttonValiderJob.Location = new System.Drawing.Point(118, 659);
+            this.buttonValiderJob.Location = new System.Drawing.Point(153, 647);
             this.buttonValiderJob.Name = "buttonValiderJob";
             this.buttonValiderJob.Size = new System.Drawing.Size(75, 23);
-            this.buttonValiderJob.TabIndex = 56;
+            this.buttonValiderJob.TabIndex = 15;
             this.buttonValiderJob.Text = "Ajouter";
             this.buttonValiderJob.UseVisualStyleBackColor = true;
             this.buttonValiderJob.Click += new System.EventHandler(this.buttonValiderJob_Click);
             // 
             // buttonFermerJob
             // 
-            this.buttonFermerJob.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.buttonFermerJob.Location = new System.Drawing.Point(309, 659);
+            this.buttonFermerJob.Location = new System.Drawing.Point(334, 647);
             this.buttonFermerJob.Name = "buttonFermerJob";
             this.buttonFermerJob.Size = new System.Drawing.Size(75, 23);
-            this.buttonFermerJob.TabIndex = 58;
+            this.buttonFermerJob.TabIndex = 17;
             this.buttonFermerJob.Text = "Fermer";
             this.buttonFermerJob.UseVisualStyleBackColor = true;
+            this.buttonFermerJob.Click += new System.EventHandler(this.buttonFermerJob_Click);
             // 
             // textBoxEtudiantJob
             // 
@@ -353,6 +352,7 @@
             this.textBoxEtudiantJob.ReadOnly = true;
             this.textBoxEtudiantJob.Size = new System.Drawing.Size(127, 20);
             this.textBoxEtudiantJob.TabIndex = 52;
+            this.textBoxEtudiantJob.TabStop = false;
             // 
             // numericUpDownSalaireJob
             // 
@@ -365,7 +365,7 @@
             0});
             this.numericUpDownSalaireJob.Name = "numericUpDownSalaireJob";
             this.numericUpDownSalaireJob.Size = new System.Drawing.Size(85, 20);
-            this.numericUpDownSalaireJob.TabIndex = 60;
+            this.numericUpDownSalaireJob.TabIndex = 10;
             // 
             // buttonEffacerSelectionEtudiant
             // 
@@ -381,7 +381,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(441, 711);
+            this.AutoScroll = true;
+            this.ClientSize = new System.Drawing.Size(441, 549);
             this.Controls.Add(this.buttonEffacerSelectionEtudiant);
             this.Controls.Add(this.numericUpDownSalaireJob);
             this.Controls.Add(this.buttonFermerJob);
