@@ -13,7 +13,7 @@ namespace Connect.Enums
         Désactivé
     }
 
-    public enum Sexe
+    public enum Genre
     {
         Masculin,
         Féminin,

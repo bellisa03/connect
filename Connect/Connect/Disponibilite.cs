@@ -25,16 +25,17 @@ namespace Connect
 
         private void PopulateAndBind()
         {
-            //Si l'étudiant est nouvellement créé, cette condition permet de récupérer son id
+            //Si l'étudiant est nouvellement créé, cette condition permet de récupérer son id.
+            //Sinon, l'id passée en paramètre avec le constructeur est à -1
             if (etudiantId == -1)
             {
-                Connectds ds = new Connectds();
-                ds = EtudiantManager.GetEtudiantDS();
-                etudiantRow = ds.etudiant.Last<Connectds.etudiantRow>();
+                Connectds.etudiantDataTable dt = new Connectds.etudiantDataTable();
+                dt = EtudiantManager.GetEtudiantDT();
+                etudiantRow = dt.Last<Connectds.etudiantRow>();
                 etudiantId = etudiantRow.etudiant_id;
 
             }
-            dataGridViewPeriode.DataSource = EtudiantManager.GetDisponibiliteList(etudiantId);
+            dataGridViewPeriode.DataSource = EtudiantManager.GetPeriodeList(etudiantId);
             textBoxIdEtudiant.Text = etudiantId.ToString();
             etudiantRow = EtudiantManager.GetEtudiant(etudiantId);
             textBoxNom.Text = etudiantRow.prenom_etudiant + " " + etudiantRow.nom_etudiant;

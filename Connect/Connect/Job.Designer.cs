@@ -62,6 +62,7 @@
             this.textBoxEtudiantJob = new System.Windows.Forms.TextBox();
             this.numericUpDownSalaireJob = new System.Windows.Forms.NumericUpDown();
             this.buttonEffacerSelectionEtudiant = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSalaireJob)).BeginInit();
             this.SuspendLayout();
             // 
@@ -115,7 +116,7 @@
             // 
             this.labelChamps.AutoSize = true;
             this.labelChamps.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelChamps.Location = new System.Drawing.Point(12, 691);
+            this.labelChamps.Location = new System.Drawing.Point(12, 676);
             this.labelChamps.Name = "labelChamps";
             this.labelChamps.Size = new System.Drawing.Size(105, 13);
             this.labelChamps.TabIndex = 29;
@@ -311,7 +312,7 @@
             this.buttonRechercheEtudiant.Name = "buttonRechercheEtudiant";
             this.buttonRechercheEtudiant.Size = new System.Drawing.Size(150, 23);
             this.buttonRechercheEtudiant.TabIndex = 18;
-            this.buttonRechercheEtudiant.Text = "Etudiant(s) Disponible(s)";
+            this.buttonRechercheEtudiant.Text = "Etudiant(s) Disponible(s)**";
             this.buttonRechercheEtudiant.UseVisualStyleBackColor = true;
             this.buttonRechercheEtudiant.Click += new System.EventHandler(this.buttonRechercheEtudiant_Click);
             // 
@@ -377,12 +378,24 @@
             this.buttonEffacerSelectionEtudiant.UseVisualStyleBackColor = true;
             this.buttonEffacerSelectionEtudiant.Click += new System.EventHandler(this.buttonEffacerSelectionEtudiant_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(12, 694);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(416, 13);
+            this.label1.TabIndex = 62;
+            this.label1.Text = "**Déclenche automatiquement une première sauvegarde des données du formulaire job" +
+    "";
+            // 
             // Job
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(441, 549);
+            this.ClientSize = new System.Drawing.Size(441, 581);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonEffacerSelectionEtudiant);
             this.Controls.Add(this.numericUpDownSalaireJob);
             this.Controls.Add(this.buttonFermerJob);
@@ -461,5 +474,6 @@
         private System.Windows.Forms.TextBox textBoxEtudiantJob;
         private System.Windows.Forms.NumericUpDown numericUpDownSalaireJob;
         private System.Windows.Forms.Button buttonEffacerSelectionEtudiant;
+        private System.Windows.Forms.Label label1;
     }
 }

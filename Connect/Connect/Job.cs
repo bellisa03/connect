@@ -18,13 +18,15 @@ namespace Connect
         Connectds.etudiantRow etudiantRow;
         Connectds.entrepriseRow entrepriseRow;
         int id = -1;
-        int entrepriseID = -1;
+        int entrepriseID =-1;
+        int etudiantID =-1;
 
         /// <summary>
         /// Constructeur pour un job vierge
         /// </summary>
         public Job()
         {
+            entrepriseID = -1;
             InitializeComponent();
             PopulateAndBind(id);
         }
@@ -99,7 +101,7 @@ namespace Connect
                 jobRow.remarque_job = string.Empty;
                 jobRow.date_publication_job = DateTime.Now;
                 jobRow.statut_job = false;
-                jobRow.etudiant_id = 1; // A MODIFIER!!!
+                jobRow.etudiant_id = etudiantID; // A MODIFIER!!!
                 labelJob.Visible = false;
                 textBoxJobID.Visible = false;
                 

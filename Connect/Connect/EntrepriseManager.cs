@@ -50,88 +50,14 @@ namespace Connect
             return entrepriseRow;
         }
 
-        public static bool GetStatus(string statut)
-        {
-            switch (statut)
-            {
-                case "Actif":
-                    return true;
-
-                case "Désactivé":
-                    return false;
-
-                default:
-                    return true;
-
-            }
-        }
-
-        public static bool GetStatusJob(string statut)
-        {
-            switch (statut)
-            {
-                case "Disponible":
-                    return true;
-
-                case "Attribué":
-                    return false;
-
-                default:
-                    return true;
-
-            }
-        }
-
-        public static string GetTaille(string taille)
-        {
-            string codeTaille;
-            switch (taille)
-            {
-                case "Très Petite Entreprise":
-                    codeTaille = "TPE";
-                    break;
-
-                case "Petite Entreprise":
-                    codeTaille = "PE";
-                    break;
-
-                case "Grande Entreprise":
-                    codeTaille = "GE";
-                    break;
-
-                default:
-                    codeTaille = "";
-                    break;
-            }
-            return codeTaille;
-        }
-
-        public static Connectds GetEntrepriseDS()
-        {
-            Connectds ds = new Connectds();
-            using (ConnectdsTableAdapters.entrepriseTableAdapter entrepriseAdpt = new ConnectdsTableAdapters.entrepriseTableAdapter())
-            {
-                entrepriseAdpt.Fill(ds.entreprise);
-            }
-            return ds;
-        }
-
+        
+        
         public static Connectds.entrepriseDataTable GetEntrepriseDT()
         {
             Connectds.entrepriseDataTable dt = new Connectds.entrepriseDataTable();
             using (ConnectdsTableAdapters.entrepriseTableAdapter entrepriseAdpt = new ConnectdsTableAdapters.entrepriseTableAdapter())
             {
                 entrepriseAdpt.Fill(dt);
-            }
-            return dt;
-        }
-
-        public static Connectds.jobDataTable GetJobDT()
-        {
-            Connectds.jobDataTable dt = new Connectds.jobDataTable();
-            using (ConnectdsTableAdapters.jobTableAdapter jobAdpt = new ConnectdsTableAdapters.jobTableAdapter())
-            {
-                jobAdpt.Fill(dt);
             }
             return dt;
         }
@@ -144,9 +70,8 @@ namespace Connect
             }
         }
 
-        public static void AddEntreprise(DataRow dataRow)
+        public static void AddEntreprise(Connectds.entrepriseRow entrepriseRow)
         {
-            Connectds.entrepriseRow entrepriseRow = (Connectds.entrepriseRow)dataRow;
             using (ConnectdsTableAdapters.entrepriseTableAdapter entrepriseAdpt = new ConnectdsTableAdapters.entrepriseTableAdapter())
             {
                 entrepriseAdpt.Insert(entrepriseRow.nom_entreprise, entrepriseRow.adresse_entreprise, entrepriseRow.contact_entreprise, entrepriseRow.telephone_entreprise, entrepriseRow.secteur_entreprise, entrepriseRow.type_entreprise, entrepriseRow.taille_entreprise, entrepriseRow.descriptif_entreprise, entrepriseRow.statut_entreprise, entrepriseRow.date_creation_entreprise);
@@ -181,6 +106,16 @@ namespace Connect
             return jobRow;
         }
 
+        public static Connectds.jobDataTable GetJobDT()
+        {
+            Connectds.jobDataTable dt = new Connectds.jobDataTable();
+            using (ConnectdsTableAdapters.jobTableAdapter jobAdpt = new ConnectdsTableAdapters.jobTableAdapter())
+            {
+                jobAdpt.Fill(dt);
+            }
+            return dt;
+        }
+
         public static void SaveJob(DataRow jobRow)
         {
             using (ConnectdsTableAdapters.jobTableAdapter jobAdpt = new ConnectdsTableAdapters.jobTableAdapter())
@@ -210,6 +145,61 @@ namespace Connect
 
                 jobAdpt.Update(jobDT);
             }
+        }
+        public static bool GetStatusEnt(string statut)
+        {
+            switch (statut)
+            {
+                case "Actif":
+                    return true;
+
+                case "Désactivé":
+                    return false;
+
+                default:
+                    return true;
+
+            }
+        }
+
+        public static bool GetStatusJob(string statut)
+        {
+            switch (statut)
+            {
+                case "Disponible":
+                    return true;
+
+                case "Attribué":
+                    return false;
+
+                default:
+                    return true;
+
+            }
+        }
+
+        public static string GetTailleEnt(string taille)
+        {
+            string codeTaille;
+            switch (taille)
+            {
+                case "Très Petite Entreprise":
+                    codeTaille = "TPE";
+                    break;
+
+                case "Petite Entreprise":
+                    codeTaille = "PE";
+                    break;
+
+                case "Grande Entreprise":
+                    codeTaille = "GE";
+                    break;
+
+                default:
+                    codeTaille = "";
+                    break;
+            }
+            return codeTaille;
         }
     }
 }

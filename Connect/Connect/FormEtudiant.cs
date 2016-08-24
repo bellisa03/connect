@@ -41,9 +41,9 @@ namespace Connect
         
         private void PopulateAndBind(int id)
         {
-            comboBoxSexeEtudiant.Items.Add(Enums.Sexe.Féminin.ToString());
-            comboBoxSexeEtudiant.Items.Add(Enums.Sexe.Masculin.ToString());
-            comboBoxSexeEtudiant.Items.Add(Enums.Sexe.Indéterminé.ToString());
+            comboBoxSexeEtudiant.Items.Add(Enums.Genre.Féminin.ToString());
+            comboBoxSexeEtudiant.Items.Add(Enums.Genre.Masculin.ToString());
+            comboBoxSexeEtudiant.Items.Add(Enums.Genre.Indéterminé.ToString());
 
             dateTimePickerDdNEtudiant.MinDate = DateTime.Now.AddYears(-31);
             dateTimePickerDdNEtudiant.MaxDate = DateTime.Now.AddYears(-12);
@@ -58,13 +58,13 @@ namespace Connect
                 switch (etudiantRow.sexe_etudiant)
                 {
                     case "F":
-                        comboBoxSexeEtudiant.Text = Enums.Sexe.Féminin.ToString();
+                        comboBoxSexeEtudiant.Text = Enums.Genre.Féminin.ToString();
                         break;
                     case "M":
-                        comboBoxSexeEtudiant.Text = Enums.Sexe.Masculin.ToString();
+                        comboBoxSexeEtudiant.Text = Enums.Genre.Masculin.ToString();
                         break;
                     case "X":
-                        comboBoxSexeEtudiant.Text = Enums.Sexe.Indéterminé.ToString();
+                        comboBoxSexeEtudiant.Text = Enums.Genre.Indéterminé.ToString();
                         break;
                     default:
                         break;
@@ -173,10 +173,10 @@ namespace Connect
 
         private void buttonValiderDispoEtudiant_Click(object sender, EventArgs e)
         {
+            
             if (etudiantRow.nom_etudiant != string.Empty && etudiantRow.prenom_etudiant != string.Empty)
             {
                 Valider();
-                refreshDataGrid();
                 Disponibilite disponibilite = new Disponibilite(id);
                 disponibilite.MdiParent = HomePage.ActiveForm;
                 disponibilite.Show();
@@ -187,17 +187,46 @@ namespace Connect
 
         private void Valider()
         {
-            etudiantRow.sexe_etudiant = EtudiantManager.GetSexe(comboBoxSexeEtudiant.Text);
+            etudiantRow.sexe_etudiant = EtudiantManager.GetGenre(comboBoxSexeEtudiant.Text);
 
             if (id == -1)
                 EtudiantManager.AddEtudiant(etudiantRow);
             else
+            {
+                if (!etudiantRow.statut_etudiant)
+                {
+                    var Result = MessageBox.Show("Etes-vous sûr de vouloir inactiver l'étudiant n°" + etudiantRow.etudiant_id + "? S'il a communiqué des périodes de disponibilité à venir, elles vont être supprimées", 
+                        "Veuillez confirmer", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                    if (Result == DialogResult.OK)
+                    {
+                        List<Connectds.periodeRow> periodeList = new List<Connectds.periodeRow>();
+                        periodeList = EtudiantManager.GetPeriodeList(etudiantRow.etudiant_id);
+                        if (periodeList != null)
+                        {
+                            foreach (var periode in periodeList)
+                            {
+                                if (periode.debut_periode >= DateTime.Now)
+                                    EtudiantManager.DeletePeriode(periode.periode_id);
+                            }
+                        }
+                    }
+                }
                 EtudiantManager.SaveEtudiant(etudiantRow);
+            }
+                
         }
 
         private void buttonAnnulerEtudiant_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void checkBoxActif_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!checkBoxActif.Checked)
+                buttonValiderDispoEtudiant.Enabled = false;                
+            else
+                buttonValiderDispoEtudiant.Enabled = true;
         }
     }
 }

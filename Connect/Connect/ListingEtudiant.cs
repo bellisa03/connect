@@ -78,7 +78,7 @@ namespace Connect
                 if (!checkJob)
                 {
                     List<Connectds.periodeRow> periodeList = new List<Connectds.periodeRow>();
-                    periodeList = EtudiantManager.GetDisponibiliteList(value);
+                    periodeList = EtudiantManager.GetPeriodeList(value);
                     if (periodeList != null)
                     {
                         foreach (var periode in periodeList)

@@ -124,8 +124,8 @@ namespace Connect
         {
             if(entrepriseRow.nom_entreprise != string.Empty)
             {
-                entrepriseRow.statut_entreprise = EntrepriseManager.GetStatus(comboBoxStatutEnt.Text);
-                entrepriseRow.taille_entreprise = EntrepriseManager.GetTaille(comboBoxTailleEnt.Text);
+                entrepriseRow.statut_entreprise = EntrepriseManager.GetStatusEnt(comboBoxStatutEnt.Text);
+                entrepriseRow.taille_entreprise = EntrepriseManager.GetTailleEnt(comboBoxTailleEnt.Text);
                 if (id == -1)
                     EntrepriseManager.AddEntreprise(entrepriseRow);
                 else
