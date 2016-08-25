@@ -91,8 +91,7 @@
             this.buttonValiderEtudiant.Location = new System.Drawing.Point(35, 893);
             this.buttonValiderEtudiant.Name = "buttonValiderEtudiant";
             this.buttonValiderEtudiant.Size = new System.Drawing.Size(75, 23);
-            this.buttonValiderEtudiant.TabIndex = 19;
-            this.buttonValiderEtudiant.TabStop = false;
+            this.buttonValiderEtudiant.TabIndex = 20;
             this.buttonValiderEtudiant.Text = "Valider";
             this.buttonValiderEtudiant.UseVisualStyleBackColor = true;
             this.buttonValiderEtudiant.Click += new System.EventHandler(this.buttonValiderEtudiant_Click);
@@ -190,7 +189,7 @@
             this.textBoxEcoleEtudiant.Location = new System.Drawing.Point(57, 24);
             this.textBoxEcoleEtudiant.Name = "textBoxEcoleEtudiant";
             this.textBoxEcoleEtudiant.Size = new System.Drawing.Size(222, 20);
-            this.textBoxEcoleEtudiant.TabIndex = 8;
+            this.textBoxEcoleEtudiant.TabIndex = 9;
             // 
             // labelEcoleEtudiant
             // 
@@ -246,7 +245,7 @@
             this.groupBoxScolariteEtudiant.Location = new System.Drawing.Point(22, 284);
             this.groupBoxScolariteEtudiant.Name = "groupBoxScolariteEtudiant";
             this.groupBoxScolariteEtudiant.Size = new System.Drawing.Size(468, 107);
-            this.groupBoxScolariteEtudiant.TabIndex = 31;
+            this.groupBoxScolariteEtudiant.TabIndex = 8;
             this.groupBoxScolariteEtudiant.TabStop = false;
             this.groupBoxScolariteEtudiant.Text = "Scolarité";
             // 
@@ -264,7 +263,7 @@
             this.textBoxAnneeEtudiant.Location = new System.Drawing.Point(348, 27);
             this.textBoxAnneeEtudiant.Name = "textBoxAnneeEtudiant";
             this.textBoxAnneeEtudiant.Size = new System.Drawing.Size(101, 20);
-            this.textBoxAnneeEtudiant.TabIndex = 10;
+            this.textBoxAnneeEtudiant.TabIndex = 11;
             // 
             // labelTypeEtudiant
             // 
@@ -280,7 +279,7 @@
             this.textBoxTypeEtudiant.Location = new System.Drawing.Point(57, 69);
             this.textBoxTypeEtudiant.Name = "textBoxTypeEtudiant";
             this.textBoxTypeEtudiant.Size = new System.Drawing.Size(222, 20);
-            this.textBoxTypeEtudiant.TabIndex = 9;
+            this.textBoxTypeEtudiant.TabIndex = 10;
             // 
             // groupBoxProfilEtudiant
             // 
@@ -300,7 +299,7 @@
             this.groupBoxProfilEtudiant.Location = new System.Drawing.Point(22, 407);
             this.groupBoxProfilEtudiant.Name = "groupBoxProfilEtudiant";
             this.groupBoxProfilEtudiant.Size = new System.Drawing.Size(468, 445);
-            this.groupBoxProfilEtudiant.TabIndex = 35;
+            this.groupBoxProfilEtudiant.TabIndex = 12;
             this.groupBoxProfilEtudiant.TabStop = false;
             this.groupBoxProfilEtudiant.Text = "Profil";
             // 
@@ -310,7 +309,7 @@
             this.radioButtonPermisNonEtudiant.Location = new System.Drawing.Point(329, 232);
             this.radioButtonPermisNonEtudiant.Name = "radioButtonPermisNonEtudiant";
             this.radioButtonPermisNonEtudiant.Size = new System.Drawing.Size(45, 17);
-            this.radioButtonPermisNonEtudiant.TabIndex = 15;
+            this.radioButtonPermisNonEtudiant.TabIndex = 17;
             this.radioButtonPermisNonEtudiant.TabStop = true;
             this.radioButtonPermisNonEtudiant.Text = "Non";
             this.radioButtonPermisNonEtudiant.UseVisualStyleBackColor = true;
@@ -321,7 +320,7 @@
             this.radioButtonPermisOuiEtudiant.Location = new System.Drawing.Point(183, 234);
             this.radioButtonPermisOuiEtudiant.Name = "radioButtonPermisOuiEtudiant";
             this.radioButtonPermisOuiEtudiant.Size = new System.Drawing.Size(41, 17);
-            this.radioButtonPermisOuiEtudiant.TabIndex = 14;
+            this.radioButtonPermisOuiEtudiant.TabIndex = 16;
             this.radioButtonPermisOuiEtudiant.TabStop = true;
             this.radioButtonPermisOuiEtudiant.Text = "Oui";
             this.radioButtonPermisOuiEtudiant.UseVisualStyleBackColor = true;
@@ -350,7 +349,7 @@
             this.textBoxRmqEtudiant.Multiline = true;
             this.textBoxRmqEtudiant.Name = "textBoxRmqEtudiant";
             this.textBoxRmqEtudiant.Size = new System.Drawing.Size(297, 74);
-            this.textBoxRmqEtudiant.TabIndex = 17;
+            this.textBoxRmqEtudiant.TabIndex = 19;
             // 
             // textBoxHobbiesEtudiant
             // 
@@ -358,7 +357,7 @@
             this.textBoxHobbiesEtudiant.Multiline = true;
             this.textBoxHobbiesEtudiant.Name = "textBoxHobbiesEtudiant";
             this.textBoxHobbiesEtudiant.Size = new System.Drawing.Size(297, 74);
-            this.textBoxHobbiesEtudiant.TabIndex = 16;
+            this.textBoxHobbiesEtudiant.TabIndex = 18;
             // 
             // labelHobbiesEtudiant
             // 
@@ -375,7 +374,7 @@
             this.textBoxDomaineEtudiant.Multiline = true;
             this.textBoxDomaineEtudiant.Name = "textBoxDomaineEtudiant";
             this.textBoxDomaineEtudiant.Size = new System.Drawing.Size(297, 74);
-            this.textBoxDomaineEtudiant.TabIndex = 13;
+            this.textBoxDomaineEtudiant.TabIndex = 15;
             // 
             // labelDomaineEtudiant
             // 
@@ -392,7 +391,7 @@
             this.textBoxExperience.Multiline = true;
             this.textBoxExperience.Name = "textBoxExperience";
             this.textBoxExperience.Size = new System.Drawing.Size(297, 74);
-            this.textBoxExperience.TabIndex = 12;
+            this.textBoxExperience.TabIndex = 14;
             // 
             // labelExperienceEtudiant
             // 
@@ -408,7 +407,7 @@
             this.textBoxLangueEtudiant.Location = new System.Drawing.Point(152, 22);
             this.textBoxLangueEtudiant.Name = "textBoxLangueEtudiant";
             this.textBoxLangueEtudiant.Size = new System.Drawing.Size(297, 20);
-            this.textBoxLangueEtudiant.TabIndex = 11;
+            this.textBoxLangueEtudiant.TabIndex = 13;
             // 
             // labelLangueEtudiant
             // 
@@ -424,7 +423,7 @@
             this.buttonValiderDispoEtudiant.Location = new System.Drawing.Point(157, 893);
             this.buttonValiderDispoEtudiant.Name = "buttonValiderDispoEtudiant";
             this.buttonValiderDispoEtudiant.Size = new System.Drawing.Size(190, 23);
-            this.buttonValiderDispoEtudiant.TabIndex = 20;
+            this.buttonValiderDispoEtudiant.TabIndex = 21;
             this.buttonValiderDispoEtudiant.Text = "Valider et Ajouter disponibilité**";
             this.buttonValiderDispoEtudiant.UseVisualStyleBackColor = true;
             this.buttonValiderDispoEtudiant.Click += new System.EventHandler(this.buttonValiderDispoEtudiant_Click);
@@ -434,7 +433,7 @@
             this.buttonAnnulerEtudiant.Location = new System.Drawing.Point(397, 893);
             this.buttonAnnulerEtudiant.Name = "buttonAnnulerEtudiant";
             this.buttonAnnulerEtudiant.Size = new System.Drawing.Size(75, 23);
-            this.buttonAnnulerEtudiant.TabIndex = 21;
+            this.buttonAnnulerEtudiant.TabIndex = 22;
             this.buttonAnnulerEtudiant.Text = "Annuler";
             this.buttonAnnulerEtudiant.UseVisualStyleBackColor = true;
             this.buttonAnnulerEtudiant.Click += new System.EventHandler(this.buttonAnnulerEtudiant_Click);
@@ -475,7 +474,7 @@
             this.checkBoxActif.Location = new System.Drawing.Point(360, 17);
             this.checkBoxActif.Name = "checkBoxActif";
             this.checkBoxActif.Size = new System.Drawing.Size(51, 17);
-            this.checkBoxActif.TabIndex = 22;
+            this.checkBoxActif.TabIndex = 23;
             this.checkBoxActif.Text = "Actif*";
             this.checkBoxActif.UseVisualStyleBackColor = true;
             this.checkBoxActif.CheckedChanged += new System.EventHandler(this.checkBoxActif_CheckedChanged);

@@ -174,7 +174,6 @@
             this.Controls.Add(this.dataGridViewRechercheEtudiant);
             this.Name = "RechercheEtudiant";
             this.Text = "Etudiant(s) Disponible(s)";
-            this.Load += new System.EventHandler(this.RechercheEtudiant_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRechercheEtudiant)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.etudiantBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.connectds)).EndInit();

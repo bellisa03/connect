@@ -89,7 +89,6 @@ namespace Connect
                 entrepriseRow.Delete();
 
                 entrepriseAdpt.Update(entrepriseDT);
-
             }
         }
 
@@ -158,7 +157,6 @@ namespace Connect
 
                 default:
                     return true;
-
             }
         }
 
@@ -174,7 +172,6 @@ namespace Connect
 
                 default:
                     return true;
-
             }
         }
 

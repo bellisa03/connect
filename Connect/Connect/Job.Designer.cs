@@ -311,7 +311,7 @@
             this.buttonRechercheEtudiant.Location = new System.Drawing.Point(259, 582);
             this.buttonRechercheEtudiant.Name = "buttonRechercheEtudiant";
             this.buttonRechercheEtudiant.Size = new System.Drawing.Size(150, 23);
-            this.buttonRechercheEtudiant.TabIndex = 18;
+            this.buttonRechercheEtudiant.TabIndex = 14;
             this.buttonRechercheEtudiant.Text = "Etudiant(s) Disponible(s)**";
             this.buttonRechercheEtudiant.UseVisualStyleBackColor = true;
             this.buttonRechercheEtudiant.Click += new System.EventHandler(this.buttonRechercheEtudiant_Click);
@@ -321,7 +321,7 @@
             this.buttonDeleteJob.Location = new System.Drawing.Point(244, 647);
             this.buttonDeleteJob.Name = "buttonDeleteJob";
             this.buttonDeleteJob.Size = new System.Drawing.Size(75, 23);
-            this.buttonDeleteJob.TabIndex = 16;
+            this.buttonDeleteJob.TabIndex = 17;
             this.buttonDeleteJob.Text = "Supprimer";
             this.buttonDeleteJob.UseVisualStyleBackColor = true;
             this.buttonDeleteJob.Click += new System.EventHandler(this.buttonDeleteJob_Click);
@@ -331,7 +331,7 @@
             this.buttonValiderJob.Location = new System.Drawing.Point(153, 647);
             this.buttonValiderJob.Name = "buttonValiderJob";
             this.buttonValiderJob.Size = new System.Drawing.Size(75, 23);
-            this.buttonValiderJob.TabIndex = 15;
+            this.buttonValiderJob.TabIndex = 16;
             this.buttonValiderJob.Text = "Ajouter";
             this.buttonValiderJob.UseVisualStyleBackColor = true;
             this.buttonValiderJob.Click += new System.EventHandler(this.buttonValiderJob_Click);
@@ -341,7 +341,7 @@
             this.buttonFermerJob.Location = new System.Drawing.Point(334, 647);
             this.buttonFermerJob.Name = "buttonFermerJob";
             this.buttonFermerJob.Size = new System.Drawing.Size(75, 23);
-            this.buttonFermerJob.TabIndex = 17;
+            this.buttonFermerJob.TabIndex = 18;
             this.buttonFermerJob.Text = "Fermer";
             this.buttonFermerJob.UseVisualStyleBackColor = true;
             this.buttonFermerJob.Click += new System.EventHandler(this.buttonFermerJob_Click);
@@ -373,7 +373,7 @@
             this.buttonEffacerSelectionEtudiant.Location = new System.Drawing.Point(101, 613);
             this.buttonEffacerSelectionEtudiant.Name = "buttonEffacerSelectionEtudiant";
             this.buttonEffacerSelectionEtudiant.Size = new System.Drawing.Size(127, 23);
-            this.buttonEffacerSelectionEtudiant.TabIndex = 61;
+            this.buttonEffacerSelectionEtudiant.TabIndex = 15;
             this.buttonEffacerSelectionEtudiant.Text = "Effacer Sélection";
             this.buttonEffacerSelectionEtudiant.UseVisualStyleBackColor = true;
             this.buttonEffacerSelectionEtudiant.Click += new System.EventHandler(this.buttonEffacerSelectionEtudiant_Click);

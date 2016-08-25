@@ -14,7 +14,6 @@ namespace Connect
     {
         Connectds ds = new Connectds();
 
-
         public ListingJobs()
         {
             InitializeComponent();
@@ -66,7 +65,7 @@ namespace Connect
             dataGridViewListingJob.Columns[14].HeaderText = "Etudiant";
             dataGridViewListingJob.Columns[14].DisplayIndex = 12;
             dataGridViewListingJob.Columns[10].HeaderText = "Attribué";
-
+            dataGridViewListingJob.Columns[10].SortMode = DataGridViewColumnSortMode.Automatic; // permet de trier les jobs attribués ou non (pas de tri par défaut pour les colonnes de type bit)
         }
 
         
@@ -89,7 +88,6 @@ namespace Connect
             {
                 PopulateAndBind();
             }
-            
         }
 
         private void buttonAfficherJob_Click(object sender, EventArgs e)
@@ -123,7 +121,6 @@ namespace Connect
                 job.MdiParent = HomePage.ActiveForm;
                 job.Show();
             }
-            
             this.Close();
         }
 
@@ -146,6 +143,5 @@ namespace Connect
         {
             this.Close();
         }
-
     }
 }

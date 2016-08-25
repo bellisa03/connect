@@ -33,7 +33,6 @@ namespace Connect
                 dt = EtudiantManager.GetEtudiantDT();
                 etudiantRow = dt.Last<Connectds.etudiantRow>();
                 etudiantId = etudiantRow.etudiant_id;
-
             }
             dataGridViewPeriode.DataSource = EtudiantManager.GetPeriodeList(etudiantId);
             textBoxIdEtudiant.Text = etudiantId.ToString();
@@ -74,9 +73,7 @@ namespace Connect
                 PopulateAndBind();
             }
             else
-            {
                 MessageBox.Show("La date de début de période doit se situer avant la date de fin de période", "Attention", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
         }
 
         private void buttonUpdateDisponibilite_Click(object sender, EventArgs e)
@@ -95,9 +92,7 @@ namespace Connect
                     }
                 }
                 else
-                {
                     MessageBox.Show("La date de début de période doit se situer avant la date de fin de période", "Attention", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
             }
             else
             {

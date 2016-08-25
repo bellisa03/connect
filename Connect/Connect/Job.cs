@@ -12,14 +12,12 @@ namespace Connect
 {
     public partial class Job : Form
     {
-        DataSet DsNonType;
         Connectds ds = new Connectds();
         Connectds.jobRow jobRow;
         Connectds.etudiantRow etudiantRow;
         Connectds.entrepriseRow entrepriseRow;
         int id = -1;
         int entrepriseID =-1;
-        int etudiantID =-1;
 
         /// <summary>
         /// Constructeur pour un job vierge
@@ -49,18 +47,14 @@ namespace Connect
             InitializeComponent();
             this.entrepriseID = entrepriseID;
             PopulateAndBind(id);
-
         }
 
         private void PopulateAndBind(int jobID)
         {
-
             ds = EntrepriseManager.GetDS();
             comboBoxEntreprise.DataSource = ds;
             comboBoxEntreprise.ValueMember = "entreprise.entreprise_id";
             comboBoxEntreprise.DisplayMember = "entreprise.nom_entreprise";
-
-            
 
             if (id != -1)
             {
@@ -76,7 +70,6 @@ namespace Connect
                 
                 textBoxJobID.Text = jobID.ToString();
                 buttonValiderJob.Text = "Modifier";
-
             }
             else
             {
@@ -85,10 +78,9 @@ namespace Connect
 
                 Connectds.jobDataTable jobDT = new Connectds.jobDataTable();
                 jobRow = (Connectds.jobRow)jobDT.NewjobRow();
-                //jobRow = jobDT.NewjobRow();
-                //DsNonType = (DataSet)ds;
-                //DsNonType.EnforceConstraints = false;
-
+                //Tentative de contourner les contraintes de FK not null du DataSet:
+                //jobRow.Setetudiant_idNull();
+                jobRow.etudiant_id = 1;
                 comboBoxEntreprise.DropDownStyle = ComboBoxStyle.DropDownList;
                 jobRow.titre_job = string.Empty;
                 jobRow.descriptif_job = string.Empty;
@@ -101,10 +93,8 @@ namespace Connect
                 jobRow.remarque_job = string.Empty;
                 jobRow.date_publication_job = DateTime.Now;
                 jobRow.statut_job = false;
-                jobRow.etudiant_id = etudiantID; // A MODIFIER!!!
                 labelJob.Visible = false;
                 textBoxJobID.Visible = false;
-                
             }
             textBoxIntituleJob.DataBindings.Add("Text", jobRow, "titre_job");
             textBoxDescriptif.DataBindings.Add("Text", jobRow, "descriptif_job");
@@ -133,31 +123,18 @@ namespace Connect
             permisJobNonBinding.Parse += (s, args) => args.Value = (bool)args.Value ? false : true;
             // Binding:
             radioButtonPermisNonJob.DataBindings.Add(permisJobNonBinding);
-
-
         }
 
         private void buttonEffacerSelectionEtudiant_Click(object sender, EventArgs e)
         {
             textBoxEtudiantJob.Text = string.Empty;
             jobRow.statut_job = false;
-            jobRow.Setetudiant_idNull();
+            //jobRow.Setetudiant_idNull();
+            jobRow.etudiant_id = 1;
         }
 
         private void buttonValiderJob_Click(object sender, EventArgs e)
         {
-
-            if (textBoxEtudiantJob.Text != string.Empty)
-            {
-                jobRow.statut_job = true; //attribué
-                jobRow.etudiant_id = etudiantRow.etudiant_id;
-            }
-
-            else
-            {
-                jobRow.Setetudiant_idNull();
-                jobRow.statut_job = false;
-            }
             if (jobRow.titre_job != string.Empty)
             {
                 Valider();
@@ -169,9 +146,17 @@ namespace Connect
 
         private void Valider()
         {
-            
             if (jobRow.date_debut_job <= jobRow.date_fin_job)
             {
+                if (textBoxEtudiantJob.Text != string.Empty)
+                {
+                    jobRow.statut_job = true; //attribué
+                    jobRow.etudiant_id = etudiantRow.etudiant_id;
+                }
+
+                else
+                    jobRow.statut_job = false;
+
                 if (id == -1)
                 {
                     int idEntreprise;
@@ -191,7 +176,6 @@ namespace Connect
             }
             else
                 MessageBox.Show("La date de début doit se situer avant la date de fin", "Attention", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            
         }
 
         /// <summary>

@@ -12,7 +12,6 @@ namespace Connect
 {
     public partial class HomePage : Form
     {
-        
         public HomePage()
         {
             InitializeComponent();
@@ -64,6 +63,5 @@ namespace Connect
         {
             this.Close();
         }
-
     }
 }

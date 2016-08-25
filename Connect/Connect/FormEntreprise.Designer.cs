@@ -56,6 +56,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.labelChamps = new System.Windows.Forms.Label();
+            this.textBoxIdEntreprise = new System.Windows.Forms.TextBox();
+            this.labelIdEntreprise = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // datePickerCreationEnt
@@ -201,7 +203,7 @@
             this.textBoxDescripEnt.Multiline = true;
             this.textBoxDescripEnt.Name = "textBoxDescripEnt";
             this.textBoxDescripEnt.Size = new System.Drawing.Size(342, 62);
-            this.textBoxDescripEnt.TabIndex = 15;
+            this.textBoxDescripEnt.TabIndex = 16;
             // 
             // comboBoxTailleEnt
             // 
@@ -209,7 +211,7 @@
             this.comboBoxTailleEnt.Location = new System.Drawing.Point(107, 308);
             this.comboBoxTailleEnt.Name = "comboBoxTailleEnt";
             this.comboBoxTailleEnt.Size = new System.Drawing.Size(170, 21);
-            this.comboBoxTailleEnt.TabIndex = 16;
+            this.comboBoxTailleEnt.TabIndex = 15;
             // 
             // labelDateCreationEnt
             // 
@@ -262,7 +264,7 @@
             this.buttonJobsEnt.Location = new System.Drawing.Point(382, 502);
             this.buttonJobsEnt.Name = "buttonJobsEnt";
             this.buttonJobsEnt.Size = new System.Drawing.Size(75, 56);
-            this.buttonJobsEnt.TabIndex = 22;
+            this.buttonJobsEnt.TabIndex = 23;
             this.buttonJobsEnt.Text = "Voir Jobs";
             this.buttonJobsEnt.UseVisualStyleBackColor = true;
             this.buttonJobsEnt.Click += new System.EventHandler(this.buttonJobsEnt_Click);
@@ -272,7 +274,7 @@
             this.buttonDeleteEnt.Location = new System.Drawing.Point(280, 502);
             this.buttonDeleteEnt.Name = "buttonDeleteEnt";
             this.buttonDeleteEnt.Size = new System.Drawing.Size(75, 56);
-            this.buttonDeleteEnt.TabIndex = 23;
+            this.buttonDeleteEnt.TabIndex = 22;
             this.buttonDeleteEnt.Text = "Supprimer Entreprise";
             this.buttonDeleteEnt.UseVisualStyleBackColor = true;
             this.buttonDeleteEnt.Click += new System.EventHandler(this.buttonDeleteEnt_Click);
@@ -318,11 +320,30 @@
             this.labelChamps.TabIndex = 27;
             this.labelChamps.Text = "*Champs obligatoires";
             // 
+            // textBoxIdEntreprise
+            // 
+            this.textBoxIdEntreprise.Location = new System.Drawing.Point(372, 42);
+            this.textBoxIdEntreprise.Name = "textBoxIdEntreprise";
+            this.textBoxIdEntreprise.ReadOnly = true;
+            this.textBoxIdEntreprise.Size = new System.Drawing.Size(77, 20);
+            this.textBoxIdEntreprise.TabIndex = 29;
+            // 
+            // labelIdEntreprise
+            // 
+            this.labelIdEntreprise.AutoSize = true;
+            this.labelIdEntreprise.Location = new System.Drawing.Point(341, 45);
+            this.labelIdEntreprise.Name = "labelIdEntreprise";
+            this.labelIdEntreprise.Size = new System.Drawing.Size(18, 13);
+            this.labelIdEntreprise.TabIndex = 28;
+            this.labelIdEntreprise.Text = "ID";
+            // 
             // FormEntreprise
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 582);
+            this.Controls.Add(this.textBoxIdEntreprise);
+            this.Controls.Add(this.labelIdEntreprise);
             this.Controls.Add(this.labelChamps);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -388,6 +409,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label labelChamps;
+        private System.Windows.Forms.TextBox textBoxIdEntreprise;
+        private System.Windows.Forms.Label labelIdEntreprise;
     }
 }
 

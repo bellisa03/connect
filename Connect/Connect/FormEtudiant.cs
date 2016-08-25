@@ -173,7 +173,6 @@ namespace Connect
 
         private void buttonValiderDispoEtudiant_Click(object sender, EventArgs e)
         {
-            
             if (etudiantRow.nom_etudiant != string.Empty && etudiantRow.prenom_etudiant != string.Empty)
             {
                 Valider();

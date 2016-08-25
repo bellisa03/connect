@@ -12,7 +12,6 @@ namespace Connect
 {
     public partial class FormEntreprise : Form
     {
-        //Connectds ds;
         Connectds.entrepriseRow entrepriseRow;
         int id = -1;
 
@@ -96,8 +95,10 @@ namespace Connect
                 entrepriseRow.statut_entreprise = true;
                 entrepriseRow.date_creation_entreprise = DateTime.Now;
                 datePickerCreationEnt.Value = DateTime.Now;
+                labelIdEntreprise.Visible = false;
+                textBoxIdEntreprise.Visible = false;
             }
-
+                textBoxIdEntreprise.DataBindings.Add("Text", entrepriseRow, "entreprise_id");
                 textBoxNomEnt.DataBindings.Add("Text", entrepriseRow, "nom_entreprise");
                 textBoxAdresseEnt.DataBindings.Add("Text", entrepriseRow, "adresse_entreprise");
                 textBoxContactEnt.DataBindings.Add("Text", entrepriseRow, "contact_entreprise");
@@ -165,7 +166,6 @@ namespace Connect
                     EntrepriseManager.DeleteEntreprise(entrepriseRow.entreprise_id);
                     refreshDataGrid();
                 }
-                           
             }
         }
 
